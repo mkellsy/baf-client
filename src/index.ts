@@ -1,18 +1,21 @@
-import { program } from "commander";
 import { Location } from "./Location";
-import { Logger } from "./Logger";
 
-program.option("-d, --debug", "enable debug logging");
+import { Common } from "./Devices/Common";
+import { Dimmer } from "./Devices/Dimmer";
+import { Fan } from "./Devices/Fan";
+import { Humidity } from "./Devices/Humidity";
+import { Occupancy } from "./Devices/Occupancy";
+import { Temperature } from "./Devices/Temperature";
 
-program.command("start").action(() => {
-    Logger.configure(program);
+export const Devices = {
+    Common,
+    Dimmer,
+    Fan,
+    Humidity,
+    Occupancy,
+    Temperature,
+}
 
-    const location = new Location();
-
-    location.on("Available", (devices) => Logger.log.info(Logger.inspect(devices.map((device) => device.name))));
-    location.on("Update", (device, state) => device.log.info(Logger.inspect(state)));
-});
-
-export = function main(args?: string[] | undefined): void {
-    program.parse(args || process.argv);
-};
+export function connect(): Location {
+    return new Location();
+}

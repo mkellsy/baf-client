@@ -1,5 +1,5 @@
 {
-    "version": "0.0.1",
+    "version": "1.0.1",
     "name": "@mkellsy/baf-client",
     "displayName": "Big Ass Fans Client",
     "description": "Discovers and publishes Big Ass Fan controls.",
@@ -15,8 +15,7 @@
         "/lib"
     ],
     "scripts": {
-        "build": "rm -fR ./lib && tsc --project tsconfig.json",
-        "start": "npm run build && ./bin/baf -d start",
+        "build": "./build",
         "prepublishOnly": "npm run build"
     },
     "dependencies": {
@@ -34,6 +33,7 @@
         "@types/deep-equal": "^1.0.4",
         "@types/multicast-dns": "^7.2.4",
         "@types/node": "^20.11.0",
+        "esbuild": "^0.20.2",
         "typescript": "^5.3.3"
     }
 }

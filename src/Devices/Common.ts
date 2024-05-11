@@ -1,3 +1,4 @@
+import * as Logger from "js-logger";
 import * as Interfaces from "@mkellsy/hap-device";
 
 import Colors from "colors";
@@ -6,7 +7,6 @@ import { Connection } from "@mkellsy/baf";
 import { EventEmitter } from "@mkellsy/event-emitter";
 
 import { Device } from "../Interfaces/Device";
-import { Log, Logger } from "../Logger";
 
 export abstract class Common extends EventEmitter<{
     Action: (device: Interfaces.Device, button: Interfaces.Button, action: Interfaces.Action) => void;
@@ -16,7 +16,7 @@ export abstract class Common extends EventEmitter<{
     protected state: Interfaces.DeviceState;
     protected fields: Map<string, Interfaces.Capability> = new Map();
 
-    private logger: Log;
+    private logger: Logger.ILogger;
 
     private deviceName: string;
     private deviceId: string;
@@ -60,12 +60,16 @@ export abstract class Common extends EventEmitter<{
         return Object.fromEntries(this.fields);
     }
 
-    public get log(): Log {
+    public get log(): Logger.ILogger {
         return this.logger;
     }
 
     public get address(): Interfaces.Address {
         return { href: this.deviceId };
+    }
+
+    public get suffix(): string {
+        return this.deviceSuffix;
     }
 
     public get type(): Interfaces.DeviceType {
