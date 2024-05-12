@@ -4,13 +4,14 @@ import * as Interfaces from "@mkellsy/hap-device";
 import equals from "deep-equal";
 
 import { Common } from "./Common";
+import { DeviceType } from "../Interfaces/DeviceType";
 
 export class Humidity extends Common implements Interfaces.Humidity {
     constructor(connection: Baf.Connection, capabilities: Baf.Capabilities) {
         super(Interfaces.DeviceType.Humidity, connection, {
             id: capabilities.id,
-            name: `${capabilities.name} Humidity`,
-            suffix: "Humidity",
+            name: `${capabilities.name} ${DeviceType.Humidity}`,
+            suffix: DeviceType.Humidity,
         });
 
         this.state = { state: "Auto" };

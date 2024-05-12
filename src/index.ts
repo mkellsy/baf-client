@@ -5,6 +5,7 @@ import { Dimmer } from "./Devices/Dimmer";
 import { Fan } from "./Devices/Fan";
 import { Humidity } from "./Devices/Humidity";
 import { Occupancy } from "./Devices/Occupancy";
+import { Switch } from "./Devices/Switch";
 import { Temperature } from "./Devices/Temperature";
 
 export const Devices = {
@@ -13,6 +14,7 @@ export const Devices = {
     Fan,
     Humidity,
     Occupancy,
+    Switch,
     Temperature,
 }
 

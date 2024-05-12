@@ -4,14 +4,14 @@ import * as Interfaces from "@mkellsy/hap-device";
 import equals from "deep-equal";
 
 import { Common } from "./Common";
-import { LightPosition } from "../Interfaces/LightPosition";
+import { DeviceType } from "../Interfaces/DeviceType";
 
 export class Dimmer extends Common implements Interfaces.Dimmer {
-    constructor(connection: Baf.Connection, capabilities: Baf.Capabilities, position: LightPosition) {
+    constructor(connection: Baf.Connection, capabilities: Baf.Capabilities, type: DeviceType) {
         super(Interfaces.DeviceType.Dimmer, connection, {
             id: capabilities.id,
-            name: `${capabilities.name} ${position}`,
-            suffix: position,
+            name: `${capabilities.name} ${type}`,
+            suffix: type,
         });
 
         this.fields.set("state", { type: "String", values: ["On", "Off"] });
@@ -33,7 +33,7 @@ export class Dimmer extends Common implements Interfaces.Dimmer {
 
     public set(status: Partial<Interfaces.DeviceState>): void {
         switch (this.suffix) {
-            case LightPosition.Uplight:
+            case DeviceType.Uplight:
                 if (status.state === "Off") {
                     this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0x90, 0x05, 2]);
                     this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xa0, 0x04, 0x00]);
@@ -45,7 +45,7 @@ export class Dimmer extends Common implements Interfaces.Dimmer {
 
                 break;
 
-            case LightPosition.Downlight:
+            case DeviceType.Downlight:
                 if (status.state === "Off") {
                     this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0x90, 0x05, 1]);
                     this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xa0, 0x04, 0x00]);

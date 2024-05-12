@@ -4,13 +4,14 @@ import * as Interfaces from "@mkellsy/hap-device";
 import equals from "deep-equal";
 
 import { Common } from "./Common";
+import { DeviceType } from "../Interfaces/DeviceType";
 
 export class Occupancy extends Common implements Interfaces.Occupancy {
     constructor(connection: Baf.Connection, capabilities: Baf.Capabilities) {
         super(Interfaces.DeviceType.Occupancy, connection, {
             id: capabilities.id,
-            name: `${capabilities.name} Occupancy`,
-            suffix: "Occupancy",
+            name: `${capabilities.name} ${DeviceType.Occupancy}`,
+            suffix: DeviceType.Occupancy,
         });
     }
 

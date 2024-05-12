@@ -4,13 +4,14 @@ import * as Interfaces from "@mkellsy/hap-device";
 import equals from "deep-equal";
 
 import { Common } from "./Common";
+import { DeviceType } from "../Interfaces/DeviceType";
 
 export class Fan extends Common implements Interfaces.Fan {
     constructor(connection: Baf.Connection, capabilities: Baf.Capabilities) {
         super(Interfaces.DeviceType.Fan, connection, {
             id: capabilities.id,
-            name: `${capabilities.name} Fan`,
-            suffix: "Fan",
+            name: `${capabilities.name} ${DeviceType.Fan}`,
+            suffix: DeviceType.Fan,
         });
 
         this.fields.set("state", { type: "String", values: ["On", "Off"] });

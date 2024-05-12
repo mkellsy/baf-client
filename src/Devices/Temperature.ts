@@ -4,13 +4,14 @@ import * as Interfaces from "@mkellsy/hap-device";
 import equals from "deep-equal";
 
 import { Common } from "./Common";
+import { DeviceType } from "../Interfaces/DeviceType";
 
 export class Temperature extends Common implements Interfaces.Temperature {
     constructor(connection: Baf.Connection, capabilities: Baf.Capabilities) {
         super(Interfaces.DeviceType.Temperature, connection, {
             id: capabilities.id,
-            name: `${capabilities.name} Temperature`,
-            suffix: "Temperature",
+            name: `${capabilities.name} ${DeviceType.Temperature}`,
+            suffix: DeviceType.Temperature,
         });
 
         this.state = { state: "Auto" };

@@ -7,12 +7,13 @@ import { Capabilities, Connection, FanAddress, FanState, LightState, SensorState
 import { EventEmitter } from "@mkellsy/event-emitter";
 
 import { Device } from "./Interfaces/Device";
+import { DeviceType } from "./Interfaces/DeviceType";
 import { Dimmer } from "./Devices/Dimmer";
 import { Discovery } from "./Discovery";
 import { Fan } from "./Devices/Fan";
 import { Humidity } from "./Devices/Humidity";
-import { LightPosition } from "./Interfaces/LightPosition";
 import { Occupancy } from "./Devices/Occupancy";
+import { Switch } from "./Devices/Switch";
 import { Temperature } from "./Devices/Temperature";
 
 const log = Logger.get("Location");
@@ -77,10 +78,18 @@ export class Location extends EventEmitter<{
                 break;
 
             case "LightState":
-                if ((response as LightState).target === "downlight") {
-                    this.onDownlightState(response as LightState);
-                } else {
-                    this.onUplightState(response as LightState);
+                switch ((response as LightState).target) {
+                    case "downlight":
+                        this.onDownlightState(response as LightState);
+                        break;
+
+                    case "uplight":
+                        this.onUplightState(response as LightState);
+                        break;
+
+                    case "uvc":
+                        this.onUvcState(response as LightState);
+                        break;
                 }
 
                 break;
@@ -103,42 +112,49 @@ export class Location extends EventEmitter<{
 
         if (capabilities.fan) {
             this.devices.set(
-                Device.generateId(capabilities.id, "Fan"),
+                Device.generateId(capabilities.id, DeviceType.Fan),
                 (new Fan(connection, capabilities)).on("Update", this.onDeviceUpdate)
             );
         }
 
         if (capabilities.downlight) {
             this.devices.set(
-                Device.generateId(capabilities.id, LightPosition.Downlight),
-                (new Dimmer(connection, capabilities, LightPosition.Downlight)).on("Update", this.onDeviceUpdate)
+                Device.generateId(capabilities.id, DeviceType.Downlight),
+                (new Dimmer(connection, capabilities, DeviceType.Downlight)).on("Update", this.onDeviceUpdate)
             );
         }
 
         if (capabilities.uplight) {
             this.devices.set(
-                Device.generateId(capabilities.id, LightPosition.Uplight),
-                (new Dimmer(connection, capabilities, LightPosition.Uplight)).on("Update", this.onDeviceUpdate)
+                Device.generateId(capabilities.id, DeviceType.Uplight),
+                (new Dimmer(connection, capabilities, DeviceType.Uplight)).on("Update", this.onDeviceUpdate)
+            );
+        }
+
+        if (capabilities.uvc) {
+            this.devices.set(
+                Device.generateId(capabilities.id, DeviceType.UVC),
+                (new Switch(connection, capabilities, DeviceType.UVC)).on("Update", this.onDeviceUpdate)
             );
         }
 
         if (capabilities.occupancy) {
             this.devices.set(
-                Device.generateId(capabilities.id, "Occupancy"),
+                Device.generateId(capabilities.id, DeviceType.Occupancy),
                 (new Occupancy(connection, capabilities)).on("Update", this.onDeviceUpdate)
             );
         }
 
         if (capabilities.temperature) {
             this.devices.set(
-                Device.generateId(capabilities.id, "Temperature"),
+                Device.generateId(capabilities.id, DeviceType.Temperature),
                 (new Temperature(connection, capabilities)).on("Update", this.onDeviceUpdate)
             );
         }
 
         if (capabilities.humidity) {
             this.devices.set(
-                Device.generateId(capabilities.id, "Humidity"),
+                Device.generateId(capabilities.id, DeviceType.Humidity),
                 (new Humidity(connection, capabilities)).on("Update", this.onDeviceUpdate)
             );
         }
@@ -147,8 +163,8 @@ export class Location extends EventEmitter<{
     };
 
     private onFanState = (state: FanState): void => {
-        const fan = this.devices.get(Device.generateId(state.id, "Fan"));
-        const occupancy = this.devices.get(Device.generateId(state.id, "Occupancy"));
+        const fan = this.devices.get(Device.generateId(state.id, DeviceType.Fan));
+        const occupancy = this.devices.get(Device.generateId(state.id, DeviceType.Occupancy));
 
         if (fan != null) {
             fan.update({
@@ -172,7 +188,7 @@ export class Location extends EventEmitter<{
     };
 
     private onDownlightState = (state: LightState): void => {
-        const downlight = this.devices.get(Device.generateId(state.id, LightPosition.Downlight));
+        const downlight = this.devices.get(Device.generateId(state.id, DeviceType.Downlight));
 
         if (downlight != null) {
             downlight.update({
@@ -186,7 +202,7 @@ export class Location extends EventEmitter<{
     };
 
     private onUplightState = (state: LightState): void => {
-        const uplight = this.devices.get(Device.generateId(state.id, LightPosition.Uplight));
+        const uplight = this.devices.get(Device.generateId(state.id, DeviceType.Uplight));
 
         if (uplight != null) {
             uplight.update({
@@ -199,9 +215,22 @@ export class Location extends EventEmitter<{
         }
     };
 
+    private onUvcState = (state: LightState): void => {
+        const uvc = this.devices.get(Device.generateId(state.id, DeviceType.UVC));
+
+        if (uvc != null) {
+            uvc.update({
+                href: state.id,
+                SwitchedLevel: state.on ? "On" : "Off",
+                Zone: { href: state.id },
+                AssociatedArea: { href: state.id },
+            } as Interfaces.ZoneStatus);
+        }
+    };
+
     private onSensorState = (state: SensorState): void => {
-        const temperature = this.devices.get(Device.generateId(state.id, "Temperature"));
-        const humidity = this.devices.get(Device.generateId(state.id, "Humidity"));
+        const temperature = this.devices.get(Device.generateId(state.id, DeviceType.Temperature));
+        const humidity = this.devices.get(Device.generateId(state.id, DeviceType.Humidity));
 
         if (temperature != null) {
             temperature.update({
