@@ -8,6 +8,9 @@ import { EventEmitter } from "@mkellsy/event-emitter";
 
 import { Device } from "../Interfaces/Device";
 
+/**
+ * Defines common functionallity for a device.
+ */
 export abstract class Common extends EventEmitter<{
     Action: (device: Interfaces.Device, button: Interfaces.Button, action: Interfaces.Action) => void;
     Update: (device: Interfaces.Device, state: Interfaces.DeviceState) => void;
@@ -23,6 +26,23 @@ export abstract class Common extends EventEmitter<{
     private deviceType: Interfaces.DeviceType;
     private deviceSuffix: string;
 
+    /**
+     * Creates a base device object.
+     *
+     * ```
+     * class Fan extends Common {
+     *     constructor(id: string, connection: Connection, name: string) {
+     *         super(DeviceType.Fan, connection, { id, name, "Fan" });
+     *
+     *         // Device specific code
+     *     }
+     * }
+     * ```
+     *
+     * @param type The device type.
+     * @param connection The main connection.
+     * @param definition Id, name and suffix definition.
+     */
     constructor(
         type: Interfaces.DeviceType,
         connection: Connection,
@@ -40,42 +60,75 @@ export abstract class Common extends EventEmitter<{
         this.state = { state: "Unknown" };
     }
 
+    /**
+     * The device's manufacturer.
+     */
     public get manufacturer(): string {
         return "Delta T, LLC";
     }
 
+    /**
+     * The device's unique identifier.
+     */
     public get id(): string {
         return Device.generateId(this.deviceId, this.deviceSuffix);
     }
 
+    /**
+     * The device's configured name.
+     */
     public get name(): string {
         return this.deviceName;
     }
 
+    /**
+     * The device's configured room (not supported).
+     */
     public get room(): string {
         return "Default";
     }
 
+    /**
+     * The devices capibilities. This is a map of the fields that can be set
+     * or read.
+     */
     public get capabilities(): { [key: string]: Interfaces.Capability } {
         return Object.fromEntries(this.fields);
     }
 
+
+    /**
+     * A logger for the device. This will automatically print the devices name,
+     * room and id.
+     */
     public get log(): Logger.ILogger {
         return this.logger;
     }
 
+    /**
+     * The href address of the device (not used).
+     */
     public get address(): Interfaces.Address {
         return { href: this.deviceId };
     }
 
+    /**
+     * The device's suffix.
+     */
     public get suffix(): string {
         return this.deviceSuffix;
     }
 
+    /**
+     * The device type.
+     */
     public get type(): Interfaces.DeviceType {
         return this.deviceType;
     }
 
+    /**
+     * The area the device is in (not used).
+     */
     public get area(): Interfaces.Area {
         return {
             href: this.address.href,
@@ -89,6 +142,9 @@ export abstract class Common extends EventEmitter<{
         };
     }
 
+    /**
+     * The current state of the device.
+     */
     public get status(): Interfaces.DeviceState {
         return this.state;
     }

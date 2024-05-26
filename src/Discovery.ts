@@ -3,16 +3,32 @@ import { FanAddress } from "@mkellsy/baf";
 import { MDNSService, MDNSServiceDiscovery, Protocol } from "tinkerhub-mdns";
 import { HostAddress, HostAddressFamily } from "@mkellsy/hap-device";
 
+/**
+ * Creates and searches the network for devices.
+ */
 export class Discovery extends EventEmitter<{
-    Discovered: (fan: FanAddress) => void;
+    Discovered: (device: FanAddress) => void;
     Failed: (error: Error) => void;
 }> {
     private discovery?: MDNSServiceDiscovery;
 
+    /**
+     * Creates a mDNS discovery object used to search the network for devices.
+     *
+     * ```js
+     * const discovery = new Discovery();
+     * 
+     * discovery.on("Discovered", (device: FanAddress) => {  });
+     * discovery.search()
+     * ```
+     */
     constructor() {
         super();
     }
 
+    /**
+     * Starts searching the network for devices.
+     */
     public search(): void {
         this.stop();
 
@@ -24,10 +40,17 @@ export class Discovery extends EventEmitter<{
         this.discovery.onAvailable(this.onAvailable);
     }
 
+    /**
+     * Stops searching the network.
+     */
     public stop(): void {
         this.discovery?.destroy();
     }
 
+    /*
+     * Parses a service once discovered. If it fits the criteria, this will
+     * emit a discovered event.
+     */
     private onAvailable = (service: MDNSService): void => {
         const id = service.data.get("uuid");
         const name = service.data.get("name");

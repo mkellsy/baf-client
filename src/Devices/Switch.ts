@@ -6,7 +6,21 @@ import equals from "deep-equal";
 import { Common } from "./Common";
 import { DeviceType } from "../Interfaces/DeviceType";
 
+/**
+ * Defines a on/off switch device.
+ */
 export class Switch extends Common implements Interfaces.Switch {
+    /**
+     * Creates a dimmable light device.
+     *
+     * ```js
+     * const switch = new Switch(connection, capabilities, DeviceType.UVC);
+     * ```
+     *
+     * @param connection The main connection to the device.
+     * @param capabilities Device capabilities from discovery.
+     * @param type The device type to tell the difference from a light and uvc.
+     */
     constructor(connection: Baf.Connection, capabilities: Baf.Capabilities, type: DeviceType) {
         super(Interfaces.DeviceType.Switch, connection, {
             id: capabilities.id,
@@ -18,12 +32,21 @@ export class Switch extends Common implements Interfaces.Switch {
         this.fields.set("level", { type: "Integer", min: 0, max: 100 });
     }
 
+    /**
+     * Recieves a state response from the connection and updates the device
+     * state.
+     *
+     * ```js
+     * switch.update({ SwitchedLevel: "On" });
+     * ```
+     *
+     * @param status The current device state.
+     */
     public update(status: Interfaces.ZoneStatus): void {
         const previous = { ...this.status };
 
         if (status.Level != null) {
-            this.state.state = status.Level > 0 ? "On" : "Off";
-            this.state.level = status.Level;
+            this.state.state = status.SwitchedLevel;
         }
 
         if (!equals(this.state, previous)) {
@@ -31,6 +54,15 @@ export class Switch extends Common implements Interfaces.Switch {
         }
     }
 
+    /**
+     * Controls this device.
+     *
+     * ```js
+     * switch.set({ state: "On" });
+     * ```
+     *
+     * @param status Partial desired device state.
+     */
     public set(status: Partial<Interfaces.DeviceState>): void {
         switch (this.suffix) {
             case DeviceType.UVC:

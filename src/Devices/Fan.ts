@@ -6,7 +6,20 @@ import equals from "deep-equal";
 import { Common } from "./Common";
 import { DeviceType } from "../Interfaces/DeviceType";
 
+/**
+ * Defines a fan device.
+ */
 export class Fan extends Common implements Interfaces.Fan {
+    /**
+     * Creates a fan device.
+     *
+     * ```js
+     * const fan = new Fan(connection, capabilities);
+     * ```
+     *
+     * @param connection The main connection to the device.
+     * @param capabilities Device capabilities from discovery.
+     */
     constructor(connection: Baf.Connection, capabilities: Baf.Capabilities) {
         super(Interfaces.DeviceType.Fan, connection, {
             id: capabilities.id,
@@ -24,6 +37,16 @@ export class Fan extends Common implements Interfaces.Fan {
         }
     }
 
+    /**
+     * Recieves a state response from the connection and updates the device
+     * state.
+     *
+     * ```js
+     * fan.update({ SwitchedLevel: "On", FanSpeed: 7 });
+     * ```
+     *
+     * @param status The current device state.
+     */
     public update(status: Interfaces.ZoneStatus): void {
         const previous = { ...this.status };
 
@@ -44,6 +67,15 @@ export class Fan extends Common implements Interfaces.Fan {
         }
     }
 
+    /**
+     * Controls this device.
+     *
+     * ```js
+     * fan.set({ state: "On", speed: 3 });
+     * ```
+     *
+     * @param status Partial desired device state.
+     */
     public set(status: Partial<Interfaces.DeviceState>): void {
         if (status.state === "Off") {
             this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xd8, 0x02, 0x00]);

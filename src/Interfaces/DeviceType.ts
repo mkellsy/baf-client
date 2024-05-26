@@ -1,9 +1,39 @@
+/**
+ * Lists all supported device types.
+ */
 export enum DeviceType {
-    Fan = "Fan",
-    Humidity = "Humidity",
+    /**
+     * Dimmable downlight device.
+     */
     Downlight = "Downlight",
-    Temperature = "Temperature",
+
+    /**
+     * Fan device.
+     */
+    Fan = "Fan",
+
+    /**
+     * Humidity sensor.
+     */
+    Humidity = "Humidity",
+
+    /**
+     * Occupancy sensor.
+     */
     Occupancy = "Occupancy",
+
+    /**
+     * Temperature sensor.
+     */
+    Temperature = "Temperature",
+
+    /**
+     * Dimmable uplight device.
+     */
     Uplight = "Uplight",
+
+    /**
+     * UV light device.
+     */
     UVC = "UVC",
 }
