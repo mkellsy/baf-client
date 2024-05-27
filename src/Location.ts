@@ -73,16 +73,19 @@ export class Location extends EventEmitter<{
         const ip = host.addresses.find((address) => address.family === Interfaces.HostAddressFamily.IPv4) || host.addresses[0];
         const connection = new Connection(ip.address, host.id, host.name, host.model);
 
-        connection.connect().then(() => {
-            connection.on("Response", this.onResponse);
-            connection.on("Error", this.onError);
+        connection
+            .on("Connect", () => {
+                this.connections.set(connection.id, connection);
 
-            this.connections.set(connection.id, connection);
+                connection.write([0x12, 0x04, 0x1a, 0x02, 0x08, 0x03]); // software
+                connection.write([0x12, 0x04, 0x1a, 0x02, 0x08, 0x06]); // capabilities
+                connection.write([0x12, 0x02, 0x1a, 0x00]);
+            })
+            .on("Response", this.onResponse)
+            .on("Error", this.onError);
 
-            connection.write([0x12, 0x04, 0x1a, 0x02, 0x08, 0x03]); // software
-            connection.write([0x12, 0x04, 0x1a, 0x02, 0x08, 0x06]); // capabilities
-            connection.write([0x12, 0x02, 0x1a, 0x00]);
-        });
+        connection.connect()
+            .catch((error) => log.error(Colors.red(error.message)));
     };
 
     /*
