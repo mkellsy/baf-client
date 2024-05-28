@@ -1,5 +1,5 @@
 {
-    "version": "1.2.3",
+    "version": "1.2.4",
     "name": "@mkellsy/baf-client",
     "displayName": "Big Ass Fans Client",
     "description": "Discovers and publishes Big Ass Fan controls.",
