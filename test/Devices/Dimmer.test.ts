@@ -69,7 +69,7 @@ describe("Dimmer", () => {
             expect(status.level).to.equal(100);
         });
 
-        dimmer.update({ } as any);
+        dimmer.update({} as any);
         dimmer.update({ Level: 1 } as any);
         dimmer.update({ Level: 1 } as any);
     });
@@ -80,7 +80,7 @@ describe("Dimmer", () => {
             expect(status.level).to.equal(0);
         });
 
-        dimmer.update({ } as any);
+        dimmer.update({} as any);
         dimmer.update({ Level: 0 } as any);
         dimmer.update({ Level: 0 } as any);
     });

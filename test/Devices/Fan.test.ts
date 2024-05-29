@@ -93,9 +93,19 @@ describe("Fan", () => {
             expect(status.speed).to.equal(7);
         });
 
-        fan.update({ } as any);
-        fan.update({ SwitchedLevel: "On", WhooshLevel: "On", AutoLevel: "Off", FanSpeed: 7 } as any);
-        fan.update({ SwitchedLevel: "On", WhooshLevel: "On", AutoLevel: "Off", FanSpeed: 7 } as any);
+        fan.update({} as any);
+        fan.update({
+            SwitchedLevel: "On",
+            WhooshLevel: "On",
+            AutoLevel: "Off",
+            FanSpeed: 7,
+        } as any);
+        fan.update({
+            SwitchedLevel: "On",
+            WhooshLevel: "On",
+            AutoLevel: "Off",
+            FanSpeed: 7,
+        } as any);
     });
 
     it("should not define eco is not available", () => {
@@ -112,7 +122,12 @@ describe("Fan", () => {
             expect(status.eco).to.be.undefined;
         });
 
-        fan.update({ SwitchedLevel: "On", WhooshLevel: "On", AutoLevel: "Off", FanSpeed: 7 } as any);
+        fan.update({
+            SwitchedLevel: "On",
+            WhooshLevel: "On",
+            AutoLevel: "Off",
+            FanSpeed: 7,
+        } as any);
     });
 
     it("should call write when setting the state to off", () => {

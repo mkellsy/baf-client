@@ -37,7 +37,7 @@ describe("Humidity", () => {
     });
 
     it("should define a logger for the device", () => {
-        humidity.set({});
+        humidity.set();
 
         expect(humidity.log).to.not.be.undefined;
         expect(humidity.log.info).to.not.be.undefined;
@@ -60,7 +60,7 @@ describe("Humidity", () => {
             expect(status.humidity).to.equal(40);
         });
 
-        humidity.update({ } as any);
+        humidity.update({} as any);
         humidity.update({ Humidity: 40 } as any);
         humidity.update({ Humidity: 40 } as any);
     });

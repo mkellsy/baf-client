@@ -55,5 +55,5 @@ export class Humidity extends Common implements Interfaces.Humidity {
     /**
      * Controls this device (not supported).
      */
-    public set(_state: unknown): void {}
+    public set(): void {}
 }

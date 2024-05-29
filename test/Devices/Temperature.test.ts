@@ -37,7 +37,7 @@ describe("Temperature", () => {
     });
 
     it("should define a logger for the device", () => {
-        temperature.set({});
+        temperature.set();
 
         expect(temperature.log).to.not.be.undefined;
         expect(temperature.log.info).to.not.be.undefined;
@@ -60,7 +60,7 @@ describe("Temperature", () => {
             expect(status.temprature).to.equal(20);
         });
 
-        temperature.update({ } as any);
+        temperature.update({} as any);
         temperature.update({ Temperature: 20 } as any);
         temperature.update({ Temperature: 20 } as any);
     });

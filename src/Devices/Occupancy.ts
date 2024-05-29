@@ -53,5 +53,5 @@ export class Occupancy extends Common implements Interfaces.Occupancy {
     /**
      * Controls this device (not supported).
      */
-    public set(_state: unknown): void {}
+    public set(): void {}
 }

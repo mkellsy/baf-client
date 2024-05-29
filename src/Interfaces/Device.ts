@@ -15,6 +15,6 @@ export abstract class Device {
      * @returns A standard formatted id string.
      */
     public static generateId(id: string, suffix: string): string {
-        return `BAF-${id}-${suffix.toUpperCase()}`
+        return `BAF-${id}-${suffix.toUpperCase()}`;
     }
 }

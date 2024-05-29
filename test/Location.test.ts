@@ -10,16 +10,16 @@ chai.use(sinonChai);
 registerNode();
 
 describe("Location", () => {
-    let connectionStub: any;
-    let discoveryStub: any;
-    let emitStub: any;
-
-    let logStub = {
+    const logStub = {
         info: sinon.stub(),
         warn: sinon.stub(),
         error: sinon.stub(),
         debug: sinon.stub(),
     };
+
+    let connectionStub: any;
+    let discoveryStub: any;
+    let emitStub: any;
 
     let hostStub: any;
 
@@ -34,17 +34,17 @@ describe("Location", () => {
     let locationType: typeof Location;
 
     const emit = (stub: any, event: string, ...payload: any[]) => {
-        for (const callback of (stub.callbacks[event] || [])) {
+        for (const callback of stub.callbacks[event] || []) {
             callback(...payload);
         }
-    }
+    };
 
     before(() => {
         locationType = proxy(() => require("../src/Location").Location, {
             "js-logger": {
                 get() {
-                    return logStub
-                }
+                    return logStub;
+                },
             },
             "@mkellsy/event-emitter": {
                 EventEmitter: class {
@@ -249,9 +249,7 @@ describe("Location", () => {
             id: "ID",
             name: "NAME",
             model: "MODEL",
-            addresses: [
-                { address: "0.0.0.0", family: 4 },
-            ],
+            addresses: [{ address: "0.0.0.0", family: 4 }],
         };
 
         location = new locationType();
@@ -299,7 +297,7 @@ describe("Location", () => {
             emit(discoveryStub, "Discovered", hostStub);
             emit(connectionStub, "Connect");
             emit(discoveryStub, "Discovered", hostStub);
-    
+
             expect(connectionStub.disconnect).to.be.called;
         });
 
@@ -321,9 +319,7 @@ describe("Location", () => {
                 id: "ID",
                 name: "NAME",
                 model: "MODEL",
-                addresses: [
-                    { address: "0.0.0.0", family: 6 },
-                ],
+                addresses: [{ address: "0.0.0.0", family: 6 }],
             };
 
             emit(discoveryStub, "Discovered", hostStub);
@@ -455,7 +451,7 @@ describe("Location", () => {
                 on: true,
                 level: 50,
             });
-    
+
             expect(dimmerStub.update).to.be.called;
         });
 
@@ -466,7 +462,7 @@ describe("Location", () => {
                 on: false,
                 level: 50,
             });
-    
+
             expect(dimmerStub.update).to.be.called;
         });
 
@@ -504,7 +500,7 @@ describe("Location", () => {
                 on: true,
                 level: 50,
             });
-    
+
             expect(dimmerStub.update).to.be.called;
         });
 
@@ -515,7 +511,7 @@ describe("Location", () => {
                 on: false,
                 level: 50,
             });
-    
+
             expect(dimmerStub.update).to.be.called;
         });
 
@@ -552,7 +548,7 @@ describe("Location", () => {
                 target: "uvc",
                 on: true,
             });
-    
+
             expect(switchStub.update).to.be.called;
         });
 
@@ -562,7 +558,7 @@ describe("Location", () => {
                 target: "uvc",
                 on: false,
             });
-    
+
             expect(switchStub.update).to.be.called;
         });
 
@@ -599,7 +595,7 @@ describe("Location", () => {
                 temperature: 20,
                 humidity: 40,
             });
-    
+
             expect(temperatureStub.update).to.be.called;
             expect(humidityStub.update).to.be.called;
         });

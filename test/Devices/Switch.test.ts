@@ -65,7 +65,7 @@ describe("Switch", () => {
             expect(status.state).to.equal("On");
         });
 
-        binary.update({ } as any);
+        binary.update({} as any);
         binary.update({ SwitchedLevel: "On" } as any);
         binary.update({ SwitchedLevel: "On" } as any);
     });
@@ -75,7 +75,7 @@ describe("Switch", () => {
             expect(status.state).to.equal("Off");
         });
 
-        binary.update({ } as any);
+        binary.update({} as any);
         binary.update({ SwitchedLevel: "Off" } as any);
         binary.update({ SwitchedLevel: "Off" } as any);
     });

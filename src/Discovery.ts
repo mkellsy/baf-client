@@ -17,7 +17,7 @@ export class Discovery extends EventEmitter<{
      *
      * ```js
      * const discovery = new Discovery();
-     * 
+     *
      * discovery.on("Discovered", (device: FanAddress) => {  });
      * discovery.search()
      * ```

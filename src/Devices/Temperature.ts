@@ -55,5 +55,5 @@ export class Temperature extends Common implements Interfaces.Temperature {
     /**
      * Controls this device (not supported).
      */
-    public set(_state: unknown): void {}
+    public set(): void {}
 }

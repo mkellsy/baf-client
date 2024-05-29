@@ -16,8 +16,13 @@ export const Devices = {
     Occupancy,
     Switch,
     Temperature,
-}
+};
 
+/**
+ * Creates a connection and starts mDNS discovery.
+ *
+ * @returns A location object.
+ */
 export function connect(): Location {
     return new Location();
 }

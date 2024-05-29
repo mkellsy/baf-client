@@ -36,7 +36,7 @@ export class Location extends EventEmitter<{
      *
      * ```js
      * const location = new Location();
-     * 
+     *
      * location.on("Avaliable", (devices: Device[]) => {  });
      * ```
      */
@@ -70,7 +70,8 @@ export class Location extends EventEmitter<{
             this.connections.delete(host.id);
         }
 
-        const ip = host.addresses.find((address) => address.family === Interfaces.HostAddressFamily.IPv4) || host.addresses[0];
+        const ip =
+            host.addresses.find((address) => address.family === Interfaces.HostAddressFamily.IPv4) || host.addresses[0];
         const connection = new Connection(ip.address, host.id, host.name, host.model);
 
         connection
@@ -84,8 +85,7 @@ export class Location extends EventEmitter<{
             .on("Response", this.onResponse)
             .on("Error", this.onError);
 
-        connection.connect()
-            .catch((error) => log.error(Colors.red(error.message)));
+        connection.connect().catch((error) => log.error(Colors.red(error.message)));
     };
 
     /*
@@ -145,49 +145,49 @@ export class Location extends EventEmitter<{
         if (capabilities.fan) {
             this.devices.set(
                 Device.generateId(capabilities.id, DeviceType.Fan),
-                (new Fan(connection, capabilities)).on("Update", this.onDeviceUpdate)
+                new Fan(connection, capabilities).on("Update", this.onDeviceUpdate),
             );
         }
 
         if (capabilities.downlight) {
             this.devices.set(
                 Device.generateId(capabilities.id, DeviceType.Downlight),
-                (new Dimmer(connection, capabilities, DeviceType.Downlight)).on("Update", this.onDeviceUpdate)
+                new Dimmer(connection, capabilities, DeviceType.Downlight).on("Update", this.onDeviceUpdate),
             );
         }
 
         if (capabilities.uplight) {
             this.devices.set(
                 Device.generateId(capabilities.id, DeviceType.Uplight),
-                (new Dimmer(connection, capabilities, DeviceType.Uplight)).on("Update", this.onDeviceUpdate)
+                new Dimmer(connection, capabilities, DeviceType.Uplight).on("Update", this.onDeviceUpdate),
             );
         }
 
         if (capabilities.uvc) {
             this.devices.set(
                 Device.generateId(capabilities.id, DeviceType.UVC),
-                (new Switch(connection, capabilities, DeviceType.UVC)).on("Update", this.onDeviceUpdate)
+                new Switch(connection, capabilities, DeviceType.UVC).on("Update", this.onDeviceUpdate),
             );
         }
 
         if (capabilities.occupancy) {
             this.devices.set(
                 Device.generateId(capabilities.id, DeviceType.Occupancy),
-                (new Occupancy(connection, capabilities)).on("Update", this.onDeviceUpdate)
+                new Occupancy(connection, capabilities).on("Update", this.onDeviceUpdate),
             );
         }
 
         if (capabilities.temperature) {
             this.devices.set(
                 Device.generateId(capabilities.id, DeviceType.Temperature),
-                (new Temperature(connection, capabilities)).on("Update", this.onDeviceUpdate)
+                new Temperature(connection, capabilities).on("Update", this.onDeviceUpdate),
             );
         }
 
         if (capabilities.humidity) {
             this.devices.set(
                 Device.generateId(capabilities.id, DeviceType.Humidity),
-                (new Humidity(connection, capabilities)).on("Update", this.onDeviceUpdate)
+                new Humidity(connection, capabilities).on("Update", this.onDeviceUpdate),
             );
         }
 

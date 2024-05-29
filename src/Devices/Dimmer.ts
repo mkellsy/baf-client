@@ -76,7 +76,18 @@ export class Dimmer extends Common implements Interfaces.Dimmer {
                 } else {
                     this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0x90, 0x05, 2]);
                     this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xa0, 0x04, 0x01]);
-                    this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xa8, 0x04, (status.level || 0) / LEVEL_MULTIPLIER]);
+
+                    this.connection.write([
+                        0x12,
+                        0x07,
+                        0x12,
+                        0x05,
+                        0x1a,
+                        0x03,
+                        0xa8,
+                        0x04,
+                        (status.level || 0) / LEVEL_MULTIPLIER,
+                    ]);
                 }
 
                 break;
@@ -88,7 +99,18 @@ export class Dimmer extends Common implements Interfaces.Dimmer {
                 } else {
                     this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0x90, 0x05, 1]);
                     this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xa0, 0x04, 0x01]);
-                    this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xa8, 0x04, (status.level || 0) / LEVEL_MULTIPLIER]);
+
+                    this.connection.write([
+                        0x12,
+                        0x07,
+                        0x12,
+                        0x05,
+                        0x1a,
+                        0x03,
+                        0xa8,
+                        0x04,
+                        (status.level || 0) / LEVEL_MULTIPLIER,
+                    ]);
                 }
 
                 break;

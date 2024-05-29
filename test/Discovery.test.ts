@@ -62,10 +62,7 @@ describe("Discovery", () => {
 
             onAvailableStub({
                 data,
-                addresses: [
-                    { host: "127.0.0.1" },
-                    { host: "0:0:0:0:0:0:0:1" },
-                ]
+                addresses: [{ host: "127.0.0.1" }, { host: "0:0:0:0:0:0:0:1" }],
             });
 
             expect(emitStub).to.be.calledWith("Discovered", sinon.match.any);
@@ -80,10 +77,7 @@ describe("Discovery", () => {
 
             onAvailableStub({
                 data,
-                addresses: [
-                    { host: "127.0.0.1" },
-                    { host: "0:0:0:0:0:0:0:1" },
-                ]
+                addresses: [{ host: "127.0.0.1" }, { host: "0:0:0:0:0:0:0:1" }],
             });
 
             expect(emitStub).to.not.be.calledWith("Discovered", sinon.match.any);

@@ -37,7 +37,7 @@ describe("Occupancy", () => {
     });
 
     it("should define a logger for the device", () => {
-        occupancy.set({});
+        occupancy.set();
 
         expect(occupancy.log).to.not.be.undefined;
         expect(occupancy.log.info).to.not.be.undefined;
@@ -60,7 +60,7 @@ describe("Occupancy", () => {
             expect(status.state).to.equal("Occupied");
         });
 
-        occupancy.update({ } as any);
+        occupancy.update({} as any);
         occupancy.update({ OccupancyStatus: "Occupied" } as any);
         occupancy.update({ OccupancyStatus: "Occupied" } as any);
     });
@@ -70,7 +70,7 @@ describe("Occupancy", () => {
             expect(status.state).to.equal("Occupied");
         });
 
-        occupancy.update({ } as any);
+        occupancy.update({} as any);
         occupancy.update({ OccupancyStatus: "Unoccupied" } as any);
         occupancy.update({ OccupancyStatus: "Unoccupied" } as any);
     });

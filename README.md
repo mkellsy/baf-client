@@ -1,7 +1,9 @@
 # Big Ass Fans Client
+
 Discovers and publishes Big Ass Fan controls.
 
 ## API
+
 This client will automatically find and connect to any Big Ass Fan on your network. When devices are found they will be exposed via events.
 
 ```js
