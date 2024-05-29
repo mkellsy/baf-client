@@ -66,7 +66,7 @@ export class Location extends EventEmitter<{
      */
     private onDiscovered = (host: FanAddress): void => {
         if (this.connections.has(host.id)) {
-            this.connections.get(host.id)?.disconnect();
+            this.connections.get(host.id)!.disconnect();
             this.connections.delete(host.id);
         }
 

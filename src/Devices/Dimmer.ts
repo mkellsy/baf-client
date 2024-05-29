@@ -7,6 +7,7 @@ import { Common } from "./Common";
 import { DeviceType } from "../Interfaces/DeviceType";
 
 const LEVEL_MULTIPLIER: number = 100;
+
 /**
  * Defines a dimmable light device.
  */

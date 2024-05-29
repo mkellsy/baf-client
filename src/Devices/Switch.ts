@@ -29,7 +29,6 @@ export class Switch extends Common implements Interfaces.Switch {
         });
 
         this.fields.set("state", { type: "String", values: ["On", "Off"] });
-        this.fields.set("level", { type: "Integer", min: 0, max: 100 });
     }
 
     /**
@@ -45,8 +44,8 @@ export class Switch extends Common implements Interfaces.Switch {
     public update(status: Interfaces.ZoneStatus): void {
         const previous = { ...this.status };
 
-        if (status.Level != null) {
-            this.state.state = status.SwitchedLevel;
+        if (status.SwitchedLevel != null) {
+            this.state.state = status.SwitchedLevel === "On" ? "On" : "Off";
         }
 
         if (!equals(this.state, previous)) {
