@@ -67,53 +67,65 @@ export class Dimmer extends Common implements Interfaces.Dimmer {
      *
      * @param status Partial desired device state.
      */
-    public set(status: Partial<Interfaces.DeviceState>): void {
+    public set(status: Partial<Interfaces.DeviceState>): Promise<void> {
+        const waits: Promise<void>[] = [];
+
         switch (this.suffix) {
             case DeviceType.Uplight:
                 if (status.state === "Off") {
-                    this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0x90, 0x05, 2]);
-                    this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xa0, 0x04, 0x00]);
+                    waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0x90, 0x05, 2]));
+                    waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xa0, 0x04, 0x00]));
                 } else {
-                    this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0x90, 0x05, 2]);
-                    this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xa0, 0x04, 0x01]);
+                    waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0x90, 0x05, 2]));
+                    waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xa0, 0x04, 0x01]));
 
-                    this.connection.write([
-                        0x12,
-                        0x07,
-                        0x12,
-                        0x05,
-                        0x1a,
-                        0x03,
-                        0xa8,
-                        0x04,
-                        (status.level || 0) / LEVEL_MULTIPLIER,
-                    ]);
+                    waits.push(
+                        this.connection.write([
+                            0x12,
+                            0x07,
+                            0x12,
+                            0x05,
+                            0x1a,
+                            0x03,
+                            0xa8,
+                            0x04,
+                            (status.level || 0) / LEVEL_MULTIPLIER,
+                        ]),
+                    );
                 }
 
                 break;
 
             case DeviceType.Downlight:
                 if (status.state === "Off") {
-                    this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0x90, 0x05, 1]);
-                    this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xa0, 0x04, 0x00]);
+                    waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0x90, 0x05, 1]));
+                    waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xa0, 0x04, 0x00]));
                 } else {
-                    this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0x90, 0x05, 1]);
-                    this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xa0, 0x04, 0x01]);
+                    waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0x90, 0x05, 1]));
+                    waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xa0, 0x04, 0x01]));
 
-                    this.connection.write([
-                        0x12,
-                        0x07,
-                        0x12,
-                        0x05,
-                        0x1a,
-                        0x03,
-                        0xa8,
-                        0x04,
-                        (status.level || 0) / LEVEL_MULTIPLIER,
-                    ]);
+                    waits.push(
+                        this.connection.write([
+                            0x12,
+                            0x07,
+                            0x12,
+                            0x05,
+                            0x1a,
+                            0x03,
+                            0xa8,
+                            0x04,
+                            (status.level || 0) / LEVEL_MULTIPLIER,
+                        ]),
+                    );
                 }
 
                 break;
         }
+
+        return new Promise((resolve, reject) => {
+            Promise.all(waits)
+                .then(() => resolve())
+                .catch((error) => reject(error));
+        });
     }
 }

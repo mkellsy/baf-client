@@ -62,16 +62,24 @@ export class Switch extends Common implements Interfaces.Switch {
      *
      * @param status Partial desired device state.
      */
-    public set(status: Partial<Interfaces.DeviceState>): void {
+    public set(status: Partial<Interfaces.DeviceState>): Promise<void> {
+        const waits: Promise<void>[] = [];
+
         switch (this.suffix) {
             case DeviceType.UVC:
                 if (status.state === "Off") {
-                    this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xe0, 0x0a, 0x00]);
+                    waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xe0, 0x0a, 0x00]));
                 } else {
-                    this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xe0, 0x0a, 0x01]);
+                    waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xe0, 0x0a, 0x01]));
                 }
 
                 break;
         }
+
+        return new Promise((resolve, reject) => {
+            Promise.all(waits)
+                .then(() => resolve())
+                .catch((error) => reject(error));
+        });
     }
 }

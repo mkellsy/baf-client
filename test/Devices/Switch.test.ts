@@ -80,15 +80,42 @@ describe("Switch", () => {
         binary.update({ SwitchedLevel: "Off" } as any);
     });
 
-    it("should call write when setting the state to on", () => {
-        binary.set({ state: "On" });
+    it("should call write when setting the state to on", (done) => {
+        connection.write.resolves();
 
-        expect(connection.write).to.be.called;
+        binary
+            .set({ state: "On" })
+            .then(() => {
+                expect(connection.write).to.be.called;
+            })
+            .finally(() => {
+                done();
+            });
     });
 
-    it("should call write when setting the state to off", () => {
-        binary.set({ state: "Off" });
+    it("should call write when setting the state to off", (done) => {
+        connection.write.resolves();
 
-        expect(connection.write).to.be.called;
+        binary
+            .set({ state: "Off" })
+            .then(() => {
+                expect(connection.write).to.be.called;
+            })
+            .finally(() => {
+                done();
+            });
+    });
+
+    it("should reject with the error from the connection", (done) => {
+        connection.write.rejects("ERROR TEST");
+
+        binary
+            .set({ state: "Off" })
+            .catch((error) => {
+                expect(error).to.equal("ERROR TEST");
+            })
+            .finally(() => {
+                done();
+            });
     });
 });

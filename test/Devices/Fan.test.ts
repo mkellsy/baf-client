@@ -130,21 +130,51 @@ describe("Fan", () => {
         } as any);
     });
 
-    it("should call write when setting the state to off", () => {
-        fan.set({ state: "Off", whoosh: "Off", eco: "Off" });
+    it("should call write when setting the state to off", (done) => {
+        connection.write.resolves();
 
-        expect(connection.write).to.be.called;
+        fan.set({ state: "Off", whoosh: "Off", eco: "Off" })
+            .then(() => {
+                expect(connection.write).to.be.called;
+            })
+            .finally(() => {
+                done();
+            });
     });
 
-    it("should call write when setting the state to on and set the speed", () => {
-        fan.set({ state: "On", whoosh: "On", eco: "On", speed: 7 });
+    it("should call write when setting the state to on and set the speed", (done) => {
+        connection.write.resolves();
 
-        expect(connection.write).to.be.called;
+        fan.set({ state: "On", whoosh: "On", eco: "On", speed: 7 })
+            .then(() => {
+                expect(connection.write).to.be.called;
+            })
+            .finally(() => {
+                done();
+            });
     });
 
-    it("should call write when setting the state to on and set", () => {
-        fan.set({ state: "On", whoosh: "On", auto: "On" });
+    it("should call write when setting the state to on and set", (done) => {
+        connection.write.resolves();
 
-        expect(connection.write).to.be.called;
+        fan.set({ state: "On", whoosh: "On", auto: "On" })
+            .then(() => {
+                expect(connection.write).to.be.called;
+            })
+            .finally(() => {
+                done();
+            });
+    });
+
+    it("should reject with the error from the connection", (done) => {
+        connection.write.rejects("ERROR TEST");
+
+        fan.set({ state: "Off" })
+            .catch((error) => {
+                expect(error).to.equal("ERROR TEST");
+            })
+            .finally(() => {
+                done();
+            });
     });
 });

@@ -85,33 +85,70 @@ describe("Dimmer", () => {
         dimmer.update({ Level: 0 } as any);
     });
 
-    it("should call write when setting the state to off for downlight", () => {
-        dimmer.set({ state: "Off" });
+    it("should call write when setting the state to off for downlight", (done) => {
+        connection.write.resolves();
 
-        expect(connection.write).to.be.called;
+        dimmer
+            .set({ state: "Off" })
+            .then(() => {
+                expect(connection.write).to.be.called;
+            })
+            .finally(() => {
+                done();
+            });
     });
 
-    it("should call write when setting the state to on for downlight", () => {
-        dimmer.set({ state: "On" });
-        dimmer.set({ state: "On", level: 100 });
+    it("should call write when setting the state to on for downlight", (done) => {
+        connection.write.resolves();
 
-        expect(connection.write).to.be.called;
+        Promise.all([dimmer.set({ state: "On" }), dimmer.set({ state: "On", level: 100 })])
+            .then(() => {
+                expect(connection.write).to.be.called;
+            })
+            .finally(() => {
+                done();
+            });
     });
 
-    it("should call write when setting the state to off for uplight", () => {
+    it("should call write when setting the state to off for uplight", (done) => {
+        connection.write.resolves();
+
         dimmer = new Dimmer(connection, capabilities, DeviceType.Uplight);
 
-        dimmer.set({ state: "Off" });
-
-        expect(connection.write).to.be.called;
+        dimmer
+            .set({ state: "Off" })
+            .then(() => {
+                expect(connection.write).to.be.called;
+            })
+            .finally(() => {
+                done();
+            });
     });
 
-    it("should call write when setting the state to on for uplight", () => {
+    it("should call write when setting the state to on for uplight", (done) => {
+        connection.write.resolves();
+
         dimmer = new Dimmer(connection, capabilities, DeviceType.Uplight);
 
-        dimmer.set({ state: "On" });
-        dimmer.set({ state: "On", level: 100 });
+        Promise.all([dimmer.set({ state: "On" }), dimmer.set({ state: "On", level: 100 })])
+            .then(() => {
+                expect(connection.write).to.be.called;
+            })
+            .finally(() => {
+                done();
+            });
+    });
 
-        expect(connection.write).to.be.called;
+    it("should reject with the error from the connection", (done) => {
+        connection.write.rejects("ERROR TEST");
+
+        dimmer
+            .set({ state: "Off" })
+            .catch((error) => {
+                expect(error).to.equal("ERROR TEST");
+            })
+            .finally(() => {
+                done();
+            });
     });
 });

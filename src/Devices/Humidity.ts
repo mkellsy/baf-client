@@ -55,5 +55,5 @@ export class Humidity extends Common implements Interfaces.Humidity {
     /**
      * Controls this device (not supported).
      */
-    public set(): void {}
+    public set = (): Promise<void> => Promise.resolve();
 }

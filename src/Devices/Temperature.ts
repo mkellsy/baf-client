@@ -55,5 +55,5 @@ export class Temperature extends Common implements Interfaces.Temperature {
     /**
      * Controls this device (not supported).
      */
-    public set(): void {}
+    public set = (): Promise<void> => Promise.resolve();
 }
