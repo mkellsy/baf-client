@@ -1,10 +1,13 @@
-import * as Baf from "@mkellsy/baf";
 import * as Interfaces from "@mkellsy/hap-device";
+
+import { Capabilities, Connection } from "@mkellsy/baf";
 
 import equals from "deep-equal";
 
+import { Command } from "../Interfaces/Command";
 import { Common } from "./Common";
 import { DeviceType } from "../Interfaces/DeviceType";
+import { SwitchState } from "./SwitchState";
 
 /**
  * Defines a on/off switch device.
@@ -21,7 +24,7 @@ export class Switch extends Common implements Interfaces.Switch {
      * @param capabilities Device capabilities from discovery.
      * @param type The device type to tell the difference from a light and uvc.
      */
-    constructor(connection: Baf.Connection, capabilities: Baf.Capabilities, type: DeviceType) {
+    constructor(connection: Connection, capabilities: Capabilities, type: DeviceType) {
         super(Interfaces.DeviceType.Switch, connection, {
             id: capabilities.id,
             name: `${capabilities.name} ${type}`,
@@ -60,26 +63,14 @@ export class Switch extends Common implements Interfaces.Switch {
      * switch.set({ state: "On" });
      * ```
      *
-     * @param status Partial desired device state.
+     * @param status Desired device state.
      */
-    public set(status: Partial<Interfaces.DeviceState>): Promise<void> {
-        const waits: Promise<void>[] = [];
+    public set(status: SwitchState): Promise<void> {
+        const command = new Command(this.connection);
+        const state = status.state === "On" ? 0x01 : 0x00;
 
-        switch (this.suffix) {
-            case DeviceType.UVC:
-                if (status.state === "Off") {
-                    waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xe0, 0x0a, 0x00]));
-                } else {
-                    waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xe0, 0x0a, 0x01]));
-                }
+        command.push([0xe0, 0x0a, state]);
 
-                break;
-        }
-
-        return new Promise((resolve, reject) => {
-            Promise.all(waits)
-                .then(() => resolve())
-                .catch((error) => reject(error));
-        });
+        return command.execute();
     }
 }

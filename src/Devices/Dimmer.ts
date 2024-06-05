@@ -1,9 +1,12 @@
-import * as Baf from "@mkellsy/baf";
 import * as Interfaces from "@mkellsy/hap-device";
+
+import { Capabilities, Connection } from "@mkellsy/baf";
 
 import equals from "deep-equal";
 
+import { Command } from "../Interfaces/Command";
 import { Common } from "./Common";
+import { DimmerState } from "./DimmerState";
 import { DeviceType } from "../Interfaces/DeviceType";
 
 const LEVEL_MULTIPLIER: number = 100;
@@ -24,7 +27,7 @@ export class Dimmer extends Common implements Interfaces.Dimmer {
      * @param type The device type to tell the difference from an uplight and
      *             downlight.
      */
-    constructor(connection: Baf.Connection, capabilities: Baf.Capabilities, type: DeviceType) {
+    constructor(connection: Connection, capabilities: Capabilities, type: DeviceType) {
         super(Interfaces.DeviceType.Dimmer, connection, {
             id: capabilities.id,
             name: `${capabilities.name} ${type}`,
@@ -65,67 +68,21 @@ export class Dimmer extends Common implements Interfaces.Dimmer {
      * dimmer.set({ state: "On", level: 50 });
      * ```
      *
-     * @param status Partial desired device state.
+     * @param status Desired device state.
      */
-    public set(status: Partial<Interfaces.DeviceState>): Promise<void> {
-        const waits: Promise<void>[] = [];
+    public set(status: DimmerState): Promise<void> {
+        const command = new Command(this.connection);
 
-        switch (this.suffix) {
-            case DeviceType.Uplight:
-                if (status.state === "Off") {
-                    waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0x90, 0x05, 2]));
-                    waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xa0, 0x04, 0x00]));
-                } else {
-                    waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0x90, 0x05, 2]));
-                    waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xa0, 0x04, 0x01]));
+        const state = status.state === "On" ? 0x01 : 0x00;
+        const suffix = this.suffix === DeviceType.Downlight.toString() ? 1 : 2;
+        const level = status.level / LEVEL_MULTIPLIER;
 
-                    waits.push(
-                        this.connection.write([
-                            0x12,
-                            0x07,
-                            0x12,
-                            0x05,
-                            0x1a,
-                            0x03,
-                            0xa8,
-                            0x04,
-                            (status.level || 0) / LEVEL_MULTIPLIER,
-                        ]),
-                    );
-                }
+        command.push([0x90, 0x05, suffix], [0xa0, 0x04, state]);
 
-                break;
-
-            case DeviceType.Downlight:
-                if (status.state === "Off") {
-                    waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0x90, 0x05, 1]));
-                    waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xa0, 0x04, 0x00]));
-                } else {
-                    waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0x90, 0x05, 1]));
-                    waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xa0, 0x04, 0x01]));
-
-                    waits.push(
-                        this.connection.write([
-                            0x12,
-                            0x07,
-                            0x12,
-                            0x05,
-                            0x1a,
-                            0x03,
-                            0xa8,
-                            0x04,
-                            (status.level || 0) / LEVEL_MULTIPLIER,
-                        ]),
-                    );
-                }
-
-                break;
+        if (status.state === "On") {
+            command.push([0xa8, 0x04, level]);
         }
 
-        return new Promise((resolve, reject) => {
-            Promise.all(waits)
-                .then(() => resolve())
-                .catch((error) => reject(error));
-        });
+        return command.execute();
     }
 }

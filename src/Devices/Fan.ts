@@ -1,10 +1,13 @@
-import * as Baf from "@mkellsy/baf";
 import * as Interfaces from "@mkellsy/hap-device";
+
+import { Capabilities, Connection } from "@mkellsy/baf";
 
 import equals from "deep-equal";
 
+import { Command } from "../Interfaces/Command";
 import { Common } from "./Common";
 import { DeviceType } from "../Interfaces/DeviceType";
+import { FanState } from "./FanState";
 
 /**
  * Defines a fan device.
@@ -20,7 +23,7 @@ export class Fan extends Common implements Interfaces.Fan {
      * @param connection The main connection to the device.
      * @param capabilities Device capabilities from discovery.
      */
-    constructor(connection: Baf.Connection, capabilities: Baf.Capabilities) {
+    constructor(connection: Connection, capabilities: Capabilities) {
         super(Interfaces.DeviceType.Fan, connection, {
             id: capabilities.id,
             name: `${capabilities.name} ${DeviceType.Fan}`,
@@ -74,38 +77,34 @@ export class Fan extends Common implements Interfaces.Fan {
      * fan.set({ state: "On", speed: 3 });
      * ```
      *
-     * @param status Partial desired device state.
+     * @param status Desired device state.
      */
-    public set(status: Partial<Interfaces.DeviceState>): Promise<void> {
-        const waits: Promise<void>[] = [];
+    public set(status: FanState): Promise<void> {
+        const command = new Command(this.connection);
 
-        if (status.state === "Off") {
-            waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xd8, 0x02, 0x00]));
-        } else {
-            waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xd8, 0x02, 0x01]));
-            waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xf0, 0x02, status.speed || 0]));
+        const whoosh = status.whoosh === "On" ? 0x01 : 0x00;
+        const eco = status.eco === "On" ? 0x01 : 0x0;
+
+        switch (status.state) {
+            case "On":
+                command.push([0xd8, 0x02, 0x01], [0xf0, 0x02, status.speed]);
+                break;
+
+            case "Off":
+                command.push([0xd8, 0x02, 0x00]);
+                break;
+
+            case "Auto":
+                command.push([0xd8, 0x02, 0x02]);
+                break;
         }
 
-        if (status.whoosh === "On") {
-            waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xd0, 0x03, 0x01]));
-        } else {
-            waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xd0, 0x03, 0x00]));
+        command.push([0xd0, 0x03, whoosh]);
+
+        if (this.capabilities.eco) {
+            command.push([0x88, 0x04, eco]);
         }
 
-        if (status.eco === "On") {
-            waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0x88, 0x04, 0x01]));
-        } else {
-            waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0x88, 0x04, 0x0]));
-        }
-
-        if (status.auto === "On") {
-            waits.push(this.connection.write([0x12, 0x07, 0x12, 0x05, 0x1a, 0x03, 0xd8, 0x02, 0x02]));
-        }
-
-        return new Promise((resolve, reject) => {
-            Promise.all(waits)
-                .then(() => resolve())
-                .catch((error) => reject(error));
-        });
+        return command.execute();
     }
 }

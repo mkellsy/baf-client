@@ -1,5 +1,6 @@
-import * as Baf from "@mkellsy/baf";
 import * as Interfaces from "@mkellsy/hap-device";
+
+import { Capabilities, Connection } from "@mkellsy/baf";
 
 import equals from "deep-equal";
 
@@ -20,7 +21,7 @@ export class Temperature extends Common implements Interfaces.Temperature {
      * @param connection The main connection to the device.
      * @param capabilities Device capabilities from discovery.
      */
-    constructor(connection: Baf.Connection, capabilities: Baf.Capabilities) {
+    constructor(connection: Connection, capabilities: Capabilities) {
         super(Interfaces.DeviceType.Temperature, connection, {
             id: capabilities.id,
             name: `${capabilities.name} ${DeviceType.Temperature}`,

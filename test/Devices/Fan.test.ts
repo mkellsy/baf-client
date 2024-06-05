@@ -94,12 +94,14 @@ describe("Fan", () => {
         });
 
         fan.update({} as any);
+
         fan.update({
             SwitchedLevel: "On",
             WhooshLevel: "On",
             AutoLevel: "Off",
             FanSpeed: 7,
         } as any);
+
         fan.update({
             SwitchedLevel: "On",
             WhooshLevel: "On",
@@ -133,7 +135,7 @@ describe("Fan", () => {
     it("should call write when setting the state to off", (done) => {
         connection.write.resolves();
 
-        fan.set({ state: "Off", whoosh: "Off", eco: "Off" })
+        fan.set({ state: "Off", speed: 0, whoosh: "Off", eco: "Off" })
             .then(() => {
                 expect(connection.write).to.be.called;
             })
@@ -145,7 +147,7 @@ describe("Fan", () => {
     it("should call write when setting the state to on and set the speed", (done) => {
         connection.write.resolves();
 
-        fan.set({ state: "On", whoosh: "On", eco: "On", speed: 7 })
+        fan.set({ state: "On", speed: 7, whoosh: "On", eco: "On" })
             .then(() => {
                 expect(connection.write).to.be.called;
             })
@@ -154,10 +156,24 @@ describe("Fan", () => {
             });
     });
 
-    it("should call write when setting the state to on and set", (done) => {
+    it("should call write when setting the state to on and eco to off", (done) => {
         connection.write.resolves();
 
-        fan.set({ state: "On", whoosh: "On", auto: "On" })
+        fan.set({ state: "Auto", speed: 7, whoosh: "On", eco: "Off" })
+            .then(() => {
+                expect(connection.write).to.be.called;
+            })
+            .finally(() => {
+                done();
+            });
+    });
+
+    it("should call write when setting the state to off and eco is not supported", (done) => {
+        connection.write.resolves();
+        capabilities.eco = false;
+        fan = new Fan(connection, capabilities);
+
+        fan.set({ state: "Off", speed: 0, whoosh: "Off" })
             .then(() => {
                 expect(connection.write).to.be.called;
             })
@@ -169,7 +185,7 @@ describe("Fan", () => {
     it("should reject with the error from the connection", (done) => {
         connection.write.rejects("ERROR TEST");
 
-        fan.set({ state: "Off" })
+        fan.set({ state: "Off", speed: 0, whoosh: "Off", eco: "Off" })
             .catch((error) => {
                 expect(error).to.equal("ERROR TEST");
             })

@@ -1,3 +1,9 @@
+import os from "os";
+import path from "path";
+import equals from "deep-equal";
+
+import Cache from "flat-cache";
+
 import { EventEmitter } from "@mkellsy/event-emitter";
 import { FanAddress } from "@mkellsy/baf";
 import { MDNSService, MDNSServiceDiscovery, Protocol } from "tinkerhub-mdns";
@@ -10,6 +16,8 @@ export class Discovery extends EventEmitter<{
     Discovered: (device: FanAddress) => void;
     Failed: (error: Error) => void;
 }> {
+    private cache: Cache.Cache;
+    private cached: FanAddress[];
     private discovery?: MDNSServiceDiscovery;
 
     /**
@@ -24,6 +32,9 @@ export class Discovery extends EventEmitter<{
      */
     constructor() {
         super();
+
+        this.cache = Cache.load("discovery", path.join(os.homedir(), ".baf"));
+        this.cached = this.cache.getKey("/hosts") || [];
     }
 
     /**
@@ -31,6 +42,10 @@ export class Discovery extends EventEmitter<{
      */
     public search(): void {
         this.stop();
+
+        for (let i = 0; i < this.cached.length; i++) {
+            this.emit("Discovered", this.cached[i]);
+        }
 
         this.discovery = new MDNSServiceDiscovery({
             type: "api",
@@ -78,6 +93,20 @@ export class Discovery extends EventEmitter<{
             });
         }
 
-        this.emit("Discovered", { id, addresses, name, model });
+        const host: FanAddress = { id, addresses, name, model };
+        const index = this.cached.findIndex((entry) => entry.id === host.id);
+
+        if (index === -1 || !equals(this.cached[index], host)) {
+            if (index >= 0) {
+                this.cached[index] = host;
+            } else {
+                this.cached.push(host);
+            }
+
+            this.emit("Discovered", host);
+        }
+
+        this.cache.setKey("/hosts", this.cached);
+        this.cache.save(true);
     };
 }
