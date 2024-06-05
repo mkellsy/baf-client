@@ -57,7 +57,6 @@ export class Fan extends Common implements Interfaces.Fan {
             ...previous,
             state: status.SwitchedLevel || "Unknown",
             whoosh: status.WhooshLevel || "Unknown",
-            auto: status.AutoLevel || "Unknown",
             speed: status.FanSpeed || 0,
         };
 

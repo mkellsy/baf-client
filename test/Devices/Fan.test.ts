@@ -88,7 +88,6 @@ describe("Fan", () => {
         fan.on("Update", (_device, status) => {
             expect(status.state).to.equal("On");
             expect(status.whoosh).to.equal("On");
-            expect(status.auto).to.equal("Off");
             expect(status.eco).to.equal("Unknown");
             expect(status.speed).to.equal(7);
         });
