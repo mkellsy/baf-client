@@ -8,15 +8,15 @@ import { Occupancy } from "./Devices/Occupancy";
 import { Switch } from "./Devices/Switch";
 import { Temperature } from "./Devices/Temperature";
 
-export const Devices = {
-    Common,
-    Dimmer,
-    Fan,
-    Humidity,
-    Occupancy,
-    Switch,
-    Temperature,
-};
+export namespace Devices {
+    Common;
+    Dimmer;
+    Fan;
+    Humidity;
+    Occupancy;
+    Switch;
+    Temperature;
+}
 
 /**
  * Creates a connection and starts mDNS discovery.
