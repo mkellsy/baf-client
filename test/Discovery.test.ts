@@ -11,6 +11,7 @@ registerNode();
 
 describe("Discovery", () => {
     let onAvailableStub: any;
+    let reachableStub: any;
     let cacheStub: any;
     let emitStub: any;
 
@@ -33,6 +34,15 @@ describe("Discovery", () => {
                     UDP: "udp",
                 },
             },
+            "@mkellsy/baf": {
+                Connection: {
+                    reachable() {
+                        return new Promise((resolve) => {
+                            resolve(reachableStub);
+                        });
+                    },
+                },
+            },
             "@mkellsy/event-emitter": {
                 EventEmitter: class {
                     emit(event: string, ...payload: any[]) {
@@ -51,11 +61,13 @@ describe("Discovery", () => {
         };
 
         emitStub = sinon.stub();
+        reachableStub = true;
+
         discovery = new discoveryType();
     });
 
     describe("search()", () => {
-        it("should emit discovered events for cached hosts", () => {
+        it("should emit discovered events for cached hosts", (done) => {
             cacheStub.getKey.returns([
                 { id: "ID_1", addresses: ["0.0.0.0"], name: "NAME_1", model: "MODEL_1" },
                 { id: "ID_2", addresses: ["1.1.1.1"], name: "NAME_2", model: "MODEL_2" },
@@ -64,19 +76,53 @@ describe("Discovery", () => {
             discovery = new discoveryType();
             discovery.search();
 
-            expect(emitStub).to.be.calledWith("Discovered", {
-                id: "ID_1",
-                addresses: ["0.0.0.0"],
-                name: "NAME_1",
-                model: "MODEL_1",
-            });
+            setTimeout(() => {
+                expect(emitStub).to.be.calledWith("Discovered", {
+                    id: "ID_1",
+                    addresses: ["0.0.0.0"],
+                    name: "NAME_1",
+                    model: "MODEL_1",
+                });
 
-            expect(emitStub).to.be.calledWith("Discovered", {
-                id: "ID_2",
-                addresses: ["1.1.1.1"],
-                name: "NAME_2",
-                model: "MODEL_2",
-            });
+                expect(emitStub).to.be.calledWith("Discovered", {
+                    id: "ID_2",
+                    addresses: ["1.1.1.1"],
+                    name: "NAME_2",
+                    model: "MODEL_2",
+                });
+
+                done();
+            }, 1);
+        });
+
+        it("should not emit discovered events for cached hosts that are not reachable", (done) => {
+            reachableStub = false;
+
+            cacheStub.getKey.returns([
+                { id: "ID_1", addresses: ["0.0.0.0"], name: "NAME_1", model: "MODEL_1" },
+                { id: "ID_2", addresses: ["1.1.1.1"], name: "NAME_2", model: "MODEL_2" },
+            ]);
+
+            discovery = new discoveryType();
+            discovery.search();
+
+            setTimeout(() => {
+                expect(emitStub).to.not.be.calledWith("Discovered", {
+                    id: "ID_1",
+                    addresses: ["0.0.0.0"],
+                    name: "NAME_1",
+                    model: "MODEL_1",
+                });
+
+                expect(emitStub).to.not.be.calledWith("Discovered", {
+                    id: "ID_2",
+                    addresses: ["1.1.1.1"],
+                    name: "NAME_2",
+                    model: "MODEL_2",
+                });
+
+                done();
+            }, 1);
         });
 
         it("should not emit any discovered events if there are no cached hosts", () => {
@@ -124,7 +170,7 @@ describe("Discovery", () => {
             });
         });
 
-        it("should not emit a discovered event when a service is found but already cached", () => {
+        it("should not emit a discovered event when a service is found but already cached", (done) => {
             const data = new Map<string, boolean | string | undefined>();
 
             data.set("uuid", "UUID");
@@ -152,26 +198,30 @@ describe("Discovery", () => {
             discovery = new discoveryType();
             discovery.search();
 
-            onAvailableStub({
-                data,
-                addresses: [{ host: "127.0.0.1" }, { host: "0:0:0:0:0:0:0:1" }],
-            });
+            setTimeout(() => {
+                onAvailableStub({
+                    data,
+                    addresses: [{ host: "127.0.0.1" }, { host: "0:0:0:0:0:0:0:1" }],
+                });
 
-            expect(emitStub).to.be.calledOnceWith("Discovered", {
-                id: "UUID",
-                addresses: [
-                    {
-                        address: "127.0.0.1",
-                        family: 4,
-                    },
-                    {
-                        address: "0:0:0:0:0:0:0:1",
-                        family: 6,
-                    },
-                ],
-                name: "NAME",
-                model: "MODEL",
-            });
+                expect(emitStub).to.be.calledOnceWith("Discovered", {
+                    id: "UUID",
+                    addresses: [
+                        {
+                            address: "127.0.0.1",
+                            family: 4,
+                        },
+                        {
+                            address: "0:0:0:0:0:0:0:1",
+                            family: 6,
+                        },
+                    ],
+                    name: "NAME",
+                    model: "MODEL",
+                });
+
+                done();
+            }, 1);
         });
 
         it("should emit a discovered event when a cached service reports a different address", () => {

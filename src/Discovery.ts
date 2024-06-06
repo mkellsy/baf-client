@@ -4,8 +4,8 @@ import equals from "deep-equal";
 
 import Cache from "flat-cache";
 
+import { Connection, FanAddress } from "@mkellsy/baf";
 import { EventEmitter } from "@mkellsy/event-emitter";
-import { FanAddress } from "@mkellsy/baf";
 import { MDNSService, MDNSServiceDiscovery, Protocol } from "tinkerhub-mdns";
 import { HostAddress, HostAddressFamily } from "@mkellsy/hap-device";
 
@@ -17,7 +17,7 @@ export class Discovery extends EventEmitter<{
     Failed: (error: Error) => void;
 }> {
     private cache: Cache.Cache;
-    private cached: FanAddress[];
+    private cached: Map<string, FanAddress> = new Map();
     private discovery?: MDNSServiceDiscovery;
 
     /**
@@ -34,7 +34,10 @@ export class Discovery extends EventEmitter<{
         super();
 
         this.cache = Cache.load("discovery", path.join(os.homedir(), ".baf"));
-        this.cached = this.cache.getKey("/hosts") || [];
+
+        for (const host of (this.cache.getKey("/hosts") || []) as FanAddress[]) {
+            this.cached.set(host.id, host);
+        }
     }
 
     /**
@@ -43,9 +46,15 @@ export class Discovery extends EventEmitter<{
     public search(): void {
         this.stop();
 
-        for (let i = 0; i < this.cached.length; i++) {
-            this.emit("Discovered", this.cached[i]);
-        }
+        this.cached.forEach(async (host) => {
+            const ip = host.addresses.find((address) => address.family === HostAddressFamily.IPv4);
+
+            if (await Connection.reachable((ip || host.addresses[0]).address)) {
+                this.emit("Discovered", host);
+            } else {
+                this.cached.delete(host.id);
+            }
+        });
 
         this.discovery = new MDNSServiceDiscovery({
             type: "api",
@@ -94,19 +103,13 @@ export class Discovery extends EventEmitter<{
         }
 
         const host: FanAddress = { id, addresses, name, model };
-        const index = this.cached.findIndex((entry) => entry.id === host.id);
 
-        if (index === -1 || !equals(this.cached[index], host)) {
-            if (index >= 0) {
-                this.cached[index] = host;
-            } else {
-                this.cached.push(host);
-            }
-
+        if (!equals(this.cached.get(id), host)) {
             this.emit("Discovered", host);
         }
 
-        this.cache.setKey("/hosts", this.cached);
+        this.cached.set(id, host);
+        this.cache.setKey("/hosts", Array.from(this.cached.values()));
         this.cache.save(true);
     };
 }

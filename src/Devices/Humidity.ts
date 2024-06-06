@@ -5,12 +5,13 @@ import { Capabilities, Connection } from "@mkellsy/baf";
 import equals from "deep-equal";
 
 import { Common } from "./Common";
+import { HumidityState } from "./HumidityState";
 import { DeviceType } from "../Interfaces/DeviceType";
 
 /**
  * Defines a humidity sensor device.
  */
-export class Humidity extends Common implements Interfaces.Humidity {
+export class Humidity extends Common<HumidityState> implements Interfaces.Humidity {
     /**
      * Creates a humidity sensor device.
      *
@@ -22,13 +23,16 @@ export class Humidity extends Common implements Interfaces.Humidity {
      * @param capabilities Device capabilities from discovery.
      */
     constructor(connection: Connection, capabilities: Capabilities) {
-        super(Interfaces.DeviceType.Humidity, connection, {
-            id: capabilities.id,
-            name: `${capabilities.name} ${DeviceType.Humidity}`,
-            suffix: DeviceType.Humidity,
-        });
-
-        this.state = { state: "Auto" };
+        super(
+            Interfaces.DeviceType.Humidity,
+            connection,
+            {
+                id: capabilities.id,
+                name: `${capabilities.name} ${DeviceType.Humidity}`,
+                suffix: DeviceType.Humidity,
+            },
+            { state: "Auto", humidity: 0 },
+        );
     }
 
     /**

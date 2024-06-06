@@ -11,12 +11,12 @@ import { Device } from "../Interfaces/Device";
 /**
  * Defines common functionallity for a device.
  */
-export abstract class Common extends EventEmitter<{
+export abstract class Common<STATE extends Interfaces.DeviceState> extends EventEmitter<{
     Action: (device: Interfaces.Device, button: Interfaces.Button, action: Interfaces.Action) => void;
-    Update: (device: Interfaces.Device, state: Interfaces.DeviceState) => void;
+    Update: (device: Interfaces.Device, state: STATE) => void;
 }> {
     protected connection: Connection;
-    protected state: Interfaces.DeviceState;
+    protected state: STATE;
     protected fields: Map<string, Interfaces.Capability> = new Map();
 
     private logger: Logger.ILogger;
@@ -50,6 +50,7 @@ export abstract class Common extends EventEmitter<{
         type: Interfaces.DeviceType,
         connection: Connection,
         definition: { id: string; name: string; suffix: string },
+        state: STATE,
     ) {
         super();
 
@@ -60,7 +61,7 @@ export abstract class Common extends EventEmitter<{
         this.deviceType = type;
 
         this.logger = Logger.get(`Device ${Colors.dim(this.id)}`);
-        this.state = { state: "Unknown" };
+        this.state = state;
     }
 
     /**
@@ -169,7 +170,7 @@ export abstract class Common extends EventEmitter<{
      *
      * @returns The device's state.
      */
-    public get status(): Interfaces.DeviceState {
+    public get status(): STATE {
         return this.state;
     }
 }

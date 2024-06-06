@@ -33,7 +33,7 @@ describe("Fan", () => {
         expect(fan.address.href).to.equal("ID");
         expect(fan.suffix).to.equal("Fan");
         expect(fan.type).to.equal("Fan");
-        expect(fan.status.state).to.equal("Unknown");
+        expect(fan.status.state).to.equal("Off");
     });
 
     it("should define a logger for the device", () => {
@@ -88,7 +88,7 @@ describe("Fan", () => {
         fan.on("Update", (_device, status) => {
             expect(status.state).to.equal("On");
             expect(status.whoosh).to.equal("On");
-            expect(status.eco).to.equal("Unknown");
+            expect(status.eco).to.equal("Off");
             expect(status.speed).to.equal(7);
         });
 

@@ -34,7 +34,7 @@ describe("Switch", () => {
         expect(binary.address.href).to.equal("ID");
         expect(binary.suffix).to.equal("UVC");
         expect(binary.type).to.equal("Switch");
-        expect(binary.status.state).to.equal("Unknown");
+        expect(binary.status.state).to.equal("Off");
     });
 
     it("should define a logger for the device", () => {

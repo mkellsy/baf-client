@@ -14,7 +14,7 @@ const LEVEL_MULTIPLIER: number = 100;
 /**
  * Defines a dimmable light device.
  */
-export class Dimmer extends Common implements Interfaces.Dimmer {
+export class Dimmer extends Common<DimmerState> implements Interfaces.Dimmer {
     /**
      * Creates a dimmable light device.
      *
@@ -28,11 +28,16 @@ export class Dimmer extends Common implements Interfaces.Dimmer {
      *             downlight.
      */
     constructor(connection: Connection, capabilities: Capabilities, type: DeviceType) {
-        super(Interfaces.DeviceType.Dimmer, connection, {
-            id: capabilities.id,
-            name: `${capabilities.name} ${type}`,
-            suffix: type,
-        });
+        super(
+            Interfaces.DeviceType.Dimmer,
+            connection,
+            {
+                id: capabilities.id,
+                name: `${capabilities.name} ${type}`,
+                suffix: type,
+            },
+            { state: "Off", level: 0 },
+        );
 
         this.fields.set("state", { type: "String", values: ["On", "Off"] });
         this.fields.set("level", { type: "Integer", min: 0, max: 100 });

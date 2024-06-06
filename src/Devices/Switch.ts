@@ -12,7 +12,7 @@ import { SwitchState } from "./SwitchState";
 /**
  * Defines a on/off switch device.
  */
-export class Switch extends Common implements Interfaces.Switch {
+export class Switch extends Common<SwitchState> implements Interfaces.Switch {
     /**
      * Creates a dimmable light device.
      *
@@ -25,11 +25,16 @@ export class Switch extends Common implements Interfaces.Switch {
      * @param type The device type to tell the difference from a light and uvc.
      */
     constructor(connection: Connection, capabilities: Capabilities, type: DeviceType) {
-        super(Interfaces.DeviceType.Switch, connection, {
-            id: capabilities.id,
-            name: `${capabilities.name} ${type}`,
-            suffix: type,
-        });
+        super(
+            Interfaces.DeviceType.Switch,
+            connection,
+            {
+                id: capabilities.id,
+                name: `${capabilities.name} ${type}`,
+                suffix: type,
+            },
+            { state: "Off" },
+        );
 
         this.fields.set("state", { type: "String", values: ["On", "Off"] });
     }

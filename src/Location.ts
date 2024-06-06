@@ -70,9 +70,8 @@ export class Location extends EventEmitter<{
             this.connections.delete(host.id);
         }
 
-        const ip =
-            host.addresses.find((address) => address.family === Interfaces.HostAddressFamily.IPv4) || host.addresses[0];
-        const connection = new Connection(ip.address, host.id, host.name, host.model);
+        const ip = host.addresses.find((address) => address.family === Interfaces.HostAddressFamily.IPv4);
+        const connection = new Connection((ip || host.addresses[0]).address, host.id, host.name, host.model);
 
         connection
             .on("Connect", () => {

@@ -33,7 +33,7 @@ describe("Occupancy", () => {
         expect(occupancy.address.href).to.equal("ID");
         expect(occupancy.suffix).to.equal("Occupancy");
         expect(occupancy.type).to.equal("Occupancy");
-        expect(occupancy.status.state).to.equal("Unknown");
+        expect(occupancy.status.state).to.equal("Unoccupied");
     });
 
     it("should define a logger for the device", () => {

@@ -5,7 +5,7 @@ import { DeviceState } from "@mkellsy/hap-device";
  */
 export interface FanState extends DeviceState {
     /**
-     * Is the dimmer on, off, or set to auto.
+     * Is the fan on, off, or set to auto.
      */
     state: "On" | "Off" | "Auto";
 

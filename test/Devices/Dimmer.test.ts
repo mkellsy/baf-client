@@ -34,7 +34,7 @@ describe("Dimmer", () => {
         expect(dimmer.address.href).to.equal("ID");
         expect(dimmer.suffix).to.equal("Downlight");
         expect(dimmer.type).to.equal("Dimmer");
-        expect(dimmer.status.state).to.equal("Unknown");
+        expect(dimmer.status.state).to.equal("Off");
     });
 
     it("should define a logger for the device", () => {

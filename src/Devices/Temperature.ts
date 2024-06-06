@@ -6,11 +6,12 @@ import equals from "deep-equal";
 
 import { Common } from "./Common";
 import { DeviceType } from "../Interfaces/DeviceType";
+import { TemperatureState } from "./TemperatureState";
 
 /**
  * Defines a temperature sensor device.
  */
-export class Temperature extends Common implements Interfaces.Temperature {
+export class Temperature extends Common<TemperatureState> implements Interfaces.Temperature {
     /**
      * Creates a temperature sensor device.
      *
@@ -22,13 +23,16 @@ export class Temperature extends Common implements Interfaces.Temperature {
      * @param capabilities Device capabilities from discovery.
      */
     constructor(connection: Connection, capabilities: Capabilities) {
-        super(Interfaces.DeviceType.Temperature, connection, {
-            id: capabilities.id,
-            name: `${capabilities.name} ${DeviceType.Temperature}`,
-            suffix: DeviceType.Temperature,
-        });
-
-        this.state = { state: "Auto" };
+        super(
+            Interfaces.DeviceType.Temperature,
+            connection,
+            {
+                id: capabilities.id,
+                name: `${capabilities.name} ${DeviceType.Temperature}`,
+                suffix: DeviceType.Temperature,
+            },
+            { state: "Auto", temprature: 0 },
+        );
     }
 
     /**

@@ -6,11 +6,12 @@ import equals from "deep-equal";
 
 import { Common } from "./Common";
 import { DeviceType } from "../Interfaces/DeviceType";
+import { OccupancyState } from "./OccupancyState";
 
 /**
  * Defines a occupancy sensor device.
  */
-export class Occupancy extends Common implements Interfaces.Occupancy {
+export class Occupancy extends Common<OccupancyState> implements Interfaces.Occupancy {
     /**
      * Creates a occupancy sensor device.
      *
@@ -22,11 +23,16 @@ export class Occupancy extends Common implements Interfaces.Occupancy {
      * @param capabilities Device capabilities from discovery.
      */
     constructor(connection: Connection, capabilities: Capabilities) {
-        super(Interfaces.DeviceType.Occupancy, connection, {
-            id: capabilities.id,
-            name: `${capabilities.name} ${DeviceType.Occupancy}`,
-            suffix: DeviceType.Occupancy,
-        });
+        super(
+            Interfaces.DeviceType.Occupancy,
+            connection,
+            {
+                id: capabilities.id,
+                name: `${capabilities.name} ${DeviceType.Occupancy}`,
+                suffix: DeviceType.Occupancy,
+            },
+            { state: "Unoccupied" },
+        );
     }
 
     /**

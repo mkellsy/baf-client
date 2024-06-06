@@ -12,7 +12,7 @@ import { FanState } from "./FanState";
 /**
  * Defines a fan device.
  */
-export class Fan extends Common implements Interfaces.Fan {
+export class Fan extends Common<FanState> implements Interfaces.Fan {
     /**
      * Creates a fan device.
      *
@@ -24,11 +24,16 @@ export class Fan extends Common implements Interfaces.Fan {
      * @param capabilities Device capabilities from discovery.
      */
     constructor(connection: Connection, capabilities: Capabilities) {
-        super(Interfaces.DeviceType.Fan, connection, {
-            id: capabilities.id,
-            name: `${capabilities.name} ${DeviceType.Fan}`,
-            suffix: DeviceType.Fan,
-        });
+        super(
+            Interfaces.DeviceType.Fan,
+            connection,
+            {
+                id: capabilities.id,
+                name: `${capabilities.name} ${DeviceType.Fan}`,
+                suffix: DeviceType.Fan,
+            },
+            { state: "Off", speed: 0, whoosh: "Off", eco: "Off" },
+        );
 
         this.fields.set("state", { type: "String", values: ["On", "Off"] });
         this.fields.set("speed", { type: "Integer", min: 0, max: 7 });
