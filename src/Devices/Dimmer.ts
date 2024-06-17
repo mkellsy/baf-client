@@ -9,8 +9,6 @@ import { Common } from "./Common";
 import { DimmerState } from "./DimmerState";
 import { DeviceType } from "../Interfaces/DeviceType";
 
-const LEVEL_MULTIPLIER: number = 100;
-
 /**
  * Defines a dimmable light device.
  */
@@ -58,7 +56,7 @@ export class Dimmer extends Common<DimmerState> implements Interfaces.Dimmer {
 
         if (status.Level != null) {
             this.state.state = status.Level > 0 ? "On" : "Off";
-            this.state.level = status.Level * LEVEL_MULTIPLIER;
+            this.state.level = status.Level;
         }
 
         if (!equals(this.state, previous)) {
@@ -80,12 +78,11 @@ export class Dimmer extends Common<DimmerState> implements Interfaces.Dimmer {
 
         const state = status.state === "On" ? 0x01 : 0x00;
         const suffix = this.suffix === DeviceType.Downlight.toString() ? 1 : 2;
-        const level = status.level / LEVEL_MULTIPLIER;
 
         command.push([0x90, 0x05, suffix], [0xa0, 0x04, state]);
 
         if (status.state === "On") {
-            command.push([0xa8, 0x04, level]);
+            command.push([0xa8, 0x04, status.level]);
         }
 
         return command.execute();

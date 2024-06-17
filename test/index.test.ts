@@ -1,11 +1,21 @@
+import { proxy, registerNode } from "proxyrequire";
+
 import chai, { expect } from "chai";
 import sinonChai from "sinon-chai";
-
-import * as Baf from "../src";
 
 chai.use(sinonChai);
 
 describe("index", () => {
+    let Baf: any;
+
+    before(() => {
+        Baf = proxy(() => require("../src"), {
+            "./Location": {
+                Location: class {},
+            },
+        });
+    });
+
     it("should define a connect function", () => {
         expect(Baf.connect).to.not.be.null;
         expect(typeof Baf.connect).to.equal("function");
@@ -21,7 +31,7 @@ describe("index", () => {
     });
 
     it("should return a location object when connect is called", () => {
-        const location = Baf.connect().close();
+        const location = Baf.connect();
 
         expect(location).to.not.be.null;
     });

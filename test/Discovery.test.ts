@@ -12,6 +12,7 @@ registerNode();
 describe("Discovery", () => {
     let onAvailableStub: any;
     let reachableStub: any;
+    let destroyStub: any;
     let cacheStub: any;
     let emitStub: any;
 
@@ -27,6 +28,10 @@ describe("Discovery", () => {
                 MDNSServiceDiscovery: class {
                     onAvailable(callback: Function) {
                         onAvailableStub = callback;
+                    }
+
+                    destroy() {
+                        destroyStub();
                     }
                 },
                 Protocol: {
@@ -61,6 +66,7 @@ describe("Discovery", () => {
         };
 
         emitStub = sinon.stub();
+        destroyStub = sinon.stub();
         reachableStub = true;
 
         discovery = new discoveryType();
@@ -129,6 +135,16 @@ describe("Discovery", () => {
             discovery.search();
 
             expect(emitStub).to.not.be.calledWith("Discovered", sinon.match.any);
+        });
+    });
+
+    describe("stop()", () => {
+        it("should call destroy on the mdns subscriber", () => {
+            discovery = new discoveryType();
+            discovery.search();
+            discovery.stop();
+
+            expect(destroyStub).to.be.called;
         });
     });
 
