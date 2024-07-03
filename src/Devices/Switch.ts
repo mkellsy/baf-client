@@ -56,9 +56,11 @@ export class Switch extends Common<SwitchState> implements Interfaces.Switch {
             this.state.state = status.SwitchedLevel === "On" ? "On" : "Off";
         }
 
-        if (!equals(this.state, previous)) {
+        if (this.initialized && !equals(this.state, previous)) {
             this.emit("Update", this, this.state);
         }
+
+        this.initialized = true;
     }
 
     /**
@@ -71,11 +73,22 @@ export class Switch extends Common<SwitchState> implements Interfaces.Switch {
      * @param status Desired device state.
      */
     public set(status: SwitchState): Promise<void> {
-        const command = new Command(this.connection);
-        const state = status.state === "On" ? 0x01 : 0x00;
+        return new Promise((resolve, reject) => {
+            const command = new Command(this.connection);
+            const state = status.state === "On" ? 0x01 : 0x00;
 
-        command.push([0xe0, 0x0a, state]);
+            command.push([0xe0, 0x0a, state]);
 
-        return command.execute();
+            command
+                .execute()
+                .then(() => {
+                    this.connection.write([0x12, 0x04, 0x1a, 0x02, 0x08, 0x03]); // software
+                    this.connection.write([0x12, 0x04, 0x1a, 0x02, 0x08, 0x06]); // capabilities
+                    this.connection.write([0x12, 0x02, 0x1a, 0x00]);
+
+                    resolve();
+                })
+                .catch((error) => reject(error));
+        });
     }
 }

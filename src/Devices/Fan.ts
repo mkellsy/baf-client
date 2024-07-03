@@ -69,9 +69,11 @@ export class Fan extends Common<FanState> implements Interfaces.Fan {
             this.state.eco = status.EcoLevel || "Unknown";
         }
 
-        if (!equals(this.state, previous)) {
+        if (this.initialized && !equals(this.state, previous)) {
             this.emit("Update", this, this.state);
         }
+
+        this.initialized = true;
     }
 
     /**
@@ -84,31 +86,42 @@ export class Fan extends Common<FanState> implements Interfaces.Fan {
      * @param status Desired device state.
      */
     public set(status: FanState): Promise<void> {
-        const command = new Command(this.connection);
+        return new Promise((resolve, reject) => {
+            const command = new Command(this.connection);
 
-        const whoosh = status.whoosh === "On" ? 0x01 : 0x00;
-        const eco = status.eco === "On" ? 0x01 : 0x0;
+            const whoosh = status.whoosh === "On" ? 0x01 : 0x00;
+            const eco = status.eco === "On" ? 0x01 : 0x0;
 
-        switch (status.state) {
-            case "On":
-                command.push([0xd8, 0x02, 0x01], [0xf0, 0x02, status.speed]);
-                break;
+            switch (status.state) {
+                case "On":
+                    command.push([0xd8, 0x02, 0x01], [0xf0, 0x02, status.speed]);
+                    break;
 
-            case "Off":
-                command.push([0xd8, 0x02, 0x00]);
-                break;
+                case "Off":
+                    command.push([0xd8, 0x02, 0x00]);
+                    break;
 
-            case "Auto":
-                command.push([0xd8, 0x02, 0x02]);
-                break;
-        }
+                case "Auto":
+                    command.push([0xd8, 0x02, 0x02]);
+                    break;
+            }
 
-        command.push([0xd0, 0x03, whoosh]);
+            command.push([0xd0, 0x03, whoosh]);
 
-        if (this.capabilities.eco) {
-            command.push([0x88, 0x04, eco]);
-        }
+            if (this.capabilities.eco) {
+                command.push([0x88, 0x04, eco]);
+            }
 
-        return command.execute();
+            command
+                .execute()
+                .then(() => {
+                    this.connection.write([0x12, 0x04, 0x1a, 0x02, 0x08, 0x03]); // software
+                    this.connection.write([0x12, 0x04, 0x1a, 0x02, 0x08, 0x06]); // capabilities
+                    this.connection.write([0x12, 0x02, 0x1a, 0x00]);
+
+                    resolve();
+                })
+                .catch((error) => reject(error));
+        });
     }
 }

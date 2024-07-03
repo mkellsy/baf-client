@@ -55,6 +55,8 @@ export class Temperature extends Common<TemperatureState> implements Interfaces.
         if (!equals(this.state, previous)) {
             this.emit("Update", this, this.state);
         }
+
+        this.initialized = true;
     }
 
     /**

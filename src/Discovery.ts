@@ -56,11 +56,7 @@ export class Discovery extends EventEmitter<{
             }
         });
 
-        this.discovery = new MDNSServiceDiscovery({
-            type: "api",
-            protocol: Protocol.TCP,
-        });
-
+        this.discovery = new MDNSServiceDiscovery({ type: "api", protocol: Protocol.TCP });
         this.discovery.onAvailable(this.onAvailable);
     }
 

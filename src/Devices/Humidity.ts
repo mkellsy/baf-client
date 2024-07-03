@@ -55,6 +55,8 @@ export class Humidity extends Common<HumidityState> implements Interfaces.Humidi
         if (!equals(this.state, previous)) {
             this.emit("Update", this, this.state);
         }
+
+        this.initialized = true;
     }
 
     /**

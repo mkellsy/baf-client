@@ -59,9 +59,11 @@ export class Dimmer extends Common<DimmerState> implements Interfaces.Dimmer {
             this.state.level = status.Level;
         }
 
-        if (!equals(this.state, previous)) {
+        if (this.initialized && !equals(this.state, previous)) {
             this.emit("Update", this, this.state);
         }
+
+        this.initialized = true;
     }
 
     /**
@@ -74,17 +76,28 @@ export class Dimmer extends Common<DimmerState> implements Interfaces.Dimmer {
      * @param status Desired device state.
      */
     public set(status: DimmerState): Promise<void> {
-        const command = new Command(this.connection);
+        return new Promise((resolve, reject) => {
+            const command = new Command(this.connection);
 
-        const state = status.state === "On" ? 0x01 : 0x00;
-        const suffix = this.suffix === DeviceType.Downlight.toString() ? 1 : 2;
+            const state = status.state === "On" ? 0x01 : 0x00;
+            const suffix = this.suffix === DeviceType.Downlight.toString() ? 1 : 2;
 
-        command.push([0x90, 0x05, suffix], [0xa0, 0x04, state]);
+            command.push([0x90, 0x05, suffix], [0xa0, 0x04, state]);
 
-        if (status.state === "On") {
-            command.push([0xa8, 0x04, status.level]);
-        }
+            if (status.state === "On") {
+                command.push([0xa8, 0x04, status.level]);
+            }
 
-        return command.execute();
+            command
+                .execute()
+                .then(() => {
+                    this.connection.write([0x12, 0x04, 0x1a, 0x02, 0x08, 0x03]); // software
+                    this.connection.write([0x12, 0x04, 0x1a, 0x02, 0x08, 0x06]); // capabilities
+                    this.connection.write([0x12, 0x02, 0x1a, 0x00]);
+
+                    resolve();
+                })
+                .catch((error) => reject(error));
+        });
     }
 }

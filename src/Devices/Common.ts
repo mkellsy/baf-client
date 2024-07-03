@@ -17,6 +17,7 @@ export abstract class Common<STATE extends Interfaces.DeviceState> extends Event
 }> {
     protected connection: Connection;
     protected state: STATE;
+    protected initialized: boolean = false;
     protected fields: Map<string, Interfaces.Capability> = new Map();
 
     private logger: Logger.ILogger;
