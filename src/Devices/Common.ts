@@ -15,9 +15,24 @@ export abstract class Common<STATE extends Interfaces.DeviceState> extends Event
     Action: (device: Interfaces.Device, button: Interfaces.Button, action: Interfaces.Action) => void;
     Update: (device: Interfaces.Device, state: STATE) => void;
 }> {
+    /**
+     * Stores the current connection of this device.
+     */
     protected connection: Connection;
+
+    /**
+     * Stores the current device state.
+     */
     protected state: STATE;
+
+    /**
+     * Stores if this device has been descovered and fully srtup.
+     */
     protected initialized: boolean = false;
+
+    /**
+     * Contains a map of fields and the type of each field.
+     */
     protected fields: Map<string, Interfaces.Capability> = new Map();
 
     private logger: Logger.ILogger;
@@ -40,12 +55,9 @@ export abstract class Common<STATE extends Interfaces.DeviceState> extends Event
      * }
      * ```
      *
-     * @param type The device type.
-     * @param connection The main connection.
-     * @param definition The definition object containing id, name and suffix.
-     * @param definition.id The connection id.
-     * @param definition.name The connection name.
-     * @param definition.suffix The device suffix.
+     * @param type - The device type.
+     * @param connection - The main connection.
+     * @param definition - The definition object containing id, name and suffix.
      */
     constructor(
         type: Interfaces.DeviceType,

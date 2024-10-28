@@ -13,20 +13,21 @@ import { Dimmer } from "./Devices/Dimmer";
 import { Discovery } from "./Discovery";
 import { Fan } from "./Devices/Fan";
 import { FanAddress } from "./Interfaces/FanAddress";
-import { FanState } from "./Interfaces/FanState";
+import { FanStateResponse } from "./Interfaces/FanStateResponse";
 import { Humidity } from "./Devices/Humidity";
-import { LightState } from "./Interfaces/LightState";
+import { LightStateResponse } from "./Interfaces/LightStateResponse";
 import { Occupancy } from "./Devices/Occupancy";
-import { SensorState } from "./Interfaces/SensorState";
+import { SensorStateResponse } from "./Interfaces/SensorStateResponse";
 import { Switch } from "./Devices/Switch";
 import { Temperature } from "./Devices/Temperature";
 
-const log = Logger.get("Location");
+const log = Logger.get("Host");
 
 /**
  * Creates an object that represents a single location, with a single network.
+ * @public
  */
-export class Location extends EventEmitter<{
+export class Host extends EventEmitter<{
     Available: (devices: Interfaces.Device[]) => void;
     Message: (response: Response) => void;
     Update: (device: Interfaces.Device, state: Interfaces.DeviceState) => void;
@@ -40,7 +41,7 @@ export class Location extends EventEmitter<{
      * Creates a location object and starts mDNS discovery.
      *
      * ```js
-     * const location = new Location();
+     * const location = new Host();
      *
      * location.on("Avaliable", (devices: Device[]) => {  });
      * ```
@@ -104,28 +105,28 @@ export class Location extends EventEmitter<{
                 break;
 
             case "FanState":
-                this.onFanState(response as FanState);
+                this.onFanState(response as FanStateResponse);
                 break;
 
             case "LightState":
-                switch ((response as LightState).target) {
+                switch ((response as LightStateResponse).target) {
                     case "downlight":
-                        this.onDownlightState(response as LightState);
+                        this.onDownlightState(response as LightStateResponse);
                         break;
 
                     case "uplight":
-                        this.onUplightState(response as LightState);
+                        this.onUplightState(response as LightStateResponse);
                         break;
 
                     case "uvc":
-                        this.onUvcState(response as LightState);
+                        this.onUvcState(response as LightStateResponse);
                         break;
                 }
 
                 break;
 
             case "SensorState":
-                this.onSensorState(response as SensorState);
+                this.onSensorState(response as SensorStateResponse);
         }
     };
 
@@ -202,7 +203,7 @@ export class Location extends EventEmitter<{
      * When the connection responds with a fan state, this will update the fan
      * device.
      */
-    private onFanState = (state: FanState): void => {
+    private onFanState = (state: FanStateResponse): void => {
         const fan = this.devices.get(DeviceAddress.generateId(state.id, DeviceType.Fan));
         const occupancy = this.devices.get(DeviceAddress.generateId(state.id, DeviceType.Occupancy));
 
@@ -231,7 +232,7 @@ export class Location extends EventEmitter<{
      * When the connection responds with a downlight state, this will update
      * the light device.
      */
-    private onDownlightState = (state: LightState): void => {
+    private onDownlightState = (state: LightStateResponse): void => {
         const downlight = this.devices.get(DeviceAddress.generateId(state.id, DeviceType.Downlight));
 
         if (downlight != null) {
@@ -249,7 +250,7 @@ export class Location extends EventEmitter<{
      * When the connection responds with a uplight state, this will update the
      * light device.
      */
-    private onUplightState = (state: LightState): void => {
+    private onUplightState = (state: LightStateResponse): void => {
         const uplight = this.devices.get(DeviceAddress.generateId(state.id, DeviceType.Uplight));
 
         if (uplight != null) {
@@ -267,7 +268,7 @@ export class Location extends EventEmitter<{
      * When the connection responds with a uvc light state, this will update
      * the light device.
      */
-    private onUvcState = (state: LightState): void => {
+    private onUvcState = (state: LightStateResponse): void => {
         const uvc = this.devices.get(DeviceAddress.generateId(state.id, DeviceType.UVC));
 
         if (uvc != null) {
@@ -284,7 +285,7 @@ export class Location extends EventEmitter<{
      * When the connection responds with a sensor state, this will update the
      * sensor device.
      */
-    private onSensorState = (state: SensorState): void => {
+    private onSensorState = (state: SensorStateResponse): void => {
         const temperature = this.devices.get(DeviceAddress.generateId(state.id, DeviceType.Temperature));
         const humidity = this.devices.get(DeviceAddress.generateId(state.id, DeviceType.Humidity));
 

@@ -11,6 +11,7 @@ import { SwitchState } from "./SwitchState";
 
 /**
  * Defines a on/off switch device.
+ * @public
  */
 export class Switch extends Common<SwitchState> implements Interfaces.Switch {
     /**
@@ -20,9 +21,9 @@ export class Switch extends Common<SwitchState> implements Interfaces.Switch {
      * const switch = new Switch(connection, capabilities, DeviceType.UVC);
      * ```
      *
-     * @param connection The main connection to the device.
-     * @param capabilities Device capabilities from discovery.
-     * @param type The device type to tell the difference from a light and uvc.
+     * @param connection - The main connection to the device.
+     * @param capabilities - Device capabilities from discovery.
+     * @param type - The device type to tell the difference from a light and uvc.
      */
     constructor(connection: Connection, capabilities: Capabilities, type: DeviceType) {
         super(
@@ -47,7 +48,7 @@ export class Switch extends Common<SwitchState> implements Interfaces.Switch {
      * switch.update({ SwitchedLevel: "On" });
      * ```
      *
-     * @param status The current device state.
+     * @param status - The current device state.
      */
     public update(status: Interfaces.ZoneStatus): void {
         const previous = { ...this.status };
@@ -70,7 +71,7 @@ export class Switch extends Common<SwitchState> implements Interfaces.Switch {
      * switch.set({ state: "On" });
      * ```
      *
-     * @param status Desired device state.
+     * @param status - Desired device state.
      */
     public set(status: SwitchState): Promise<void> {
         return new Promise((resolve, reject) => {

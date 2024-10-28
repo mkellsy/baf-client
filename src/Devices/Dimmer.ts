@@ -11,6 +11,7 @@ import { DeviceType } from "../Interfaces/DeviceType";
 
 /**
  * Defines a dimmable light device.
+ * @public
  */
 export class Dimmer extends Common<DimmerState> implements Interfaces.Dimmer {
     /**
@@ -20,10 +21,9 @@ export class Dimmer extends Common<DimmerState> implements Interfaces.Dimmer {
      * const dimmer = new Dimmer(connection, capabilities, DeviceType.Downlight);
      * ```
      *
-     * @param connection The main connection to the device.
-     * @param capabilities Device capabilities from discovery.
-     * @param type The device type to tell the difference from an uplight and
-     *             downlight.
+     * @param connection - The main connection to the device.
+     * @param capabilities - Device capabilities from discovery.
+     * @param type - The device type to tell the difference from an uplight and downlight.
      */
     constructor(connection: Connection, capabilities: Capabilities, type: DeviceType) {
         super(
@@ -49,7 +49,7 @@ export class Dimmer extends Common<DimmerState> implements Interfaces.Dimmer {
      * dimmer.update({ Level: 100 });
      * ```
      *
-     * @param status The current device state.
+     * @param status - The current device state.
      */
     public update(status: Interfaces.ZoneStatus): void {
         const previous = { ...this.status };
@@ -73,7 +73,7 @@ export class Dimmer extends Common<DimmerState> implements Interfaces.Dimmer {
      * dimmer.set({ state: "On", level: 50 });
      * ```
      *
-     * @param status Desired device state.
+     * @param status - Desired device state.
      */
     public set(status: DimmerState): Promise<void> {
         return new Promise((resolve, reject) => {

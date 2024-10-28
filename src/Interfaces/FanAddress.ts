@@ -2,6 +2,7 @@ import { HostAddress } from "@mkellsy/hap-device";
 
 /**
  * Stores information about the ip address of the device.
+ * @public
  */
 export interface FanAddress {
     /**

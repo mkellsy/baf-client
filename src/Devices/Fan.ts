@@ -11,6 +11,7 @@ import { FanState } from "./FanState";
 
 /**
  * Defines a fan device.
+ * @public
  */
 export class Fan extends Common<FanState> implements Interfaces.Fan {
     /**
@@ -20,8 +21,8 @@ export class Fan extends Common<FanState> implements Interfaces.Fan {
      * const fan = new Fan(connection, capabilities);
      * ```
      *
-     * @param connection The main connection to the device.
-     * @param capabilities Device capabilities from discovery.
+     * @param connection - The main connection to the device.
+     * @param capabilities - Device capabilities from discovery.
      */
     constructor(connection: Connection, capabilities: Capabilities) {
         super(
@@ -53,7 +54,7 @@ export class Fan extends Common<FanState> implements Interfaces.Fan {
      * fan.update({ SwitchedLevel: "On", FanSpeed: 7 });
      * ```
      *
-     * @param status The current device state.
+     * @param status - The current device state.
      */
     public update(status: Interfaces.ZoneStatus): void {
         const previous = { ...this.status };
@@ -83,7 +84,7 @@ export class Fan extends Common<FanState> implements Interfaces.Fan {
      * fan.set({ state: "On", speed: 3 });
      * ```
      *
-     * @param status Desired device state.
+     * @param status - Desired device state.
      */
     public set(status: FanState): Promise<void> {
         return new Promise((resolve, reject) => {

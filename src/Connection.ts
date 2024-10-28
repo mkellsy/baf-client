@@ -2,17 +2,18 @@ import net from "net";
 
 import { Capabilities } from "./Interfaces/Capabilities";
 import { EventEmitter } from "@mkellsy/event-emitter";
-import { FanState } from "./Interfaces/FanState";
-import { LightState } from "./Interfaces/LightState";
+import { FanStateResponse } from "./Interfaces/FanStateResponse";
+import { LightStateResponse } from "./Interfaces/LightStateResponse";
 import { Parser } from "./Parser";
 import { ResponseTypes } from "./Interfaces/ResponseTypes";
-import { SensorState } from "./Interfaces/SensorState";
+import { SensorStateResponse } from "./Interfaces/SensorStateResponse";
 
 const SOCKET_PORT = 31415;
 const REACHABLE_TIMEOUT = 1_000;
 
 /**
  * Connects to a device with the provided ip address, id, name and model.
+ * @public
  */
 export class Connection extends EventEmitter<{
     Connect: (connection: Connection) => void;
@@ -30,7 +31,12 @@ export class Connection extends EventEmitter<{
 
     private device?: Partial<Capabilities>;
     private current?: Partial<Capabilities>;
-    private state: { fan?: FanState; sensor?: SensorState; downlight?: LightState; uplight?: LightState } = {};
+    private state: {
+        fan?: FanStateResponse;
+        sensor?: SensorStateResponse;
+        downlight?: LightStateResponse;
+        uplight?: LightStateResponse;
+    } = {};
 
     /**
      * Creates a new connection to a device.
@@ -44,10 +50,10 @@ export class Connection extends EventEmitter<{
      * );
      * ```
      *
-     * @param host The ip address of the device.
-     * @param id The id of the device.
-     * @param name The name of the device.
-     * @param model The model of the device.
+     * @param host - The ip address of the device.
+     * @param id - The id of the device.
+     * @param name - The name of the device.
+     * @param model - The model of the device.
      */
     constructor(host: string, id: string, name: string, model: string) {
         super();
@@ -62,7 +68,7 @@ export class Connection extends EventEmitter<{
     /**
      * Detects if a host is reachable.
      *
-     * @param host Address of the device.
+     * @param host - Address of the device.
      *
      * @returns True if the device is rechable, false if not.
      */
@@ -157,7 +163,7 @@ export class Connection extends EventEmitter<{
      * connection.write([0x01, 0x02, 0x03]);
      * ```
      *
-     * @param buffer The command as a hex number array.
+     * @param buffer - The command as a hex number array.
      */
     public write(buffer: number[]): Promise<void> {
         return new Promise((resolve, reject) => {
@@ -298,16 +304,16 @@ export class Connection extends EventEmitter<{
             return;
         }
 
-        if ((results.fan as Record<string, FanState | undefined>)?.state == null) {
+        if ((results.fan as Record<string, FanStateResponse | undefined>)?.state == null) {
             return;
         }
 
-        this.state.fan = (results.fan as Record<string, FanState | undefined>).state;
+        this.state.fan = (results.fan as Record<string, FanStateResponse | undefined>).state;
 
         this.emit("Response", "FanState", {
             id: this.uuid,
             ...this.state.fan,
-        } as FanState);
+        } as FanStateResponse);
     }
 
     /*
@@ -320,18 +326,18 @@ export class Connection extends EventEmitter<{
 
         if (
             (results.light as Record<string, string>)?.target !== target ||
-            (results.light as Record<string, LightState | undefined>).state == null
+            (results.light as Record<string, LightStateResponse | undefined>).state == null
         ) {
             return;
         }
 
-        this.state[target] = (results.light as Record<string, LightState | undefined>).state;
+        this.state[target] = (results.light as Record<string, LightStateResponse | undefined>).state;
 
         this.emit("Response", "LightState", {
             id: this.uuid,
             target,
             ...this.state[target],
-        } as LightState);
+        } as LightStateResponse);
     }
 
     /*
@@ -346,11 +352,11 @@ export class Connection extends EventEmitter<{
             return;
         }
 
-        this.state.sensor = (results.sensor as Record<string, SensorState | undefined>).state;
+        this.state.sensor = (results.sensor as Record<string, SensorStateResponse | undefined>).state;
 
         this.emit("Response", "SensorState", {
             id: this.uuid,
             ...this.state.sensor,
-        } as SensorState);
+        } as SensorStateResponse);
     }
 }

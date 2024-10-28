@@ -1,7 +1,8 @@
 /**
  * Stores information about the current state of a light device.
+ * @public
  */
-export interface LightState {
+export interface LightStateResponse {
     /**
      * The id of the light device.
      */

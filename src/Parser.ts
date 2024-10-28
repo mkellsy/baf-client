@@ -1,3 +1,7 @@
+/**
+ * Defines helper functions used to parse data to and from the device connection.
+ * @public
+ */
 export abstract class Parser {
     private static fragment: Buffer = Buffer.alloc(0);
 
@@ -8,7 +12,7 @@ export abstract class Parser {
      * const stuffed = Parser.stuff([0x00, 0x01, 0x02]);
      * ```
      *
-     * @param data A hex number array.
+     * @param data - A hex number array.
      *
      * @returns An array of numbers.
      */
@@ -41,7 +45,7 @@ export abstract class Parser {
      * );
      * ```
      *
-     * @param data A binary buffer.
+     * @param data - A binary buffer.
      *
      * @returns A hex buffer array.
      */
@@ -77,7 +81,7 @@ export abstract class Parser {
      * );
      * ```
      *
-     * @param data A binary buffer from the device.
+     * @param data - A binary buffer from the device.
      *
      * @returns An object containing the chunks and a count.
      */
@@ -136,7 +140,7 @@ export abstract class Parser {
      * ) as FanState;
      * ```
      *
-     * @param data A binary buffer, unstuffed.
+     * @param data - A binary buffer, unstuffed.
      *
      * @returns An object that can be casted into a response type interface.
      */

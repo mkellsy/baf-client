@@ -10,6 +10,7 @@ import { DeviceType } from "../Interfaces/DeviceType";
 
 /**
  * Defines a humidity sensor device.
+ * @public
  */
 export class Humidity extends Common<HumidityState> implements Interfaces.Humidity {
     /**
@@ -19,8 +20,8 @@ export class Humidity extends Common<HumidityState> implements Interfaces.Humidi
      * const sensor = new Humidity(connection, capabilities);
      * ```
      *
-     * @param connection The main connection to the device.
-     * @param capabilities Device capabilities from discovery.
+     * @param connection - The main connection to the device.
+     * @param capabilities - Device capabilities from discovery.
      */
     constructor(connection: Connection, capabilities: Capabilities) {
         super(
@@ -43,7 +44,7 @@ export class Humidity extends Common<HumidityState> implements Interfaces.Humidi
      * sensor.update({ Humidity: 42.3 });
      * ```
      *
-     * @param status The current device state.
+     * @param status - The current device state.
      */
     public update(status: Interfaces.AreaStatus): void {
         const previous = { ...this.status };

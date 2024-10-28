@@ -1,5 +1,6 @@
 /**
  * Device helper functions.
+ * @public
  */
 export abstract class DeviceAddress {
     /**
@@ -9,8 +10,8 @@ export abstract class DeviceAddress {
      * const id = Device.generateId("12:34:56:78:90", "Fan");
      * ```
      *
-     * @param id The current connection id, typically a mac address.
-     * @param suffix The suffix for the id, typically fan, uplight, downlight...
+     * @param id - The current connection id, typically a mac address.
+     * @param suffix - The suffix for the id, typically fan, uplight, downlight...
      *
      * @returns A standard formatted id string.
      */

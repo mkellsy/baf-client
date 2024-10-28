@@ -1,10 +1,11 @@
 import { Capabilities } from "./Capabilities";
-import { FanState } from "./FanState";
-import { LightState } from "./LightState";
-import { SensorState } from "./SensorState";
+import { FanStateResponse } from "./FanStateResponse";
+import { LightStateResponse } from "./LightStateResponse";
+import { SensorStateResponse } from "./SensorStateResponse";
 
 /**
- * DEfines the different types of responses that can be recieved.
+ * Defines the different types of responses that can be recieved.
+ * @public
  */
 export interface ResponseTypes {
     /**
@@ -15,15 +16,15 @@ export interface ResponseTypes {
     /**
      * The current fan state.
      */
-    FanState: FanState;
+    FanState: FanStateResponse;
 
     /**
      * The current light state.
      */
-    LightState: LightState;
+    LightState: LightStateResponse;
 
     /**
      * The current sensor state.
      */
-    SensorState: SensorState;
+    SensorState: SensorStateResponse;
 }

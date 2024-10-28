@@ -1,5 +1,9 @@
 import { Connection } from "../Connection";
 
+/**
+ * Defines a command sent to the device connection.
+ * @public
+ */
 export class Command {
     private connection: Connection;
     private commands: number[][] = [];

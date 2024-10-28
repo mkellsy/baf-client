@@ -1,4 +1,4 @@
-import { proxy, registerNode } from "proxyrequire";
+import { proxy } from "proxyrequire";
 
 import chai, { expect } from "chai";
 import sinonChai from "sinon-chai";
@@ -10,8 +10,8 @@ describe("index", () => {
 
     before(() => {
         Baf = proxy(() => require("../src"), {
-            "./Location": {
-                Location: class {},
+            "./Host": {
+                Host: class {},
             },
         });
     });
@@ -22,8 +22,12 @@ describe("index", () => {
     });
 
     it("should define a Devices function", () => {
+        expect(Baf.Common).to.not.be.null;
+        expect(Baf.Connection).to.not.be.null;
+        expect(Baf.DeviceType).to.not.be.null;
         expect(Baf.Dimmer).to.not.be.null;
         expect(Baf.Fan).to.not.be.null;
+        expect(Baf.Host).to.not.be.null;
         expect(Baf.Humidity).to.not.be.null;
         expect(Baf.Occupancy).to.not.be.null;
         expect(Baf.Switch).to.not.be.null;

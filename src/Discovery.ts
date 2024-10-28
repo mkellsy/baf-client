@@ -13,6 +13,7 @@ import { FanAddress } from "./Interfaces/FanAddress";
 
 /**
  * Creates and searches the network for devices.
+ * @public
  */
 export class Discovery extends EventEmitter<{
     Discovered: (device: FanAddress) => void;

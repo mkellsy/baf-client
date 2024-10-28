@@ -1,0 +1,9 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "name": "Big Ass Fans Client",
+    "entryPoints": ["./src/index.ts"],
+    "plugin": ["typedoc-plugin-markdown"],
+    "out": "docs",
+    "readme": "none",
+    "hidePageHeader": true
+}

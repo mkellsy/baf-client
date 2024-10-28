@@ -4,6 +4,8 @@ Discovers and publishes Big Ass Fan controls.
 
 ## API
 
+[**API Documentation**](docs/README.md)
+
 This client will automatically find and connect to any Big Ass Fan on your network. When devices are found they will be exposed via events.
 
 ```js

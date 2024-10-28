@@ -1,7 +1,8 @@
 /**
  * Stores information about the current state of a fan device.
+ * @public
  */
-export interface FanState {
+export interface FanStateResponse {
     /**
      * The id of the fan device.
      */

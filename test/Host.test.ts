@@ -4,12 +4,12 @@ import chai, { expect } from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
 
-import { Location } from "../src/Location";
+import { Host } from "../src/Host";
 
 chai.use(sinonChai);
 registerNode();
 
-describe("Location", () => {
+describe("Host", () => {
     const logStub = {
         info: sinon.stub(),
         warn: sinon.stub(),
@@ -30,8 +30,8 @@ describe("Location", () => {
     let switchStub: any;
     let temperatureStub: any;
 
-    let location: Location;
-    let locationType: typeof Location;
+    let host: Host;
+    let hostType: typeof Host;
 
     const emit = (stub: any, event: string, ...payload: any[]) => {
         for (const callback of stub.callbacks[event] || []) {
@@ -40,7 +40,7 @@ describe("Location", () => {
     };
 
     before(() => {
-        locationType = proxy(() => require("../src/Location").Location, {
+        hostType = proxy(() => require("../src/Host").Host, {
             "js-logger": {
                 get() {
                     return logStub;
@@ -252,7 +252,7 @@ describe("Location", () => {
             addresses: [{ address: "0.0.0.0", family: 4 }],
         };
 
-        location = new locationType();
+        host = new hostType();
     });
 
     afterEach(() => {
@@ -271,7 +271,7 @@ describe("Location", () => {
             emit(discoveryStub, "Discovered", hostStub);
             emit(connectionStub, "Connect");
 
-            location.close();
+            host.close();
 
             expect(connectionStub.disconnect).to.be.called;
         });

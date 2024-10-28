@@ -1,5 +1,6 @@
 /**
  * Lists all supported device types.
+ * @public
  */
 export enum DeviceType {
     /**
