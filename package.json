@@ -1,5 +1,5 @@
 {
-    "version": "1.7.0",
+    "version": "1.7.1",
     "name": "@mkellsy/baf-client",
     "displayName": "Big Ass Fans Client",
     "description": "Discovers and publishes Big Ass Fan controls.",
@@ -24,7 +24,7 @@
     },
     "dependencies": {
         "@mkellsy/event-emitter": "^1.5.2",
-        "@mkellsy/hap-device": "^1.5.9",
+        "@mkellsy/hap-device": "^1.7.7",
         "colors": "^1.4.0",
         "commander": "^10.0.1",
         "deep-equal": "^2.2.3",
