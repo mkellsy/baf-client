@@ -7,7 +7,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/mkellsy/baf-client"
+        "url": "git+https://github.com/mkellsy/baf-client.git"
     },
     "homepage": "https://github.com/mkellsy/baf-client",
     "main": "lib/index.js",
