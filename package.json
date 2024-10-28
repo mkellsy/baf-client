@@ -23,7 +23,7 @@
         "prepublishOnly": "npm run build"
     },
     "dependencies": {
-        "@mkellsy/event-emitter": "^1.5.2",
+        "@mkellsy/event-emitter": "^1.5.3",
         "@mkellsy/hap-device": "^1.7.7",
         "colors": "^1.4.0",
         "commander": "^10.0.1",
