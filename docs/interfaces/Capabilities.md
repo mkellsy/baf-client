@@ -14,7 +14,7 @@ Is there a downlight.
 
 #### Defined in
 
-[src/Interfaces/Capabilities.ts:39](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Interfaces/Capabilities.ts#L39)
+[src/Interfaces/Capabilities.ts:39](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/Capabilities.ts#L39)
 
 ***
 
@@ -26,7 +26,7 @@ Is eco mode supported.
 
 #### Defined in
 
-[src/Interfaces/Capabilities.ts:79](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Interfaces/Capabilities.ts#L79)
+[src/Interfaces/Capabilities.ts:79](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/Capabilities.ts#L79)
 
 ***
 
@@ -38,7 +38,7 @@ Is fan functions supported.
 
 #### Defined in
 
-[src/Interfaces/Capabilities.ts:34](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Interfaces/Capabilities.ts#L34)
+[src/Interfaces/Capabilities.ts:34](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/Capabilities.ts#L34)
 
 ***
 
@@ -50,7 +50,7 @@ The firmware version of the device.
 
 #### Defined in
 
-[src/Interfaces/Capabilities.ts:24](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Interfaces/Capabilities.ts#L24)
+[src/Interfaces/Capabilities.ts:24](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/Capabilities.ts#L24)
 
 ***
 
@@ -62,7 +62,7 @@ Is there a humidity sensor.
 
 #### Defined in
 
-[src/Interfaces/Capabilities.ts:54](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Interfaces/Capabilities.ts#L54)
+[src/Interfaces/Capabilities.ts:54](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/Capabilities.ts#L54)
 
 ***
 
@@ -74,7 +74,7 @@ The id of the device, typically the mac address.
 
 #### Defined in
 
-[src/Interfaces/Capabilities.ts:9](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Interfaces/Capabilities.ts#L9)
+[src/Interfaces/Capabilities.ts:9](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/Capabilities.ts#L9)
 
 ***
 
@@ -86,7 +86,7 @@ Is there luminance control.
 
 #### Defined in
 
-[src/Interfaces/Capabilities.ts:64](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Interfaces/Capabilities.ts#L64)
+[src/Interfaces/Capabilities.ts:64](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/Capabilities.ts#L64)
 
 ***
 
@@ -98,7 +98,7 @@ The mac address of the device.
 
 #### Defined in
 
-[src/Interfaces/Capabilities.ts:29](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Interfaces/Capabilities.ts#L29)
+[src/Interfaces/Capabilities.ts:29](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/Capabilities.ts#L29)
 
 ***
 
@@ -110,7 +110,7 @@ The device model.
 
 #### Defined in
 
-[src/Interfaces/Capabilities.ts:19](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Interfaces/Capabilities.ts#L19)
+[src/Interfaces/Capabilities.ts:19](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/Capabilities.ts#L19)
 
 ***
 
@@ -122,7 +122,7 @@ The name of the device.
 
 #### Defined in
 
-[src/Interfaces/Capabilities.ts:14](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Interfaces/Capabilities.ts#L14)
+[src/Interfaces/Capabilities.ts:14](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/Capabilities.ts#L14)
 
 ***
 
@@ -134,7 +134,7 @@ Is there an occupancy sensor.
 
 #### Defined in
 
-[src/Interfaces/Capabilities.ts:59](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Interfaces/Capabilities.ts#L59)
+[src/Interfaces/Capabilities.ts:59](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/Capabilities.ts#L59)
 
 ***
 
@@ -146,7 +146,7 @@ Is there a speaker.
 
 #### Defined in
 
-[src/Interfaces/Capabilities.ts:69](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Interfaces/Capabilities.ts#L69)
+[src/Interfaces/Capabilities.ts:69](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/Capabilities.ts#L69)
 
 ***
 
@@ -158,7 +158,7 @@ Is there a temperature sensor.
 
 #### Defined in
 
-[src/Interfaces/Capabilities.ts:49](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Interfaces/Capabilities.ts#L49)
+[src/Interfaces/Capabilities.ts:49](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/Capabilities.ts#L49)
 
 ***
 
@@ -170,7 +170,7 @@ Is there an uplight.
 
 #### Defined in
 
-[src/Interfaces/Capabilities.ts:44](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Interfaces/Capabilities.ts#L44)
+[src/Interfaces/Capabilities.ts:44](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/Capabilities.ts#L44)
 
 ***
 
@@ -182,4 +182,4 @@ Is there a uvc light.
 
 #### Defined in
 
-[src/Interfaces/Capabilities.ts:74](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Interfaces/Capabilities.ts#L74)
+[src/Interfaces/Capabilities.ts:74](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/Capabilities.ts#L74)

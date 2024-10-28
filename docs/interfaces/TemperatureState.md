@@ -22,7 +22,7 @@ Sensors with secondary state values are automatic in nature.
 
 #### Defined in
 
-[src/Devices/TemperatureState.ts:11](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/TemperatureState.ts#L11)
+[src/Devices/TemperatureState.ts:11](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/TemperatureState.ts#L11)
 
 ***
 
@@ -34,4 +34,4 @@ The sensors's temprature level.
 
 #### Defined in
 
-[src/Devices/TemperatureState.ts:16](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/TemperatureState.ts#L16)
+[src/Devices/TemperatureState.ts:16](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/TemperatureState.ts#L16)

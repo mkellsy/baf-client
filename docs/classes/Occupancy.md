@@ -44,7 +44,7 @@ Device capabilities from discovery.
 
 #### Defined in
 
-[src/Devices/Occupancy.ts:26](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/Occupancy.ts#L26)
+[src/Devices/Occupancy.ts:26](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Occupancy.ts#L26)
 
 ## Properties
 
@@ -60,7 +60,7 @@ Stores the current connection of this device.
 
 #### Defined in
 
-[src/Devices/Common.ts:21](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/Common.ts#L21)
+[src/Devices/Common.ts:21](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L21)
 
 ***
 
@@ -76,7 +76,7 @@ Contains a map of fields and the type of each field.
 
 #### Defined in
 
-[src/Devices/Common.ts:36](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/Common.ts#L36)
+[src/Devices/Common.ts:36](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L36)
 
 ***
 
@@ -92,7 +92,7 @@ Stores if this device has been descovered and fully srtup.
 
 #### Defined in
 
-[src/Devices/Common.ts:31](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/Common.ts#L31)
+[src/Devices/Common.ts:31](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L31)
 
 ***
 
@@ -108,7 +108,7 @@ Stores the current device state.
 
 #### Defined in
 
-[src/Devices/Common.ts:26](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/Common.ts#L26)
+[src/Devices/Common.ts:26](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L26)
 
 ## Accessors
 
@@ -134,7 +134,7 @@ The device's href address.
 
 #### Defined in
 
-[src/Devices/Common.ts:141](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/Common.ts#L141)
+[src/Devices/Common.ts:141](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L141)
 
 ***
 
@@ -160,7 +160,7 @@ The device's area.
 
 #### Defined in
 
-[src/Devices/Common.ts:168](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/Common.ts#L168)
+[src/Devices/Common.ts:168](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L168)
 
 ***
 
@@ -187,7 +187,7 @@ The device's capabilities.
 
 #### Defined in
 
-[src/Devices/Common.ts:122](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/Common.ts#L122)
+[src/Devices/Common.ts:122](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L122)
 
 ***
 
@@ -213,7 +213,7 @@ The device id.
 
 #### Defined in
 
-[src/Devices/Common.ts:94](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/Common.ts#L94)
+[src/Devices/Common.ts:94](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L94)
 
 ***
 
@@ -240,7 +240,7 @@ A reference to the logger assigned to this device.
 
 #### Defined in
 
-[src/Devices/Common.ts:132](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/Common.ts#L132)
+[src/Devices/Common.ts:132](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L132)
 
 ***
 
@@ -266,7 +266,7 @@ The manufacturer.
 
 #### Defined in
 
-[src/Devices/Common.ts:85](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/Common.ts#L85)
+[src/Devices/Common.ts:85](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L85)
 
 ***
 
@@ -292,7 +292,7 @@ The device's configured name.
 
 #### Defined in
 
-[src/Devices/Common.ts:103](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/Common.ts#L103)
+[src/Devices/Common.ts:103](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L103)
 
 ***
 
@@ -318,7 +318,7 @@ The device's configured room.
 
 #### Defined in
 
-[src/Devices/Common.ts:112](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/Common.ts#L112)
+[src/Devices/Common.ts:112](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L112)
 
 ***
 
@@ -344,7 +344,7 @@ The device's state.
 
 #### Defined in
 
-[src/Devices/Common.ts:186](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/Common.ts#L186)
+[src/Devices/Common.ts:186](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L186)
 
 ***
 
@@ -366,7 +366,7 @@ The device's suffix.
 
 #### Defined in
 
-[src/Devices/Common.ts:150](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/Common.ts#L150)
+[src/Devices/Common.ts:150](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L150)
 
 ***
 
@@ -392,7 +392,7 @@ The device type.
 
 #### Defined in
 
-[src/Devices/Common.ts:159](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/Common.ts#L159)
+[src/Devices/Common.ts:159](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L159)
 
 ## Methods
 
@@ -682,7 +682,7 @@ Controls this device (not supported).
 
 #### Defined in
 
-[src/Devices/Occupancy.ts:66](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/Occupancy.ts#L66)
+[src/Devices/Occupancy.ts:66](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Occupancy.ts#L66)
 
 ***
 
@@ -713,4 +713,4 @@ The current device state.
 
 #### Defined in
 
-[src/Devices/Occupancy.ts:49](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/Occupancy.ts#L49)
+[src/Devices/Occupancy.ts:49](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Occupancy.ts#L49)

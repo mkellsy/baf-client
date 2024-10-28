@@ -36,7 +36,7 @@ location.on("Avaliable", (devices: Device[]) => {  });
 
 #### Defined in
 
-src/Host.ts:49
+[src/Host.ts:49](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Host.ts#L49)
 
 ## Methods
 
@@ -52,7 +52,7 @@ Closes all connections for a location and stops searching.
 
 #### Defined in
 
-src/Host.ts:60
+[src/Host.ts:60](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Host.ts#L60)
 
 ***
 

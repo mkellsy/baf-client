@@ -14,7 +14,7 @@ Dimmable downlight device.
 
 #### Defined in
 
-[src/Interfaces/DeviceType.ts:9](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Interfaces/DeviceType.ts#L9)
+[src/Interfaces/DeviceType.ts:9](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/DeviceType.ts#L9)
 
 ***
 
@@ -26,7 +26,7 @@ Fan device.
 
 #### Defined in
 
-[src/Interfaces/DeviceType.ts:14](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Interfaces/DeviceType.ts#L14)
+[src/Interfaces/DeviceType.ts:14](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/DeviceType.ts#L14)
 
 ***
 
@@ -38,7 +38,7 @@ Humidity sensor.
 
 #### Defined in
 
-[src/Interfaces/DeviceType.ts:19](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Interfaces/DeviceType.ts#L19)
+[src/Interfaces/DeviceType.ts:19](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/DeviceType.ts#L19)
 
 ***
 
@@ -50,7 +50,7 @@ Occupancy sensor.
 
 #### Defined in
 
-[src/Interfaces/DeviceType.ts:24](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Interfaces/DeviceType.ts#L24)
+[src/Interfaces/DeviceType.ts:24](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/DeviceType.ts#L24)
 
 ***
 
@@ -62,7 +62,7 @@ Temperature sensor.
 
 #### Defined in
 
-[src/Interfaces/DeviceType.ts:29](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Interfaces/DeviceType.ts#L29)
+[src/Interfaces/DeviceType.ts:29](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/DeviceType.ts#L29)
 
 ***
 
@@ -74,7 +74,7 @@ Dimmable uplight device.
 
 #### Defined in
 
-[src/Interfaces/DeviceType.ts:34](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Interfaces/DeviceType.ts#L34)
+[src/Interfaces/DeviceType.ts:34](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/DeviceType.ts#L34)
 
 ***
 
@@ -86,4 +86,4 @@ UV light device.
 
 #### Defined in
 
-[src/Interfaces/DeviceType.ts:39](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Interfaces/DeviceType.ts#L39)
+[src/Interfaces/DeviceType.ts:39](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/DeviceType.ts#L39)

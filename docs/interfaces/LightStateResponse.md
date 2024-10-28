@@ -14,7 +14,7 @@ Is the light in auto mode.
 
 #### Defined in
 
-src/Interfaces/LightStateResponse.ts:34
+[src/Interfaces/LightStateResponse.ts:34](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/LightStateResponse.ts#L34)
 
 ***
 
@@ -26,7 +26,7 @@ The id of the light device.
 
 #### Defined in
 
-src/Interfaces/LightStateResponse.ts:9
+[src/Interfaces/LightStateResponse.ts:9](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/LightStateResponse.ts#L9)
 
 ***
 
@@ -38,7 +38,7 @@ The current brightness level.
 
 #### Defined in
 
-src/Interfaces/LightStateResponse.ts:19
+[src/Interfaces/LightStateResponse.ts:19](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/LightStateResponse.ts#L19)
 
 ***
 
@@ -50,7 +50,7 @@ The current color temprature.
 
 #### Defined in
 
-src/Interfaces/LightStateResponse.ts:24
+[src/Interfaces/LightStateResponse.ts:24](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/LightStateResponse.ts#L24)
 
 ***
 
@@ -62,7 +62,7 @@ Is the light on.
 
 #### Defined in
 
-src/Interfaces/LightStateResponse.ts:29
+[src/Interfaces/LightStateResponse.ts:29](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/LightStateResponse.ts#L29)
 
 ***
 
@@ -74,7 +74,7 @@ Which light is this state for.
 
 #### Defined in
 
-src/Interfaces/LightStateResponse.ts:14
+[src/Interfaces/LightStateResponse.ts:14](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/LightStateResponse.ts#L14)
 
 ***
 
@@ -86,4 +86,4 @@ Is the light in warm mode.
 
 #### Defined in
 
-src/Interfaces/LightStateResponse.ts:39
+[src/Interfaces/LightStateResponse.ts:39](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/LightStateResponse.ts#L39)

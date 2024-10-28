@@ -14,7 +14,7 @@ The current relative humidity.
 
 #### Defined in
 
-src/Interfaces/SensorStateResponse.ts:19
+[src/Interfaces/SensorStateResponse.ts:19](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/SensorStateResponse.ts#L19)
 
 ***
 
@@ -26,7 +26,7 @@ The id of the sensor device.
 
 #### Defined in
 
-src/Interfaces/SensorStateResponse.ts:9
+[src/Interfaces/SensorStateResponse.ts:9](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/SensorStateResponse.ts#L9)
 
 ***
 
@@ -38,4 +38,4 @@ The current temperature in celsius.
 
 #### Defined in
 
-src/Interfaces/SensorStateResponse.ts:14
+[src/Interfaces/SensorStateResponse.ts:14](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/SensorStateResponse.ts#L14)

@@ -22,4 +22,4 @@ Is the switch on or off.
 
 #### Defined in
 
-[src/Devices/SwitchState.ts:11](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/SwitchState.ts#L11)
+[src/Devices/SwitchState.ts:11](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/SwitchState.ts#L11)

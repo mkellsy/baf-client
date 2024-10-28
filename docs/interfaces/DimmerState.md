@@ -18,7 +18,7 @@ The dimmer's brightness level.
 
 #### Defined in
 
-[src/Devices/DimmerState.ts:16](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/DimmerState.ts#L16)
+[src/Devices/DimmerState.ts:16](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/DimmerState.ts#L16)
 
 ***
 
@@ -34,4 +34,4 @@ Is the dimmer on or off.
 
 #### Defined in
 
-[src/Devices/DimmerState.ts:11](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/DimmerState.ts#L11)
+[src/Devices/DimmerState.ts:11](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/DimmerState.ts#L11)

@@ -18,7 +18,7 @@ The sensors's humidity level.
 
 #### Defined in
 
-[src/Devices/HumidityState.ts:16](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/HumidityState.ts#L16)
+[src/Devices/HumidityState.ts:16](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/HumidityState.ts#L16)
 
 ***
 
@@ -34,4 +34,4 @@ Sensors with secondary state values are automatic in nature.
 
 #### Defined in
 
-[src/Devices/HumidityState.ts:11](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Devices/HumidityState.ts#L11)
+[src/Devices/HumidityState.ts:11](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/HumidityState.ts#L11)

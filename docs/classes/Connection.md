@@ -58,7 +58,7 @@ The model of the device.
 
 #### Defined in
 
-[src/Connection.ts:58](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Connection.ts#L58)
+[src/Connection.ts:58](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Connection.ts#L58)
 
 ## Accessors
 
@@ -76,7 +76,7 @@ The id of the device.
 
 #### Defined in
 
-[src/Connection.ts:106](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Connection.ts#L106)
+[src/Connection.ts:106](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Connection.ts#L106)
 
 ## Methods
 
@@ -96,7 +96,7 @@ await connection.connect();
 
 #### Defined in
 
-[src/Connection.ts:117](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Connection.ts#L117)
+[src/Connection.ts:117](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Connection.ts#L117)
 
 ***
 
@@ -116,7 +116,7 @@ connection.disconnect();
 
 #### Defined in
 
-[src/Connection.ts:154](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Connection.ts#L154)
+[src/Connection.ts:154](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Connection.ts#L154)
 
 ***
 
@@ -396,7 +396,7 @@ The command as a hex number array.
 
 #### Defined in
 
-[src/Connection.ts:168](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Connection.ts#L168)
+[src/Connection.ts:168](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Connection.ts#L168)
 
 ***
 
@@ -420,4 +420,4 @@ True if the device is rechable, false if not.
 
 #### Defined in
 
-[src/Connection.ts:75](https://github.com/mkellsy/baf-client/blob/b1857d963b07500d6d708a4c8106cad07d63cfc0/src/Connection.ts#L75)
+[src/Connection.ts:75](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Connection.ts#L75)

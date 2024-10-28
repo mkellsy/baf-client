@@ -45,7 +45,7 @@ export abstract class Common<STATE extends Interfaces.DeviceState> extends Event
     /**
      * Creates a base device object.
      *
-     * ```
+     * ```js
      * class Fan extends Common {
      *     constructor(id: string, connection: Connection, name: string) {
      *         super(DeviceType.Fan, connection, { id, name, "Fan" });
