@@ -79,8 +79,6 @@ Promise.all(jobs)
     .then(() => {
         log.info(`extract api ${colors.cyan(path.resolve(__dirname, "lib"))}`);
 
-        // fs.writeFileSync(path.resolve(__dirname, "lib/baf-client.api.md"), "");
-
         proc.exec(`${path.resolve(__dirname, "node_modules/.bin/api-extractor")} run --local`, (error) => {
             if (error) {
                 throw error;
