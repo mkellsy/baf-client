@@ -3,16 +3,21 @@ import * as Interfaces from "@mkellsy/hap-device";
 
 import Colors from "colors";
 
-import { Capabilities, Connection, FanAddress, FanState, LightState, SensorState } from "@mkellsy/baf";
 import { EventEmitter } from "@mkellsy/event-emitter";
 
-import { Device } from "./Interfaces/Device";
+import { Capabilities } from "./Interfaces/Capabilities";
+import { Connection } from "./Connection";
+import { DeviceAddress } from "./Interfaces/DeviceAddress";
 import { DeviceType } from "./Interfaces/DeviceType";
 import { Dimmer } from "./Devices/Dimmer";
 import { Discovery } from "./Discovery";
 import { Fan } from "./Devices/Fan";
+import { FanAddress } from "./Interfaces/FanAddress";
+import { FanState } from "./Interfaces/FanState";
 import { Humidity } from "./Devices/Humidity";
+import { LightState } from "./Interfaces/LightState";
 import { Occupancy } from "./Devices/Occupancy";
+import { SensorState } from "./Interfaces/SensorState";
 import { Switch } from "./Devices/Switch";
 import { Temperature } from "./Devices/Temperature";
 
@@ -143,49 +148,49 @@ export class Location extends EventEmitter<{
 
         if (capabilities.fan) {
             this.devices.set(
-                Device.generateId(capabilities.id, DeviceType.Fan),
+                DeviceAddress.generateId(capabilities.id, DeviceType.Fan),
                 new Fan(connection, capabilities).on("Update", this.onDeviceUpdate),
             );
         }
 
         if (capabilities.downlight) {
             this.devices.set(
-                Device.generateId(capabilities.id, DeviceType.Downlight),
+                DeviceAddress.generateId(capabilities.id, DeviceType.Downlight),
                 new Dimmer(connection, capabilities, DeviceType.Downlight).on("Update", this.onDeviceUpdate),
             );
         }
 
         if (capabilities.uplight) {
             this.devices.set(
-                Device.generateId(capabilities.id, DeviceType.Uplight),
+                DeviceAddress.generateId(capabilities.id, DeviceType.Uplight),
                 new Dimmer(connection, capabilities, DeviceType.Uplight).on("Update", this.onDeviceUpdate),
             );
         }
 
         if (capabilities.uvc) {
             this.devices.set(
-                Device.generateId(capabilities.id, DeviceType.UVC),
+                DeviceAddress.generateId(capabilities.id, DeviceType.UVC),
                 new Switch(connection, capabilities, DeviceType.UVC).on("Update", this.onDeviceUpdate),
             );
         }
 
         if (capabilities.occupancy) {
             this.devices.set(
-                Device.generateId(capabilities.id, DeviceType.Occupancy),
+                DeviceAddress.generateId(capabilities.id, DeviceType.Occupancy),
                 new Occupancy(connection, capabilities).on("Update", this.onDeviceUpdate),
             );
         }
 
         if (capabilities.temperature) {
             this.devices.set(
-                Device.generateId(capabilities.id, DeviceType.Temperature),
+                DeviceAddress.generateId(capabilities.id, DeviceType.Temperature),
                 new Temperature(connection, capabilities).on("Update", this.onDeviceUpdate),
             );
         }
 
         if (capabilities.humidity) {
             this.devices.set(
-                Device.generateId(capabilities.id, DeviceType.Humidity),
+                DeviceAddress.generateId(capabilities.id, DeviceType.Humidity),
                 new Humidity(connection, capabilities).on("Update", this.onDeviceUpdate),
             );
         }
@@ -198,8 +203,8 @@ export class Location extends EventEmitter<{
      * device.
      */
     private onFanState = (state: FanState): void => {
-        const fan = this.devices.get(Device.generateId(state.id, DeviceType.Fan));
-        const occupancy = this.devices.get(Device.generateId(state.id, DeviceType.Occupancy));
+        const fan = this.devices.get(DeviceAddress.generateId(state.id, DeviceType.Fan));
+        const occupancy = this.devices.get(DeviceAddress.generateId(state.id, DeviceType.Occupancy));
 
         if (fan != null) {
             fan.update({
@@ -227,7 +232,7 @@ export class Location extends EventEmitter<{
      * the light device.
      */
     private onDownlightState = (state: LightState): void => {
-        const downlight = this.devices.get(Device.generateId(state.id, DeviceType.Downlight));
+        const downlight = this.devices.get(DeviceAddress.generateId(state.id, DeviceType.Downlight));
 
         if (downlight != null) {
             downlight.update({
@@ -245,7 +250,7 @@ export class Location extends EventEmitter<{
      * light device.
      */
     private onUplightState = (state: LightState): void => {
-        const uplight = this.devices.get(Device.generateId(state.id, DeviceType.Uplight));
+        const uplight = this.devices.get(DeviceAddress.generateId(state.id, DeviceType.Uplight));
 
         if (uplight != null) {
             uplight.update({
@@ -263,7 +268,7 @@ export class Location extends EventEmitter<{
      * the light device.
      */
     private onUvcState = (state: LightState): void => {
-        const uvc = this.devices.get(Device.generateId(state.id, DeviceType.UVC));
+        const uvc = this.devices.get(DeviceAddress.generateId(state.id, DeviceType.UVC));
 
         if (uvc != null) {
             uvc.update({
@@ -280,8 +285,8 @@ export class Location extends EventEmitter<{
      * sensor device.
      */
     private onSensorState = (state: SensorState): void => {
-        const temperature = this.devices.get(Device.generateId(state.id, DeviceType.Temperature));
-        const humidity = this.devices.get(Device.generateId(state.id, DeviceType.Humidity));
+        const temperature = this.devices.get(DeviceAddress.generateId(state.id, DeviceType.Temperature));
+        const humidity = this.devices.get(DeviceAddress.generateId(state.id, DeviceType.Humidity));
 
         if (temperature != null) {
             temperature.update({

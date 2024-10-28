@@ -39,20 +39,20 @@ describe("Discovery", () => {
                     UDP: "udp",
                 },
             },
-            "@mkellsy/baf": {
+            "@mkellsy/event-emitter": {
+                EventEmitter: class {
+                    emit(event: string, ...payload: any[]) {
+                        emitStub(event, ...payload);
+                    }
+                },
+            },
+            "./Connection": {
                 Connection: {
                     reachable() {
                         return new Promise((resolve) => {
                             resolve(reachableStub);
                         });
                     },
-                },
-            },
-            "@mkellsy/event-emitter": {
-                EventEmitter: class {
-                    emit(event: string, ...payload: any[]) {
-                        emitStub(event, ...payload);
-                    }
                 },
             },
         });

@@ -1,7 +1,7 @@
 /**
  * Device helper functions.
  */
-export abstract class Device {
+export abstract class DeviceAddress {
     /**
      * Generates a standard device id.
      *

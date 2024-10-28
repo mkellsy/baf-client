@@ -3,10 +3,10 @@ import * as Interfaces from "@mkellsy/hap-device";
 
 import Colors from "colors";
 
-import { Connection } from "@mkellsy/baf";
 import { EventEmitter } from "@mkellsy/event-emitter";
 
-import { Device } from "../Interfaces/Device";
+import { Connection } from "../Connection";
+import { DeviceAddress } from "../Interfaces/DeviceAddress";
 
 /**
  * Defines common functionallity for a device.
@@ -80,7 +80,7 @@ export abstract class Common<STATE extends Interfaces.DeviceState> extends Event
      * @returns The device id.
      */
     public get id(): string {
-        return Device.generateId(this.deviceId, this.deviceSuffix);
+        return DeviceAddress.generateId(this.deviceId, this.deviceSuffix);
     }
 
     /**

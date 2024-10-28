@@ -4,10 +4,12 @@ import equals from "deep-equal";
 
 import Cache from "flat-cache";
 
-import { Connection, FanAddress } from "@mkellsy/baf";
 import { EventEmitter } from "@mkellsy/event-emitter";
 import { MDNSService, MDNSServiceDiscovery, Protocol } from "tinkerhub-mdns";
 import { HostAddress, HostAddressFamily } from "@mkellsy/hap-device";
+
+import { Connection } from "./Connection";
+import { FanAddress } from "./Interfaces/FanAddress";
 
 /**
  * Creates and searches the network for devices.

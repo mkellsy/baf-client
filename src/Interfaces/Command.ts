@@ -1,4 +1,4 @@
-import { Connection } from "@mkellsy/baf";
+import { Connection } from "../Connection";
 
 export class Command {
     private connection: Connection;

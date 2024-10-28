@@ -1,11 +1,11 @@
 import * as Interfaces from "@mkellsy/hap-device";
 
-import { Capabilities, Connection } from "@mkellsy/baf";
-
 import equals from "deep-equal";
 
+import { Capabilities } from "../Interfaces/Capabilities";
 import { Command } from "../Interfaces/Command";
 import { Common } from "./Common";
+import { Connection } from "../Connection";
 import { DeviceType } from "../Interfaces/DeviceType";
 import { SwitchState } from "./SwitchState";
 

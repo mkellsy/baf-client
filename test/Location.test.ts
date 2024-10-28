@@ -53,7 +53,7 @@ describe("Location", () => {
                     }
                 },
             },
-            "@mkellsy/baf": {
+            "./Connection": {
                 Connection: class {
                     constructor(host: string, id: string, name: string) {
                         connectionStub.host = host;

@@ -1,10 +1,10 @@
 import * as Interfaces from "@mkellsy/hap-device";
 
-import { Capabilities, Connection } from "@mkellsy/baf";
-
 import equals from "deep-equal";
 
+import { Capabilities } from "../Interfaces/Capabilities";
 import { Command } from "../Interfaces/Command";
+import { Connection } from "../Connection";
 import { Common } from "./Common";
 import { DimmerState } from "./DimmerState";
 import { DeviceType } from "../Interfaces/DeviceType";
