@@ -42,10 +42,6 @@ Device capabilities from discovery.
 
 [`Common`](Common.md).[`constructor`](Common.md#constructors)
 
-#### Defined in
-
-[src/Devices/Temperature.ts:26](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Temperature.ts#L26)
-
 ## Properties
 
 ### connection
@@ -57,10 +53,6 @@ Stores the current connection of this device.
 #### Inherited from
 
 [`Common`](Common.md).[`connection`](Common.md#connection)
-
-#### Defined in
-
-[src/Devices/Common.ts:21](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L21)
 
 ***
 
@@ -74,10 +66,6 @@ Contains a map of fields and the type of each field.
 
 [`Common`](Common.md).[`fields`](Common.md#fields)
 
-#### Defined in
-
-[src/Devices/Common.ts:36](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L36)
-
 ***
 
 ### initialized
@@ -90,10 +78,6 @@ Stores if this device has been descovered and fully srtup.
 
 [`Common`](Common.md).[`initialized`](Common.md#initialized)
 
-#### Defined in
-
-[src/Devices/Common.ts:31](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L31)
-
 ***
 
 ### state
@@ -105,10 +89,6 @@ Stores the current device state.
 #### Inherited from
 
 [`Common`](Common.md).[`state`](Common.md#state)
-
-#### Defined in
-
-[src/Devices/Common.ts:26](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L26)
 
 ## Accessors
 
@@ -132,10 +112,6 @@ The device's href address.
 
 [`Common`](Common.md).[`address`](Common.md#address)
 
-#### Defined in
-
-[src/Devices/Common.ts:141](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L141)
-
 ***
 
 ### area
@@ -157,10 +133,6 @@ The device's area.
 #### Inherited from
 
 [`Common`](Common.md).[`area`](Common.md#area)
-
-#### Defined in
-
-[src/Devices/Common.ts:168](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L168)
 
 ***
 
@@ -185,10 +157,6 @@ The device's capabilities.
 
 [`Common`](Common.md).[`capabilities`](Common.md#capabilities)
 
-#### Defined in
-
-[src/Devices/Common.ts:122](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L122)
-
 ***
 
 ### id
@@ -210,10 +178,6 @@ The device id.
 #### Inherited from
 
 [`Common`](Common.md).[`id`](Common.md#id)
-
-#### Defined in
-
-[src/Devices/Common.ts:94](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L94)
 
 ***
 
@@ -238,10 +202,6 @@ A reference to the logger assigned to this device.
 
 [`Common`](Common.md).[`log`](Common.md#log)
 
-#### Defined in
-
-[src/Devices/Common.ts:132](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L132)
-
 ***
 
 ### manufacturer
@@ -263,10 +223,6 @@ The manufacturer.
 #### Inherited from
 
 [`Common`](Common.md).[`manufacturer`](Common.md#manufacturer)
-
-#### Defined in
-
-[src/Devices/Common.ts:85](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L85)
 
 ***
 
@@ -290,10 +246,6 @@ The device's configured name.
 
 [`Common`](Common.md).[`name`](Common.md#name)
 
-#### Defined in
-
-[src/Devices/Common.ts:103](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L103)
-
 ***
 
 ### room
@@ -315,10 +267,6 @@ The device's configured room.
 #### Inherited from
 
 [`Common`](Common.md).[`room`](Common.md#room)
-
-#### Defined in
-
-[src/Devices/Common.ts:112](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L112)
 
 ***
 
@@ -342,10 +290,6 @@ The device's state.
 
 [`Common`](Common.md).[`status`](Common.md#status)
 
-#### Defined in
-
-[src/Devices/Common.ts:186](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L186)
-
 ***
 
 ### suffix
@@ -363,10 +307,6 @@ The device's suffix.
 #### Inherited from
 
 [`Common`](Common.md).[`suffix`](Common.md#suffix)
-
-#### Defined in
-
-[src/Devices/Common.ts:150](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L150)
 
 ***
 
@@ -389,10 +329,6 @@ The device type.
 #### Inherited from
 
 [`Common`](Common.md).[`type`](Common.md#type)
-
-#### Defined in
-
-[src/Devices/Common.ts:159](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L159)
 
 ## Methods
 
@@ -439,10 +375,6 @@ Returns `true` if the event had listeners, `false` otherwise.
 
 [`Common`](Common.md).[`emit`](Common.md#emit)
 
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:119
-
 ***
 
 ### events()
@@ -461,10 +393,6 @@ Returns an array of events names.
 #### Inherited from
 
 [`Common`](Common.md).[`events`](Common.md#events)
-
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:133
 
 ***
 
@@ -493,10 +421,6 @@ Returns a copy of the array of listeners.
 #### Inherited from
 
 [`Common`](Common.md).[`listeners`](Common.md#listeners)
-
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:126
 
 ***
 
@@ -550,10 +474,6 @@ Returns a reference to the `EventEmitter`, so that calls can be
 
 [`Common`](Common.md).[`off`](Common.md#off)
 
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:102
-
 ***
 
 ### on()
@@ -606,10 +526,6 @@ Returns a reference to the `EventEmitter`, so that calls can be
 
 [`Common`](Common.md).[`on`](Common.md#on)
 
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:59
-
 ***
 
 ### once()
@@ -660,10 +576,6 @@ Returns a reference to the `EventEmitter`, so that calls can be
 
 [`Common`](Common.md).[`once`](Common.md#once)
 
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:78
-
 ***
 
 ### set()
@@ -679,10 +591,6 @@ Controls this device (not supported).
 #### Implementation of
 
 `Interfaces.Temperature.set`
-
-#### Defined in
-
-[src/Devices/Temperature.ts:66](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Temperature.ts#L66)
 
 ***
 
@@ -710,7 +618,3 @@ The current device state.
 #### Implementation of
 
 `Interfaces.Temperature.update`
-
-#### Defined in
-
-[src/Devices/Temperature.ts:49](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Temperature.ts#L49)

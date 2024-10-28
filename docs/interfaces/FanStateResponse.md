@@ -12,10 +12,6 @@ Stores information about the current state of a fan device.
 
 If the fan is in auto mode.
 
-#### Defined in
-
-[src/Interfaces/FanStateResponse.ts:19](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/FanStateResponse.ts#L19)
-
 ***
 
 ### eco
@@ -23,10 +19,6 @@ If the fan is in auto mode.
 > **eco**: `boolean`
 
 Is the fan in eco mode.
-
-#### Defined in
-
-[src/Interfaces/FanStateResponse.ts:39](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/FanStateResponse.ts#L39)
 
 ***
 
@@ -36,10 +28,6 @@ Is the fan in eco mode.
 
 The id of the fan device.
 
-#### Defined in
-
-[src/Interfaces/FanStateResponse.ts:9](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/FanStateResponse.ts#L9)
-
 ***
 
 ### occupancy
@@ -47,10 +35,6 @@ The id of the fan device.
 > **occupancy**: `boolean`
 
 Is occupancy detected.
-
-#### Defined in
-
-[src/Interfaces/FanStateResponse.ts:44](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/FanStateResponse.ts#L44)
 
 ***
 
@@ -60,10 +44,6 @@ Is occupancy detected.
 
 If the fan is on.
 
-#### Defined in
-
-[src/Interfaces/FanStateResponse.ts:14](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/FanStateResponse.ts#L14)
-
 ***
 
 ### reverse
@@ -71,10 +51,6 @@ If the fan is on.
 > **reverse**: `boolean`
 
 If the fan is in reverse mode.
-
-#### Defined in
-
-[src/Interfaces/FanStateResponse.ts:24](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/FanStateResponse.ts#L24)
 
 ***
 
@@ -84,10 +60,6 @@ If the fan is in reverse mode.
 
 The current speed of the fan.
 
-#### Defined in
-
-[src/Interfaces/FanStateResponse.ts:29](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/FanStateResponse.ts#L29)
-
 ***
 
 ### whoosh
@@ -95,7 +67,3 @@ The current speed of the fan.
 > **whoosh**: `boolean`
 
 If the fan's whoosh mode is on.
-
-#### Defined in
-
-[src/Interfaces/FanStateResponse.ts:34](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/FanStateResponse.ts#L34)

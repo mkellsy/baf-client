@@ -34,10 +34,6 @@ location.on("Avaliable", (devices: Device[]) => {  });
     Update: (device: Interfaces.Device, state: Interfaces.DeviceState) => void;
 }>.constructor`
 
-#### Defined in
-
-[src/Host.ts:49](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Host.ts#L49)
-
 ## Methods
 
 ### close()
@@ -49,10 +45,6 @@ Closes all connections for a location and stops searching.
 #### Returns
 
 `void`
-
-#### Defined in
-
-[src/Host.ts:60](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Host.ts#L60)
 
 ***
 
@@ -95,10 +87,6 @@ Returns `true` if the event had listeners, `false` otherwise.
 
 `EventEmitter.emit`
 
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:119
-
 ***
 
 ### events()
@@ -117,10 +105,6 @@ Returns an array of events names.
 #### Inherited from
 
 `EventEmitter.events`
-
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:133
 
 ***
 
@@ -149,10 +133,6 @@ Returns a copy of the array of listeners.
 #### Inherited from
 
 `EventEmitter.listeners`
-
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:126
 
 ***
 
@@ -202,10 +182,6 @@ Returns a reference to the `EventEmitter`, so that calls can be
 
 `EventEmitter.off`
 
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:102
-
 ***
 
 ### on()
@@ -254,10 +230,6 @@ Returns a reference to the `EventEmitter`, so that calls can be
 
 `EventEmitter.on`
 
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:59
-
 ***
 
 ### once()
@@ -303,7 +275,3 @@ Returns a reference to the `EventEmitter`, so that calls can be
 #### Inherited from
 
 `EventEmitter.once`
-
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:78

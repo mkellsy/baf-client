@@ -56,10 +56,6 @@ The model of the device.
     Error: (error: Error) => void;
 }>.constructor`
 
-#### Defined in
-
-[src/Connection.ts:58](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Connection.ts#L58)
-
 ## Accessors
 
 ### id
@@ -73,10 +69,6 @@ The id of the device.
 `string`
 
 The id of the device.
-
-#### Defined in
-
-[src/Connection.ts:106](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Connection.ts#L106)
 
 ## Methods
 
@@ -94,10 +86,6 @@ await connection.connect();
 
 `Promise`\<`void`\>
 
-#### Defined in
-
-[src/Connection.ts:117](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Connection.ts#L117)
-
 ***
 
 ### disconnect()
@@ -113,10 +101,6 @@ connection.disconnect();
 #### Returns
 
 `void`
-
-#### Defined in
-
-[src/Connection.ts:154](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Connection.ts#L154)
 
 ***
 
@@ -159,10 +143,6 @@ Returns `true` if the event had listeners, `false` otherwise.
 
 `EventEmitter.emit`
 
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:119
-
 ***
 
 ### events()
@@ -181,10 +161,6 @@ Returns an array of events names.
 #### Inherited from
 
 `EventEmitter.events`
-
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:133
 
 ***
 
@@ -213,10 +189,6 @@ Returns a copy of the array of listeners.
 #### Inherited from
 
 `EventEmitter.listeners`
-
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:126
 
 ***
 
@@ -266,10 +238,6 @@ Returns a reference to the `EventEmitter`, so that calls can be
 
 `EventEmitter.off`
 
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:102
-
 ***
 
 ### on()
@@ -318,10 +286,6 @@ Returns a reference to the `EventEmitter`, so that calls can be
 
 `EventEmitter.on`
 
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:59
-
 ***
 
 ### once()
@@ -368,10 +332,6 @@ Returns a reference to the `EventEmitter`, so that calls can be
 
 `EventEmitter.once`
 
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:78
-
 ***
 
 ### write()
@@ -394,10 +354,6 @@ The command as a hex number array.
 
 `Promise`\<`void`\>
 
-#### Defined in
-
-[src/Connection.ts:168](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Connection.ts#L168)
-
 ***
 
 ### reachable()
@@ -417,7 +373,3 @@ Address of the device.
 `Promise`\<`boolean`\>
 
 True if the device is rechable, false if not.
-
-#### Defined in
-
-[src/Connection.ts:75](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Connection.ts#L75)

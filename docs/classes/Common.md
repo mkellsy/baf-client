@@ -72,10 +72,6 @@ The definition object containing id, name and suffix.
     Update: (device: Interfaces.Device, state: STATE) => void;
 }>.constructor`
 
-#### Defined in
-
-[src/Devices/Common.ts:62](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L62)
-
 ## Properties
 
 ### connection
@@ -83,10 +79,6 @@ The definition object containing id, name and suffix.
 > `protected` **connection**: [`Connection`](Connection.md)
 
 Stores the current connection of this device.
-
-#### Defined in
-
-[src/Devices/Common.ts:21](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L21)
 
 ***
 
@@ -96,10 +88,6 @@ Stores the current connection of this device.
 
 Contains a map of fields and the type of each field.
 
-#### Defined in
-
-[src/Devices/Common.ts:36](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L36)
-
 ***
 
 ### initialized
@@ -108,10 +96,6 @@ Contains a map of fields and the type of each field.
 
 Stores if this device has been descovered and fully srtup.
 
-#### Defined in
-
-[src/Devices/Common.ts:31](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L31)
-
 ***
 
 ### state
@@ -119,10 +103,6 @@ Stores if this device has been descovered and fully srtup.
 > `protected` **state**: `STATE`
 
 Stores the current device state.
-
-#### Defined in
-
-[src/Devices/Common.ts:26](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L26)
 
 ## Accessors
 
@@ -138,10 +118,6 @@ The href address of the device (not used).
 
 The device's href address.
 
-#### Defined in
-
-[src/Devices/Common.ts:141](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L141)
-
 ***
 
 ### area
@@ -155,10 +131,6 @@ The area the device is in (not used).
 `Area`
 
 The device's area.
-
-#### Defined in
-
-[src/Devices/Common.ts:168](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L168)
 
 ***
 
@@ -175,10 +147,6 @@ or read.
 
 The device's capabilities.
 
-#### Defined in
-
-[src/Devices/Common.ts:122](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L122)
-
 ***
 
 ### id
@@ -192,10 +160,6 @@ The device's unique identifier.
 `string`
 
 The device id.
-
-#### Defined in
-
-[src/Devices/Common.ts:94](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L94)
 
 ***
 
@@ -212,10 +176,6 @@ room and id.
 
 A reference to the logger assigned to this device.
 
-#### Defined in
-
-[src/Devices/Common.ts:132](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L132)
-
 ***
 
 ### manufacturer
@@ -229,10 +189,6 @@ The device's manufacturer.
 `string`
 
 The manufacturer.
-
-#### Defined in
-
-[src/Devices/Common.ts:85](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L85)
 
 ***
 
@@ -248,10 +204,6 @@ The device's configured name.
 
 The device's configured name.
 
-#### Defined in
-
-[src/Devices/Common.ts:103](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L103)
-
 ***
 
 ### room
@@ -265,10 +217,6 @@ The device's configured room (not supported).
 `string`
 
 The device's configured room.
-
-#### Defined in
-
-[src/Devices/Common.ts:112](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L112)
 
 ***
 
@@ -284,10 +232,6 @@ The current state of the device.
 
 The device's state.
 
-#### Defined in
-
-[src/Devices/Common.ts:186](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L186)
-
 ***
 
 ### suffix
@@ -302,10 +246,6 @@ The device's suffix.
 
 The device's suffix.
 
-#### Defined in
-
-[src/Devices/Common.ts:150](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L150)
-
 ***
 
 ### type
@@ -319,10 +259,6 @@ The device type.
 `DeviceType`
 
 The device type.
-
-#### Defined in
-
-[src/Devices/Common.ts:159](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/Common.ts#L159)
 
 ## Methods
 
@@ -365,10 +301,6 @@ Returns `true` if the event had listeners, `false` otherwise.
 
 `EventEmitter.emit`
 
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:119
-
 ***
 
 ### events()
@@ -387,10 +319,6 @@ Returns an array of events names.
 #### Inherited from
 
 `EventEmitter.events`
-
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:133
 
 ***
 
@@ -419,10 +347,6 @@ Returns a copy of the array of listeners.
 #### Inherited from
 
 `EventEmitter.listeners`
-
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:126
 
 ***
 
@@ -472,10 +396,6 @@ Returns a reference to the `EventEmitter`, so that calls can be
 
 `EventEmitter.off`
 
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:102
-
 ***
 
 ### on()
@@ -524,10 +444,6 @@ Returns a reference to the `EventEmitter`, so that calls can be
 
 `EventEmitter.on`
 
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:59
-
 ***
 
 ### once()
@@ -573,7 +489,3 @@ Returns a reference to the `EventEmitter`, so that calls can be
 #### Inherited from
 
 `EventEmitter.once`
-
-#### Defined in
-
-node\_modules/@mkellsy/event-emitter/lib/EventEmitter.d.ts:78

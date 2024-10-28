@@ -12,10 +12,6 @@ Stores information about the current state of a light device.
 
 Is the light in auto mode.
 
-#### Defined in
-
-[src/Interfaces/LightStateResponse.ts:34](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/LightStateResponse.ts#L34)
-
 ***
 
 ### id
@@ -23,10 +19,6 @@ Is the light in auto mode.
 > **id**: `string`
 
 The id of the light device.
-
-#### Defined in
-
-[src/Interfaces/LightStateResponse.ts:9](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/LightStateResponse.ts#L9)
 
 ***
 
@@ -36,10 +28,6 @@ The id of the light device.
 
 The current brightness level.
 
-#### Defined in
-
-[src/Interfaces/LightStateResponse.ts:19](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/LightStateResponse.ts#L19)
-
 ***
 
 ### luminance
@@ -47,10 +35,6 @@ The current brightness level.
 > **luminance**: `number`
 
 The current color temprature.
-
-#### Defined in
-
-[src/Interfaces/LightStateResponse.ts:24](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/LightStateResponse.ts#L24)
 
 ***
 
@@ -60,10 +44,6 @@ The current color temprature.
 
 Is the light on.
 
-#### Defined in
-
-[src/Interfaces/LightStateResponse.ts:29](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/LightStateResponse.ts#L29)
-
 ***
 
 ### target
@@ -72,10 +52,6 @@ Is the light on.
 
 Which light is this state for.
 
-#### Defined in
-
-[src/Interfaces/LightStateResponse.ts:14](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/LightStateResponse.ts#L14)
-
 ***
 
 ### warm
@@ -83,7 +59,3 @@ Which light is this state for.
 > **warm**: `number`
 
 Is the light in warm mode.
-
-#### Defined in
-
-[src/Interfaces/LightStateResponse.ts:39](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Interfaces/LightStateResponse.ts#L39)

@@ -16,10 +16,6 @@ Defines a fan's current status response.
 
 Determines if the fan's eco mode is on or off.
 
-#### Defined in
-
-[src/Devices/FanState.ts:26](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/FanState.ts#L26)
-
 ***
 
 ### speed
@@ -27,10 +23,6 @@ Determines if the fan's eco mode is on or off.
 > **speed**: `number`
 
 The fan's speed setting.
-
-#### Defined in
-
-[src/Devices/FanState.ts:16](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/FanState.ts#L16)
 
 ***
 
@@ -44,10 +36,6 @@ Is the fan on, off, or set to auto.
 
 `DeviceState.state`
 
-#### Defined in
-
-[src/Devices/FanState.ts:11](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/FanState.ts#L11)
-
 ***
 
 ### whoosh
@@ -55,7 +43,3 @@ Is the fan on, off, or set to auto.
 > **whoosh**: `"On"` \| `"Off"`
 
 Determines if the fan's whoosh mode is on or off.
-
-#### Defined in
-
-[src/Devices/FanState.ts:21](https://github.com/mkellsy/baf-client/blob/289367c3ef8fe75588d41eda9372734a1c23f3c8/src/Devices/FanState.ts#L21)
