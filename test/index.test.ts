@@ -21,7 +21,7 @@ describe("index", () => {
         expect(typeof Baf.connect).to.equal("function");
     });
 
-    it("should define a Devices function", () => {
+    it("should export the API", () => {
         expect(Baf.Common).to.not.be.null;
         expect(Baf.Connection).to.not.be.null;
         expect(Baf.DeviceType).to.not.be.null;
