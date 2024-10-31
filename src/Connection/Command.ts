@@ -1,4 +1,4 @@
-import { Connection } from "../Connection";
+import { Connection } from "./Connection";
 
 /**
  * Defines a command sent to the device connection.

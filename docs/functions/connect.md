@@ -2,12 +2,12 @@
 
 # Function: connect()
 
-> **connect**(): [`Host`](../classes/Host.md)
+> **connect**(): [`Client`](../classes/Client.md)
 
 Creates a connection and starts mDNS discovery.
 
 ## Returns
 
-[`Host`](../classes/Host.md)
+[`Client`](../classes/Client.md)
 
 A location object.

@@ -1,4 +1,4 @@
-import { Capabilities } from "./Capabilities";
+import { Capabilities } from "../Devices/Capabilities";
 import { FanStateResponse } from "./FanStateResponse";
 import { LightStateResponse } from "./LightStateResponse";
 import { SensorStateResponse } from "./SensorStateResponse";

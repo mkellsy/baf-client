@@ -13,11 +13,11 @@ network. When devices are found they will be exposed via events.
 
 ## Classes
 
+- [Client](classes/Client.md)
 - [Common](classes/Common.md)
 - [Connection](classes/Connection.md)
 - [Dimmer](classes/Dimmer.md)
 - [Fan](classes/Fan.md)
-- [Host](classes/Host.md)
 - [Humidity](classes/Humidity.md)
 - [Occupancy](classes/Occupancy.md)
 - [Switch](classes/Switch.md)

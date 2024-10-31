@@ -2,8 +2,8 @@ import chai, { expect } from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
 
-import { DeviceType } from "../../src/Interfaces/DeviceType";
-import { Switch } from "../../src/Devices/Switch";
+import { DeviceType } from "../../src/Devices/DeviceType";
+import { Switch } from "../../src/Devices/Switch/Switch";
 
 chai.use(sinonChai);
 

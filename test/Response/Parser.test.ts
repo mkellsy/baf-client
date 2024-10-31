@@ -1,7 +1,7 @@
 import chai, { expect } from "chai";
 import sinonChai from "sinon-chai";
 
-import { Parser } from "../src/Parser";
+import { Parser } from "../../src/Response/Parser";
 
 chai.use(sinonChai);
 

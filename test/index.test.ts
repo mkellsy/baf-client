@@ -10,8 +10,8 @@ describe("index", () => {
 
     before(() => {
         Baf = proxy(() => require("../src"), {
-            "./Host": {
-                Host: class {},
+            "./Client": {
+                Client: class {},
             },
         });
     });
@@ -22,21 +22,21 @@ describe("index", () => {
     });
 
     it("should export the API", () => {
+        expect(Baf.Client).to.not.be.null;
         expect(Baf.Common).to.not.be.null;
         expect(Baf.Connection).to.not.be.null;
         expect(Baf.DeviceType).to.not.be.null;
         expect(Baf.Dimmer).to.not.be.null;
         expect(Baf.Fan).to.not.be.null;
-        expect(Baf.Host).to.not.be.null;
         expect(Baf.Humidity).to.not.be.null;
         expect(Baf.Occupancy).to.not.be.null;
         expect(Baf.Switch).to.not.be.null;
         expect(Baf.Temperature).to.not.be.null;
     });
 
-    it("should return a location object when connect is called", () => {
-        const location = Baf.connect();
+    it("should return a client object when connect is called", () => {
+        const client = Baf.connect();
 
-        expect(location).to.not.be.null;
+        expect(client).to.not.be.null;
     });
 });

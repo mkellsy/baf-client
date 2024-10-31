@@ -1,6 +1,6 @@
-[Big Ass Fans Client](../README.md) / Host
+[Big Ass Fans Client](../README.md) / Client
 
-# Class: Host
+# Class: Client
 
 Creates an object that represents a single location, with a single network.
 
@@ -10,21 +10,21 @@ Creates an object that represents a single location, with a single network.
 
 ## Constructors
 
-### new Host()
+### new Client()
 
-> **new Host**(): [`Host`](Host.md)
+> **new Client**(): [`Client`](Client.md)
 
 Creates a location object and starts mDNS discovery.
 
 ```js
-const location = new Host();
+const location = new Client();
 
 location.on("Avaliable", (devices: Device[]) => {  });
 ```
 
 #### Returns
 
-[`Host`](Host.md)
+[`Client`](Client.md)
 
 #### Overrides
 

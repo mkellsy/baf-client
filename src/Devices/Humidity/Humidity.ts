@@ -2,11 +2,11 @@ import * as Interfaces from "@mkellsy/hap-device";
 
 import equals from "deep-equal";
 
-import { Capabilities } from "../Interfaces/Capabilities";
-import { Common } from "./Common";
-import { Connection } from "../Connection";
+import { Capabilities } from "../Capabilities";
+import { Common } from "../Common";
+import { Connection } from "../../Connection/Connection";
 import { HumidityState } from "./HumidityState";
-import { DeviceType } from "../Interfaces/DeviceType";
+import { DeviceType } from "../DeviceType";
 
 /**
  * Defines a humidity sensor device.

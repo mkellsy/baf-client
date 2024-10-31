@@ -9,7 +9,7 @@ import { MDNSService, MDNSServiceDiscovery, Protocol } from "tinkerhub-mdns";
 import { HostAddress, HostAddressFamily } from "@mkellsy/hap-device";
 
 import { Connection } from "./Connection";
-import { FanAddress } from "./Interfaces/FanAddress";
+import { FanAddress } from "../Devices/Fan/FanAddress";
 
 /**
  * Creates and searches the network for devices.

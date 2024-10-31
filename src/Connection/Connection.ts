@@ -1,12 +1,12 @@
 import net from "net";
 
-import { Capabilities } from "./Interfaces/Capabilities";
+import { Capabilities } from "../Devices/Capabilities";
 import { EventEmitter } from "@mkellsy/event-emitter";
-import { FanStateResponse } from "./Interfaces/FanStateResponse";
-import { LightStateResponse } from "./Interfaces/LightStateResponse";
-import { Parser } from "./Parser";
-import { ResponseTypes } from "./Interfaces/ResponseTypes";
-import { SensorStateResponse } from "./Interfaces/SensorStateResponse";
+import { FanStateResponse } from "../Response/FanStateResponse";
+import { LightStateResponse } from "../Response/LightStateResponse";
+import { Parser } from "../Response/Parser";
+import { ResponseTypes } from "../Response/ResponseTypes";
+import { SensorStateResponse } from "../Response/SensorStateResponse";
 
 const SOCKET_PORT = 31415;
 const REACHABLE_TIMEOUT = 1_000;

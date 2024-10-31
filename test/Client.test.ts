@@ -4,12 +4,12 @@ import chai, { expect } from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
 
-import { Host } from "../src/Host";
+import { Client } from "../src/Client";
 
 chai.use(sinonChai);
 registerNode();
 
-describe("Host", () => {
+describe("Client", () => {
     const logStub = {
         info: sinon.stub(),
         warn: sinon.stub(),
@@ -30,8 +30,8 @@ describe("Host", () => {
     let switchStub: any;
     let temperatureStub: any;
 
-    let host: Host;
-    let hostType: typeof Host;
+    let client: Client;
+    let clientType: typeof Client;
 
     const emit = (stub: any, event: string, ...payload: any[]) => {
         for (const callback of stub.callbacks[event] || []) {
@@ -40,7 +40,7 @@ describe("Host", () => {
     };
 
     before(() => {
-        hostType = proxy(() => require("../src/Host").Host, {
+        clientType = proxy(() => require("../src/Client").Client, {
             "js-logger": {
                 get() {
                     return logStub;
@@ -53,7 +53,7 @@ describe("Host", () => {
                     }
                 },
             },
-            "./Connection": {
+            "./Connection/Connection": {
                 Connection: class {
                     constructor(host: string, id: string, name: string) {
                         connectionStub.host = host;
@@ -96,7 +96,7 @@ describe("Host", () => {
                     }
                 },
             },
-            "./Discovery": {
+            "./Connection/Discovery": {
                 Discovery: class {
                     on(event: string, callback: Function) {
                         if (discoveryStub.callbacks[event] == null) {
@@ -117,7 +117,7 @@ describe("Host", () => {
                     }
                 },
             },
-            "./Devices/Dimmer": {
+            "./Devices/Dimmer/Dimmer": {
                 Dimmer: class {
                     on(event: string, callback: Function) {
                         if (dimmerStub.callbacks[event] == null) {
@@ -134,7 +134,7 @@ describe("Host", () => {
                     }
                 },
             },
-            "./Devices/Fan": {
+            "./Devices/Fan/Fan": {
                 Fan: class {
                     on(event: string, callback: Function) {
                         if (fanStub.callbacks[event] == null) {
@@ -151,7 +151,7 @@ describe("Host", () => {
                     }
                 },
             },
-            "./Devices/Humidity": {
+            "./Devices/Humidity/Humidity": {
                 Humidity: class {
                     on(event: string, callback: Function) {
                         if (humidityStub.callbacks[event] == null) {
@@ -168,7 +168,7 @@ describe("Host", () => {
                     }
                 },
             },
-            "./Devices/Occupancy": {
+            "./Devices/Occupancy/Occupancy": {
                 Occupancy: class {
                     on(event: string, callback: Function) {
                         if (occupancyStub.callbacks[event] == null) {
@@ -185,7 +185,7 @@ describe("Host", () => {
                     }
                 },
             },
-            "./Devices/Switch": {
+            "./Devices/Switch/Switch": {
                 Switch: class {
                     on(event: string, callback: Function) {
                         if (switchStub.callbacks[event] == null) {
@@ -202,7 +202,7 @@ describe("Host", () => {
                     }
                 },
             },
-            "./Devices/Temperature": {
+            "./Devices/Temperature/Temperature": {
                 Temperature: class {
                     on(event: string, callback: Function) {
                         if (temperatureStub.callbacks[event] == null) {
@@ -252,7 +252,7 @@ describe("Host", () => {
             addresses: [{ address: "0.0.0.0", family: 4 }],
         };
 
-        host = new hostType();
+        client = new clientType();
     });
 
     afterEach(() => {
@@ -271,7 +271,7 @@ describe("Host", () => {
             emit(discoveryStub, "Discovered", hostStub);
             emit(connectionStub, "Connect");
 
-            host.close();
+            client.close();
 
             expect(connectionStub.disconnect).to.be.called;
         });

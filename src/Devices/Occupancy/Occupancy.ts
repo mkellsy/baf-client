@@ -2,22 +2,22 @@ import * as Interfaces from "@mkellsy/hap-device";
 
 import equals from "deep-equal";
 
-import { Capabilities } from "../Interfaces/Capabilities";
-import { Common } from "./Common";
-import { Connection } from "../Connection";
-import { DeviceType } from "../Interfaces/DeviceType";
-import { TemperatureState } from "./TemperatureState";
+import { Capabilities } from "../Capabilities";
+import { Common } from "../Common";
+import { Connection } from "../../Connection/Connection";
+import { DeviceType } from "../DeviceType";
+import { OccupancyState } from "./OccupancyState";
 
 /**
- * Defines a temperature sensor device.
+ * Defines a occupancy sensor device.
  * @public
  */
-export class Temperature extends Common<TemperatureState> implements Interfaces.Temperature {
+export class Occupancy extends Common<OccupancyState> implements Interfaces.Occupancy {
     /**
-     * Creates a temperature sensor device.
+     * Creates a occupancy sensor device.
      *
      * ```js
-     * const sensor = new Temperature(connection, capabilities);
+     * const sensor = new Occupancy(connection, capabilities);
      * ```
      *
      * @param connection - The main connection to the device.
@@ -25,14 +25,14 @@ export class Temperature extends Common<TemperatureState> implements Interfaces.
      */
     constructor(connection: Connection, capabilities: Capabilities) {
         super(
-            Interfaces.DeviceType.Temperature,
+            Interfaces.DeviceType.Occupancy,
             connection,
             {
                 id: capabilities.id,
-                name: `${capabilities.name} ${DeviceType.Temperature}`,
-                suffix: DeviceType.Temperature,
+                name: `${capabilities.name} ${DeviceType.Occupancy}`,
+                suffix: DeviceType.Occupancy,
             },
-            { state: "Auto", temprature: 0 },
+            { state: "Unoccupied" },
         );
     }
 
@@ -41,7 +41,7 @@ export class Temperature extends Common<TemperatureState> implements Interfaces.
      * state.
      *
      * ```js
-     * sensor.update({ Temperature: 22.3 });
+     * sensor.update({ OccupancyStatus: "Occupied" });
      * ```
      *
      * @param status - The current device state.
@@ -49,8 +49,8 @@ export class Temperature extends Common<TemperatureState> implements Interfaces.
     public update(status: Interfaces.AreaStatus): void {
         const previous = { ...this.status };
 
-        if (status.Temperature != null) {
-            this.state.temprature = status.Temperature;
+        if (status.OccupancyStatus != null) {
+            this.state.state = status.OccupancyStatus === "Occupied" ? "Occupied" : "Unoccupied";
         }
 
         if (!equals(this.state, previous)) {

@@ -2,11 +2,11 @@ import * as Interfaces from "@mkellsy/hap-device";
 
 import equals from "deep-equal";
 
-import { Capabilities } from "../Interfaces/Capabilities";
-import { Command } from "../Interfaces/Command";
-import { Common } from "./Common";
-import { Connection } from "../Connection";
-import { DeviceType } from "../Interfaces/DeviceType";
+import { Capabilities } from "../Capabilities";
+import { Command } from "../../Connection/Command";
+import { Common } from "../Common";
+import { Connection } from "../../Connection/Connection";
+import { DeviceType } from "../DeviceType";
 import { FanState } from "./FanState";
 
 /**

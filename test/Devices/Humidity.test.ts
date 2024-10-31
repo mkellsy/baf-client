@@ -2,7 +2,7 @@ import chai, { expect } from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
 
-import { Humidity } from "../../src/Devices/Humidity";
+import { Humidity } from "../../src/Devices/Humidity/Humidity";
 
 chai.use(sinonChai);
 

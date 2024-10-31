@@ -5,8 +5,8 @@ import Colors from "colors";
 
 import { EventEmitter } from "@mkellsy/event-emitter";
 
-import { Connection } from "../Connection";
-import { DeviceAddress } from "../Interfaces/DeviceAddress";
+import { Connection } from "../Connection/Connection";
+import { DeviceAddress } from "./DeviceAddress";
 
 /**
  * Defines common functionallity for a device.

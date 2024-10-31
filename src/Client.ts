@@ -5,29 +5,29 @@ import Colors from "colors";
 
 import { EventEmitter } from "@mkellsy/event-emitter";
 
-import { Capabilities } from "./Interfaces/Capabilities";
-import { Connection } from "./Connection";
-import { DeviceAddress } from "./Interfaces/DeviceAddress";
-import { DeviceType } from "./Interfaces/DeviceType";
-import { Dimmer } from "./Devices/Dimmer";
-import { Discovery } from "./Discovery";
-import { Fan } from "./Devices/Fan";
-import { FanAddress } from "./Interfaces/FanAddress";
-import { FanStateResponse } from "./Interfaces/FanStateResponse";
-import { Humidity } from "./Devices/Humidity";
-import { LightStateResponse } from "./Interfaces/LightStateResponse";
-import { Occupancy } from "./Devices/Occupancy";
-import { SensorStateResponse } from "./Interfaces/SensorStateResponse";
-import { Switch } from "./Devices/Switch";
-import { Temperature } from "./Devices/Temperature";
+import { Capabilities } from "./Devices/Capabilities";
+import { Connection } from "./Connection/Connection";
+import { DeviceAddress } from "./Devices/DeviceAddress";
+import { DeviceType } from "./Devices/DeviceType";
+import { Dimmer } from "./Devices/Dimmer/Dimmer";
+import { Discovery } from "./Connection/Discovery";
+import { Fan } from "./Devices/Fan/Fan";
+import { FanAddress } from "./Devices/Fan/FanAddress";
+import { FanStateResponse } from "./Response/FanStateResponse";
+import { Humidity } from "./Devices/Humidity/Humidity";
+import { LightStateResponse } from "./Response/LightStateResponse";
+import { Occupancy } from "./Devices/Occupancy/Occupancy";
+import { SensorStateResponse } from "./Response/SensorStateResponse";
+import { Switch } from "./Devices/Switch/Switch";
+import { Temperature } from "./Devices/Temperature/Temperature";
 
-const log = Logger.get("Host");
+const log = Logger.get("Client");
 
 /**
  * Creates an object that represents a single location, with a single network.
  * @public
  */
-export class Host extends EventEmitter<{
+export class Client extends EventEmitter<{
     Available: (devices: Interfaces.Device[]) => void;
     Message: (response: Response) => void;
     Update: (device: Interfaces.Device, state: Interfaces.DeviceState) => void;
@@ -41,7 +41,7 @@ export class Host extends EventEmitter<{
      * Creates a location object and starts mDNS discovery.
      *
      * ```js
-     * const location = new Host();
+     * const location = new Client();
      *
      * location.on("Avaliable", (devices: Device[]) => {  });
      * ```

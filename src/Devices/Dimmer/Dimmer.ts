@@ -2,42 +2,43 @@ import * as Interfaces from "@mkellsy/hap-device";
 
 import equals from "deep-equal";
 
-import { Capabilities } from "../Interfaces/Capabilities";
-import { Command } from "../Interfaces/Command";
-import { Common } from "./Common";
-import { Connection } from "../Connection";
-import { DeviceType } from "../Interfaces/DeviceType";
-import { SwitchState } from "./SwitchState";
+import { Capabilities } from "../Capabilities";
+import { Command } from "../../Connection/Command";
+import { Connection } from "../../Connection/Connection";
+import { Common } from "../Common";
+import { DimmerState } from "./DimmerState";
+import { DeviceType } from "../DeviceType";
 
 /**
- * Defines a on/off switch device.
+ * Defines a dimmable light device.
  * @public
  */
-export class Switch extends Common<SwitchState> implements Interfaces.Switch {
+export class Dimmer extends Common<DimmerState> implements Interfaces.Dimmer {
     /**
      * Creates a dimmable light device.
      *
      * ```js
-     * const switch = new Switch(connection, capabilities, DeviceType.UVC);
+     * const dimmer = new Dimmer(connection, capabilities, DeviceType.Downlight);
      * ```
      *
      * @param connection - The main connection to the device.
      * @param capabilities - Device capabilities from discovery.
-     * @param type - The device type to tell the difference from a light and uvc.
+     * @param type - The device type to tell the difference from an uplight and downlight.
      */
     constructor(connection: Connection, capabilities: Capabilities, type: DeviceType) {
         super(
-            Interfaces.DeviceType.Switch,
+            Interfaces.DeviceType.Dimmer,
             connection,
             {
                 id: capabilities.id,
                 name: `${capabilities.name} ${type}`,
                 suffix: type,
             },
-            { state: "Off" },
+            { state: "Off", level: 0 },
         );
 
         this.fields.set("state", { type: "String", values: ["On", "Off"] });
+        this.fields.set("level", { type: "Integer", min: 0, max: 100 });
     }
 
     /**
@@ -45,7 +46,7 @@ export class Switch extends Common<SwitchState> implements Interfaces.Switch {
      * state.
      *
      * ```js
-     * switch.update({ SwitchedLevel: "On" });
+     * dimmer.update({ Level: 100 });
      * ```
      *
      * @param status - The current device state.
@@ -53,8 +54,9 @@ export class Switch extends Common<SwitchState> implements Interfaces.Switch {
     public update(status: Interfaces.ZoneStatus): void {
         const previous = { ...this.status };
 
-        if (status.SwitchedLevel != null) {
-            this.state.state = status.SwitchedLevel === "On" ? "On" : "Off";
+        if (status.Level != null) {
+            this.state.state = status.Level > 0 ? "On" : "Off";
+            this.state.level = status.Level;
         }
 
         if (this.initialized && !equals(this.state, previous)) {
@@ -68,17 +70,23 @@ export class Switch extends Common<SwitchState> implements Interfaces.Switch {
      * Controls this device.
      *
      * ```js
-     * switch.set({ state: "On" });
+     * dimmer.set({ state: "On", level: 50 });
      * ```
      *
      * @param status - Desired device state.
      */
-    public set(status: SwitchState): Promise<void> {
+    public set(status: DimmerState): Promise<void> {
         return new Promise((resolve, reject) => {
             const command = new Command(this.connection);
-            const state = status.state === "On" ? 0x01 : 0x00;
 
-            command.push([0xe0, 0x0a, state]);
+            const state = status.state === "On" ? 0x01 : 0x00;
+            const suffix = this.suffix === DeviceType.Downlight.toString() ? 1 : 2;
+
+            command.push([0x90, 0x05, suffix], [0xa0, 0x04, state]);
+
+            if (status.state === "On") {
+                command.push([0xa8, 0x04, status.level]);
+            }
 
             command
                 .execute()

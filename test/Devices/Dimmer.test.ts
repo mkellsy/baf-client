@@ -2,8 +2,8 @@ import chai, { expect } from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
 
-import { DeviceType } from "../../src/Interfaces/DeviceType";
-import { Dimmer } from "../../src/Devices/Dimmer";
+import { DeviceType } from "../../src/Devices/DeviceType";
+import { Dimmer } from "../../src/Devices/Dimmer/Dimmer";
 
 chai.use(sinonChai);
 
