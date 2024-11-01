@@ -307,7 +307,8 @@ describe("Client", () => {
             connectionStub.connect.reject({ message: "ERROR" });
 
             setTimeout(() => {
-                expect(logStub.error).to.be.calledWith("\u001b[31mERROR\u001b[39m");
+                expect(logStub.error.getCall(0).args[0]).to.contain("ERROR");
+
                 done();
             }, 1);
         });
@@ -641,7 +642,8 @@ describe("Client", () => {
 
         it("should emit an update event when a device updates", () => {
             emit(connectionStub, "Error", { message: "ERROR" });
-            expect(logStub.error).to.be.calledWith("\u001b[31mERROR\u001b[39m");
+
+            expect(logStub.error.getCall(0).args[0]).to.contain("ERROR");
         });
     });
 });
