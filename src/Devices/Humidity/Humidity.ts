@@ -1,5 +1,7 @@
 import { AreaStatus, Humidity as HumidityInterface } from "@mkellsy/hap-device";
 
+import { HumidityState } from "./HumidityState";
+
 /**
  * Defines a humidity sensor device.
  * @public
@@ -16,4 +18,11 @@ export interface Humidity extends HumidityInterface {
      * @param status - The current device state.
      */
     update(status: AreaStatus): void;
+
+    /**
+     * The current state of the device.
+     *
+     * @returns The device's state.
+     */
+    readonly status: HumidityState;
 }

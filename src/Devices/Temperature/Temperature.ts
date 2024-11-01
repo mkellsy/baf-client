@@ -1,5 +1,6 @@
 import { AreaStatus, Temperature as TemperatureInterface } from "@mkellsy/hap-device";
 
+import { TemperatureState } from "./TemperatureState";
 /**
  * Defines a temperature sensor device.
  * @public
@@ -16,4 +17,11 @@ export interface Temperature extends TemperatureInterface {
      * @param status - The current device state.
      */
     update(status: AreaStatus): void;
+
+    /**
+     * The current state of the device.
+     *
+     * @returns The device's state.
+     */
+    readonly status: TemperatureState;
 }

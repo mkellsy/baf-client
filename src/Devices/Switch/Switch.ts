@@ -29,4 +29,11 @@ export interface Switch extends SwitchInterface {
      * @param status - Desired device state.
      */
     set(status: SwitchState): Promise<void>;
+
+    /**
+     * The current state of the device.
+     *
+     * @returns The device's state.
+     */
+    readonly status: SwitchState;
 }

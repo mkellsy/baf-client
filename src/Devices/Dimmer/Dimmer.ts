@@ -29,4 +29,11 @@ export interface Dimmer extends DimmerInterface {
      * @param status - Desired device state.
      */
     set(status: DimmerState): Promise<void>;
+
+    /**
+     * The current state of the device.
+     *
+     * @returns The device's state.
+     */
+    readonly status: DimmerState;
 }

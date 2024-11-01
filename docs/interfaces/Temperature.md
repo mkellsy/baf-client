@@ -114,11 +114,15 @@ The device's configured room.
 
 ### status
 
-> **status**: `DeviceState`
+> `readonly` **status**: [`TemperatureState`](TemperatureState.md)
 
 The current state of the device.
 
-#### Inherited from
+#### Returns
+
+The device's state.
+
+#### Overrides
 
 `TemperatureInterface.status`
 

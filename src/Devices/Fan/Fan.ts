@@ -29,4 +29,11 @@ export interface Fan extends FanInterface {
      * @param status - Desired device state.
      */
     set(status: FanState): Promise<void>;
+
+    /**
+     * The current state of the device.
+     *
+     * @returns The device's state.
+     */
+    readonly status: FanState;
 }
