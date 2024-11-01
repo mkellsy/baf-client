@@ -4,7 +4,7 @@ import { HostAddress } from "@mkellsy/hap-device";
  * Stores information about the ip address of the device.
  * @public
  */
-export interface FanAddress {
+export interface Address {
     /**
      * The id of the device, tipically a mac address.
      */

@@ -1,41 +1,10 @@
-import * as Interfaces from "@mkellsy/hap-device";
-
-import equals from "deep-equal";
-
-import { Capabilities } from "../Capabilities";
-import { Common } from "../Common";
-import { Connection } from "../../Connection/Connection";
-import { DeviceType } from "../DeviceType";
-import { TemperatureState } from "./TemperatureState";
+import { AreaStatus, Temperature as TemperatureInterface } from "@mkellsy/hap-device";
 
 /**
  * Defines a temperature sensor device.
  * @public
  */
-export class Temperature extends Common<TemperatureState> implements Interfaces.Temperature {
-    /**
-     * Creates a temperature sensor device.
-     *
-     * ```js
-     * const sensor = new Temperature(connection, capabilities);
-     * ```
-     *
-     * @param connection - The main connection to the device.
-     * @param capabilities - Device capabilities from discovery.
-     */
-    constructor(connection: Connection, capabilities: Capabilities) {
-        super(
-            Interfaces.DeviceType.Temperature,
-            connection,
-            {
-                id: capabilities.id,
-                name: `${capabilities.name} ${DeviceType.Temperature}`,
-                suffix: DeviceType.Temperature,
-            },
-            { state: "Auto", temprature: 0 },
-        );
-    }
-
+export interface Temperature extends TemperatureInterface {
     /**
      * Recieves a state response from the connection and updates the device
      * state.
@@ -46,22 +15,5 @@ export class Temperature extends Common<TemperatureState> implements Interfaces.
      *
      * @param status - The current device state.
      */
-    public update(status: Interfaces.AreaStatus): void {
-        const previous = { ...this.status };
-
-        if (status.Temperature != null) {
-            this.state.temprature = status.Temperature;
-        }
-
-        if (!equals(this.state, previous)) {
-            this.emit("Update", this, this.state);
-        }
-
-        this.initialized = true;
-    }
-
-    /**
-     * Controls this device (not supported).
-     */
-    public set = (): Promise<void> => Promise.resolve();
+    update(status: AreaStatus): void;
 }

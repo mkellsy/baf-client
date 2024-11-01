@@ -23,9 +23,6 @@ describe("index", () => {
 
     it("should export the API", () => {
         expect(Baf.Client).to.not.be.null;
-        expect(Baf.Common).to.not.be.null;
-        expect(Baf.Connection).to.not.be.null;
-        expect(Baf.DeviceType).to.not.be.null;
         expect(Baf.Dimmer).to.not.be.null;
         expect(Baf.Fan).to.not.be.null;
         expect(Baf.Humidity).to.not.be.null;

@@ -10,16 +10,6 @@
 
 import { Client } from "./Client";
 
-export { Connection } from "./Connection/Connection";
-
-export { Capabilities } from "./Devices/Capabilities";
-export { DeviceType } from "./Devices/DeviceType";
-export { FanStateResponse } from "./Response/FanStateResponse";
-export { LightStateResponse } from "./Response/LightStateResponse";
-export { ResponseTypes } from "./Response/ResponseTypes";
-export { SensorStateResponse } from "./Response/SensorStateResponse";
-
-export { Common } from "./Devices/Common";
 export { Dimmer } from "./Devices/Dimmer/Dimmer";
 export { DimmerState } from "./Devices/Dimmer/DimmerState";
 export { Fan } from "./Devices/Fan/Fan";

@@ -2,12 +2,12 @@ import chai, { expect } from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
 
-import { Humidity } from "../../src/Devices/Humidity/Humidity";
+import { HumidityController } from "../../src/Devices/Humidity/HumidityController";
 
 chai.use(sinonChai);
 
 describe("Humidity", () => {
-    let humidity: Humidity;
+    let humidity: HumidityController;
     let capabilities: any;
     let connection: any;
 
@@ -22,7 +22,7 @@ describe("Humidity", () => {
             uplight: true,
         };
 
-        humidity = new Humidity(connection, capabilities);
+        humidity = new HumidityController(connection, capabilities);
     });
 
     it("should define common properties", () => {

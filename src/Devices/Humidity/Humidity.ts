@@ -1,41 +1,10 @@
-import * as Interfaces from "@mkellsy/hap-device";
-
-import equals from "deep-equal";
-
-import { Capabilities } from "../Capabilities";
-import { Common } from "../Common";
-import { Connection } from "../../Connection/Connection";
-import { HumidityState } from "./HumidityState";
-import { DeviceType } from "../DeviceType";
+import { AreaStatus, Humidity as HumidityInterface } from "@mkellsy/hap-device";
 
 /**
  * Defines a humidity sensor device.
  * @public
  */
-export class Humidity extends Common<HumidityState> implements Interfaces.Humidity {
-    /**
-     * Creates a humidity sensor device.
-     *
-     * ```js
-     * const sensor = new Humidity(connection, capabilities);
-     * ```
-     *
-     * @param connection - The main connection to the device.
-     * @param capabilities - Device capabilities from discovery.
-     */
-    constructor(connection: Connection, capabilities: Capabilities) {
-        super(
-            Interfaces.DeviceType.Humidity,
-            connection,
-            {
-                id: capabilities.id,
-                name: `${capabilities.name} ${DeviceType.Humidity}`,
-                suffix: DeviceType.Humidity,
-            },
-            { state: "Auto", humidity: 0 },
-        );
-    }
-
+export interface Humidity extends HumidityInterface {
     /**
      * Recieves a state response from the connection and updates the device
      * state.
@@ -46,22 +15,5 @@ export class Humidity extends Common<HumidityState> implements Interfaces.Humidi
      *
      * @param status - The current device state.
      */
-    public update(status: Interfaces.AreaStatus): void {
-        const previous = { ...this.status };
-
-        if (status.Humidity != null) {
-            this.state.humidity = status.Humidity;
-        }
-
-        if (!equals(this.state, previous)) {
-            this.emit("Update", this, this.state);
-        }
-
-        this.initialized = true;
-    }
-
-    /**
-     * Controls this device (not supported).
-     */
-    public set = (): Promise<void> => Promise.resolve();
+    update(status: AreaStatus): void;
 }

@@ -1,8 +1,8 @@
 /**
  * Lists all supported device types.
- * @public
+ * @private
  */
-export enum DeviceType {
+export enum Devices {
     /**
      * Dimmable downlight device.
      */

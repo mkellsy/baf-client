@@ -2,13 +2,13 @@ import chai, { expect } from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
 
-import { DeviceType } from "../../src/Devices/DeviceType";
-import { Switch } from "../../src/Devices/Switch/Switch";
+import { Devices } from "../../src/Devices/Devices";
+import { SwitchController } from "../../src/Devices/Switch/SwitchController";
 
 chai.use(sinonChai);
 
 describe("Switch", () => {
-    let binary: Switch;
+    let binary: SwitchController;
     let capabilities: any;
     let connection: any;
 
@@ -23,7 +23,7 @@ describe("Switch", () => {
             eco: true,
         };
 
-        binary = new Switch(connection, capabilities, DeviceType.UVC);
+        binary = new SwitchController(connection, capabilities, Devices.UVC);
     });
 
     it("should define common properties", () => {

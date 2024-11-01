@@ -2,12 +2,12 @@ import chai, { expect } from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
 
-import { Occupancy } from "../../src/Devices/Occupancy/Occupancy";
+import { OccupancyController } from "../../src/Devices/Occupancy/OccupancyController";
 
 chai.use(sinonChai);
 
 describe("Occupancy", () => {
-    let occupancy: Occupancy;
+    let occupancy: OccupancyController;
     let capabilities: any;
     let connection: any;
 
@@ -22,7 +22,7 @@ describe("Occupancy", () => {
             uplight: true,
         };
 
-        occupancy = new Occupancy(connection, capabilities);
+        occupancy = new OccupancyController(connection, capabilities);
     });
 
     it("should define common properties", () => {

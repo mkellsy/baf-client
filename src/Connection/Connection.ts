@@ -1,24 +1,24 @@
 import net from "net";
 
-import { Capabilities } from "../Devices/Capabilities";
+import { Capabilities } from "../Response/Capabilities";
 import { EventEmitter } from "@mkellsy/event-emitter";
-import { FanStateResponse } from "../Response/FanStateResponse";
-import { LightStateResponse } from "../Response/LightStateResponse";
+import { FanState } from "../Response/FanState";
+import { LightState } from "../Response/LightState";
+import { Messages } from "./Messages";
 import { Parser } from "../Response/Parser";
-import { ResponseTypes } from "../Response/ResponseTypes";
-import { SensorStateResponse } from "../Response/SensorStateResponse";
+import { SensorState } from "../Response/SensorState";
 
 const SOCKET_PORT = 31415;
 const REACHABLE_TIMEOUT = 1_000;
 
 /**
  * Connects to a device with the provided ip address, id, name and model.
- * @public
+ * @private
  */
 export class Connection extends EventEmitter<{
     Connect: (connection: Connection) => void;
     Disconnect: () => void;
-    Response: <K extends keyof ResponseTypes>(type: K, response: ResponseTypes[K]) => void;
+    Response: <K extends keyof Messages>(type: K, response: Messages[K]) => void;
     Error: (error: Error) => void;
 }> {
     private socket?: net.Socket;
@@ -32,10 +32,10 @@ export class Connection extends EventEmitter<{
     private device?: Partial<Capabilities>;
     private current?: Partial<Capabilities>;
     private state: {
-        fan?: FanStateResponse;
-        sensor?: SensorStateResponse;
-        downlight?: LightStateResponse;
-        uplight?: LightStateResponse;
+        fan?: FanState;
+        sensor?: SensorState;
+        downlight?: LightState;
+        uplight?: LightState;
     } = {};
 
     /**
@@ -304,16 +304,16 @@ export class Connection extends EventEmitter<{
             return;
         }
 
-        if ((results.fan as Record<string, FanStateResponse | undefined>)?.state == null) {
+        if ((results.fan as Record<string, FanState | undefined>)?.state == null) {
             return;
         }
 
-        this.state.fan = (results.fan as Record<string, FanStateResponse | undefined>).state;
+        this.state.fan = (results.fan as Record<string, FanState | undefined>).state;
 
         this.emit("Response", "FanState", {
             id: this.uuid,
             ...this.state.fan,
-        } as FanStateResponse);
+        } as FanState);
     }
 
     /*
@@ -326,18 +326,18 @@ export class Connection extends EventEmitter<{
 
         if (
             (results.light as Record<string, string>)?.target !== target ||
-            (results.light as Record<string, LightStateResponse | undefined>).state == null
+            (results.light as Record<string, LightState | undefined>).state == null
         ) {
             return;
         }
 
-        this.state[target] = (results.light as Record<string, LightStateResponse | undefined>).state;
+        this.state[target] = (results.light as Record<string, LightState | undefined>).state;
 
         this.emit("Response", "LightState", {
             id: this.uuid,
             target,
             ...this.state[target],
-        } as LightStateResponse);
+        } as LightState);
     }
 
     /*
@@ -352,11 +352,11 @@ export class Connection extends EventEmitter<{
             return;
         }
 
-        this.state.sensor = (results.sensor as Record<string, SensorStateResponse | undefined>).state;
+        this.state.sensor = (results.sensor as Record<string, SensorState | undefined>).state;
 
         this.emit("Response", "SensorState", {
             id: this.uuid,
             ...this.state.sensor,
-        } as SensorStateResponse);
+        } as SensorState);
     }
 }

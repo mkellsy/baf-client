@@ -2,13 +2,13 @@ import chai, { expect } from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
 
-import { DeviceType } from "../../src/Devices/DeviceType";
-import { Dimmer } from "../../src/Devices/Dimmer/Dimmer";
+import { Devices } from "../../src/Devices/Devices";
+import { DimmerController } from "../../src/Devices/Dimmer/DimmerController";
 
 chai.use(sinonChai);
 
 describe("Dimmer", () => {
-    let dimmer: Dimmer;
+    let dimmer: DimmerController;
     let capabilities: any;
     let connection: any;
 
@@ -23,7 +23,7 @@ describe("Dimmer", () => {
             uplight: true,
         };
 
-        dimmer = new Dimmer(connection, capabilities, DeviceType.Downlight);
+        dimmer = new DimmerController(connection, capabilities, Devices.Downlight);
     });
 
     it("should define common properties", () => {
@@ -114,7 +114,7 @@ describe("Dimmer", () => {
     it("should call write when setting the state to off for uplight", (done) => {
         connection.write.resolves();
 
-        dimmer = new Dimmer(connection, capabilities, DeviceType.Uplight);
+        dimmer = new DimmerController(connection, capabilities, Devices.Uplight);
 
         dimmer
             .set({ state: "Off", level: 0 })
@@ -129,7 +129,7 @@ describe("Dimmer", () => {
     it("should call write when setting the state to on for uplight", (done) => {
         connection.write.resolves();
 
-        dimmer = new Dimmer(connection, capabilities, DeviceType.Uplight);
+        dimmer = new DimmerController(connection, capabilities, Devices.Uplight);
 
         dimmer
             .set({ state: "On", level: 100 })

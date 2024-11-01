@@ -2,7 +2,7 @@ import { Connection } from "./Connection";
 
 /**
  * Defines a command sent to the device connection.
- * @public
+ * @private
  */
 export class Command {
     private connection: Connection;

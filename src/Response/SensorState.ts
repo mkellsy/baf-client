@@ -1,8 +1,8 @@
 /**
  * Stores information about the current state of a sensor device.
- * @public
+ * @private
  */
-export interface SensorStateResponse {
+export interface SensorState {
     /**
      * The id of the sensor device.
      */

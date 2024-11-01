@@ -2,12 +2,12 @@ import chai, { expect } from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
 
-import { Temperature } from "../../src/Devices/Temperature/Temperature";
+import { TemperatureController } from "../../src/Devices/Temperature/TemperatureController";
 
 chai.use(sinonChai);
 
 describe("Temperature", () => {
-    let temperature: Temperature;
+    let temperature: TemperatureController;
     let capabilities: any;
     let connection: any;
 
@@ -22,7 +22,7 @@ describe("Temperature", () => {
             uplight: true,
         };
 
-        temperature = new Temperature(connection, capabilities);
+        temperature = new TemperatureController(connection, capabilities);
     });
 
     it("should define common properties", () => {

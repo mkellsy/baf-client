@@ -1,6 +1,6 @@
 /**
  * Contains device information and capibilities.
- * @public
+ * @private
  */
 export interface Capabilities {
     /**

@@ -1,19 +1,18 @@
-import * as Logger from "js-logger";
-import * as Interfaces from "@mkellsy/hap-device";
-
 import Colors from "colors";
 
+import { get as getLogger, ILogger } from "js-logger";
+import { Action, Address, Area, Button, Capability, Device, DeviceState, DeviceType } from "@mkellsy/hap-device";
 import { EventEmitter } from "@mkellsy/event-emitter";
 
 import { Connection } from "../Connection/Connection";
-import { DeviceAddress } from "./DeviceAddress";
 
 /**
  * Defines common functionallity for a device.
+ * @private
  */
-export abstract class Common<STATE extends Interfaces.DeviceState> extends EventEmitter<{
-    Action: (device: Interfaces.Device, button: Interfaces.Button, action: Interfaces.Action) => void;
-    Update: (device: Interfaces.Device, state: STATE) => void;
+export abstract class Common<STATE extends DeviceState> extends EventEmitter<{
+    Action: (device: Device, button: Button, action: Action) => void;
+    Update: (device: Device, state: STATE) => void;
 }> {
     /**
      * Stores the current connection of this device.
@@ -33,13 +32,13 @@ export abstract class Common<STATE extends Interfaces.DeviceState> extends Event
     /**
      * Contains a map of fields and the type of each field.
      */
-    protected fields: Map<string, Interfaces.Capability> = new Map();
+    protected fields: Map<string, Capability> = new Map();
 
-    private logger: Logger.ILogger;
+    private logger: ILogger;
 
     private deviceName: string;
     private deviceId: string;
-    private deviceType: Interfaces.DeviceType;
+    private deviceType: DeviceType;
     private deviceSuffix: string;
 
     /**
@@ -60,7 +59,7 @@ export abstract class Common<STATE extends Interfaces.DeviceState> extends Event
      * @param definition - The definition object containing id, name and suffix.
      */
     constructor(
-        type: Interfaces.DeviceType,
+        type: DeviceType,
         connection: Connection,
         definition: { id: string; name: string; suffix: string },
         state: STATE,
@@ -73,8 +72,24 @@ export abstract class Common<STATE extends Interfaces.DeviceState> extends Event
         this.deviceSuffix = definition.suffix;
         this.deviceType = type;
 
-        this.logger = Logger.get(`Device ${Colors.dim(this.id)}`);
+        this.logger = getLogger(`Device ${Colors.dim(this.id)}`);
         this.state = state;
+    }
+
+    /**
+     * Generates a standard device id.
+     *
+     * ```js
+     * const id = Device.generateId("12:34:56:78:90", "Fan");
+     * ```
+     *
+     * @param id - The current connection id, typically a mac address.
+     * @param suffix - The suffix for the id, typically fan, uplight, downlight...
+     *
+     * @returns A standard formatted id string.
+     */
+    public static generateId(id: string, suffix: string): string {
+        return `BAF-${id}-${suffix.toUpperCase()}`;
     }
 
     /**
@@ -92,7 +107,7 @@ export abstract class Common<STATE extends Interfaces.DeviceState> extends Event
      * @returns The device id.
      */
     public get id(): string {
-        return DeviceAddress.generateId(this.deviceId, this.deviceSuffix);
+        return Common.generateId(this.deviceId, this.deviceSuffix);
     }
 
     /**
@@ -119,7 +134,7 @@ export abstract class Common<STATE extends Interfaces.DeviceState> extends Event
      *
      * @returns The device's capabilities.
      */
-    public get capabilities(): { [key: string]: Interfaces.Capability } {
+    public get capabilities(): { [key: string]: Capability } {
         return Object.fromEntries(this.fields);
     }
 
@@ -129,7 +144,7 @@ export abstract class Common<STATE extends Interfaces.DeviceState> extends Event
      *
      * @returns A reference to the logger assigned to this device.
      */
-    public get log(): Logger.ILogger {
+    public get log(): ILogger {
         return this.logger;
     }
 
@@ -138,7 +153,7 @@ export abstract class Common<STATE extends Interfaces.DeviceState> extends Event
      *
      * @returns The device's href address.
      */
-    public get address(): Interfaces.Address {
+    public get address(): Address {
         return { href: this.deviceId };
     }
 
@@ -156,7 +171,7 @@ export abstract class Common<STATE extends Interfaces.DeviceState> extends Event
      *
      * @returns The device type.
      */
-    public get type(): Interfaces.DeviceType {
+    public get type(): DeviceType {
         return this.deviceType;
     }
 
@@ -165,7 +180,7 @@ export abstract class Common<STATE extends Interfaces.DeviceState> extends Event
      *
      * @returns The device's area.
      */
-    public get area(): Interfaces.Area {
+    public get area(): Area {
         return {
             href: this.address.href,
             Name: this.name,

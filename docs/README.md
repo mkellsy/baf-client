@@ -7,34 +7,23 @@ Discovers and publishes Big Ass Fan controls.
 This client will automatically find and connect to any Big Ass Fan on your
 network. When devices are found they will be exposed via events.
 
-## Enumerations
-
-- [DeviceType](enumerations/DeviceType.md)
-
 ## Classes
 
 - [Client](classes/Client.md)
-- [Common](classes/Common.md)
-- [Connection](classes/Connection.md)
-- [Dimmer](classes/Dimmer.md)
-- [Fan](classes/Fan.md)
-- [Humidity](classes/Humidity.md)
-- [Occupancy](classes/Occupancy.md)
-- [Switch](classes/Switch.md)
-- [Temperature](classes/Temperature.md)
 
 ## Interfaces
 
-- [Capabilities](interfaces/Capabilities.md)
+- [Dimmer](interfaces/Dimmer.md)
 - [DimmerState](interfaces/DimmerState.md)
+- [Fan](interfaces/Fan.md)
 - [FanState](interfaces/FanState.md)
-- [FanStateResponse](interfaces/FanStateResponse.md)
+- [Humidity](interfaces/Humidity.md)
 - [HumidityState](interfaces/HumidityState.md)
-- [LightStateResponse](interfaces/LightStateResponse.md)
+- [Occupancy](interfaces/Occupancy.md)
 - [OccupancyState](interfaces/OccupancyState.md)
-- [ResponseTypes](interfaces/ResponseTypes.md)
-- [SensorStateResponse](interfaces/SensorStateResponse.md)
+- [Switch](interfaces/Switch.md)
 - [SwitchState](interfaces/SwitchState.md)
+- [Temperature](interfaces/Temperature.md)
 - [TemperatureState](interfaces/TemperatureState.md)
 
 ## Functions

@@ -29,9 +29,9 @@ location.on("Avaliable", (devices: Device[]) => {  });
 #### Overrides
 
 `EventEmitter<{
-    Available: (devices: Interfaces.Device[]) => void;
+    Available: (devices: Device[]) => void;
     Message: (response: Response) => void;
-    Update: (device: Interfaces.Device, state: Interfaces.DeviceState) => void;
+    Update: (device: Device, state: DeviceState) => void;
 }>.constructor`
 
 ## Methods

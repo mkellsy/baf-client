@@ -1,40 +1,41 @@
-import * as Logger from "js-logger";
-import * as Interfaces from "@mkellsy/hap-device";
+import { get as getLogger } from "js-logger";
+
+import { AreaStatus, Device, DeviceState, FanSpeed, HostAddressFamily, ZoneStatus } from "@mkellsy/hap-device";
 
 import Colors from "colors";
 
 import { EventEmitter } from "@mkellsy/event-emitter";
 
-import { Capabilities } from "./Devices/Capabilities";
+import { Address } from "./Connection/Address";
+import { Capabilities } from "./Response/Capabilities";
+import { Common } from "./Devices/Common";
 import { Connection } from "./Connection/Connection";
-import { DeviceAddress } from "./Devices/DeviceAddress";
-import { DeviceType } from "./Devices/DeviceType";
-import { Dimmer } from "./Devices/Dimmer/Dimmer";
+import { Devices } from "./Devices/Devices";
+import { DimmerController } from "./Devices/Dimmer/DimmerController";
 import { Discovery } from "./Connection/Discovery";
-import { Fan } from "./Devices/Fan/Fan";
-import { FanAddress } from "./Devices/Fan/FanAddress";
-import { FanStateResponse } from "./Response/FanStateResponse";
-import { Humidity } from "./Devices/Humidity/Humidity";
-import { LightStateResponse } from "./Response/LightStateResponse";
-import { Occupancy } from "./Devices/Occupancy/Occupancy";
-import { SensorStateResponse } from "./Response/SensorStateResponse";
-import { Switch } from "./Devices/Switch/Switch";
-import { Temperature } from "./Devices/Temperature/Temperature";
+import { FanController } from "./Devices/Fan/FanController";
+import { FanState } from "./Response/FanState";
+import { HumidityController } from "./Devices/Humidity/HumidityController";
+import { LightState } from "./Response/LightState";
+import { OccupancyController } from "./Devices/Occupancy/OccupancyController";
+import { SensorState } from "./Response/SensorState";
+import { SwitchController } from "./Devices/Switch/SwitchController";
+import { TemperatureController } from "./Devices/Temperature/TemperatureController";
 
-const log = Logger.get("Client");
+const log = getLogger("Client");
 
 /**
  * Creates an object that represents a single location, with a single network.
  * @public
  */
 export class Client extends EventEmitter<{
-    Available: (devices: Interfaces.Device[]) => void;
+    Available: (devices: Device[]) => void;
     Message: (response: Response) => void;
-    Update: (device: Interfaces.Device, state: Interfaces.DeviceState) => void;
+    Update: (device: Device, state: DeviceState) => void;
 }> {
     private discovery: Discovery;
 
-    private devices: Map<string, Interfaces.Device> = new Map();
+    private devices: Map<string, Device> = new Map();
     private connections: Map<string, Connection> = new Map();
 
     /**
@@ -70,13 +71,13 @@ export class Client extends EventEmitter<{
     /*
      * Creates a connection when mDNS finds a device.
      */
-    private onDiscovered = (host: FanAddress): void => {
+    private onDiscovered = (host: Address): void => {
         if (this.connections.has(host.id)) {
             this.connections.get(host.id)!.disconnect();
             this.connections.delete(host.id);
         }
 
-        const ip = host.addresses.find((address) => address.family === Interfaces.HostAddressFamily.IPv4);
+        const ip = host.addresses.find((address) => address.family === HostAddressFamily.IPv4);
         const connection = new Connection((ip || host.addresses[0]).address, host.id, host.name, host.model);
 
         connection
@@ -105,28 +106,28 @@ export class Client extends EventEmitter<{
                 break;
 
             case "FanState":
-                this.onFanState(response as FanStateResponse);
+                this.onFanState(response as FanState);
                 break;
 
             case "LightState":
-                switch ((response as LightStateResponse).target) {
+                switch ((response as LightState).target) {
                     case "downlight":
-                        this.onDownlightState(response as LightStateResponse);
+                        this.onDownlightState(response as LightState);
                         break;
 
                     case "uplight":
-                        this.onUplightState(response as LightStateResponse);
+                        this.onUplightState(response as LightState);
                         break;
 
                     case "uvc":
-                        this.onUvcState(response as LightStateResponse);
+                        this.onUvcState(response as LightState);
                         break;
                 }
 
                 break;
 
             case "SensorState":
-                this.onSensorState(response as SensorStateResponse);
+                this.onSensorState(response as SensorState);
         }
     };
 
@@ -149,50 +150,50 @@ export class Client extends EventEmitter<{
 
         if (capabilities.fan) {
             this.devices.set(
-                DeviceAddress.generateId(capabilities.id, DeviceType.Fan),
-                new Fan(connection, capabilities).on("Update", this.onDeviceUpdate),
+                Common.generateId(capabilities.id, Devices.Fan),
+                new FanController(connection, capabilities).on("Update", this.onDeviceUpdate),
             );
         }
 
         if (capabilities.downlight) {
             this.devices.set(
-                DeviceAddress.generateId(capabilities.id, DeviceType.Downlight),
-                new Dimmer(connection, capabilities, DeviceType.Downlight).on("Update", this.onDeviceUpdate),
+                Common.generateId(capabilities.id, Devices.Downlight),
+                new DimmerController(connection, capabilities, Devices.Downlight).on("Update", this.onDeviceUpdate),
             );
         }
 
         if (capabilities.uplight) {
             this.devices.set(
-                DeviceAddress.generateId(capabilities.id, DeviceType.Uplight),
-                new Dimmer(connection, capabilities, DeviceType.Uplight).on("Update", this.onDeviceUpdate),
+                Common.generateId(capabilities.id, Devices.Uplight),
+                new DimmerController(connection, capabilities, Devices.Uplight).on("Update", this.onDeviceUpdate),
             );
         }
 
         if (capabilities.uvc) {
             this.devices.set(
-                DeviceAddress.generateId(capabilities.id, DeviceType.UVC),
-                new Switch(connection, capabilities, DeviceType.UVC).on("Update", this.onDeviceUpdate),
+                Common.generateId(capabilities.id, Devices.UVC),
+                new SwitchController(connection, capabilities, Devices.UVC).on("Update", this.onDeviceUpdate),
             );
         }
 
         if (capabilities.occupancy) {
             this.devices.set(
-                DeviceAddress.generateId(capabilities.id, DeviceType.Occupancy),
-                new Occupancy(connection, capabilities).on("Update", this.onDeviceUpdate),
+                Common.generateId(capabilities.id, Devices.Occupancy),
+                new OccupancyController(connection, capabilities).on("Update", this.onDeviceUpdate),
             );
         }
 
         if (capabilities.temperature) {
             this.devices.set(
-                DeviceAddress.generateId(capabilities.id, DeviceType.Temperature),
-                new Temperature(connection, capabilities).on("Update", this.onDeviceUpdate),
+                Common.generateId(capabilities.id, Devices.Temperature),
+                new TemperatureController(connection, capabilities).on("Update", this.onDeviceUpdate),
             );
         }
 
         if (capabilities.humidity) {
             this.devices.set(
-                DeviceAddress.generateId(capabilities.id, DeviceType.Humidity),
-                new Humidity(connection, capabilities).on("Update", this.onDeviceUpdate),
+                Common.generateId(capabilities.id, Devices.Humidity),
+                new HumidityController(connection, capabilities).on("Update", this.onDeviceUpdate),
             );
         }
 
@@ -203,28 +204,28 @@ export class Client extends EventEmitter<{
      * When the connection responds with a fan state, this will update the fan
      * device.
      */
-    private onFanState = (state: FanStateResponse): void => {
-        const fan = this.devices.get(DeviceAddress.generateId(state.id, DeviceType.Fan));
-        const occupancy = this.devices.get(DeviceAddress.generateId(state.id, DeviceType.Occupancy));
+    private onFanState = (state: FanState): void => {
+        const fan = this.devices.get(Common.generateId(state.id, Devices.Fan));
+        const occupancy = this.devices.get(Common.generateId(state.id, Devices.Occupancy));
 
         if (fan != null) {
             fan.update({
                 href: state.id,
                 SwitchedLevel: state.on ? "On" : "Off",
-                FanSpeed: state.speed as Interfaces.FanSpeed,
+                FanSpeed: state.speed as FanSpeed,
                 Zone: { href: state.id },
                 AssociatedArea: { href: state.id },
                 AutoLevel: state.auto ? "On" : "Off",
                 EcoLevel: state.eco ? "On" : "Off",
                 WhooshLevel: state.whoosh ? "On" : "Off",
-            } as Interfaces.ZoneStatus);
+            } as ZoneStatus);
         }
 
         if (occupancy != null) {
             occupancy.update({
                 href: state.id,
                 OccupancyStatus: state.occupancy ? "Occupied" : "Unoccupied",
-            } as Interfaces.AreaStatus);
+            } as AreaStatus);
         }
     };
 
@@ -232,8 +233,8 @@ export class Client extends EventEmitter<{
      * When the connection responds with a downlight state, this will update
      * the light device.
      */
-    private onDownlightState = (state: LightStateResponse): void => {
-        const downlight = this.devices.get(DeviceAddress.generateId(state.id, DeviceType.Downlight));
+    private onDownlightState = (state: LightState): void => {
+        const downlight = this.devices.get(Common.generateId(state.id, Devices.Downlight));
 
         if (downlight != null) {
             downlight.update({
@@ -242,7 +243,7 @@ export class Client extends EventEmitter<{
                 Level: state.level,
                 Zone: { href: state.id },
                 AssociatedArea: { href: state.id },
-            } as Interfaces.ZoneStatus);
+            } as ZoneStatus);
         }
     };
 
@@ -250,8 +251,8 @@ export class Client extends EventEmitter<{
      * When the connection responds with a uplight state, this will update the
      * light device.
      */
-    private onUplightState = (state: LightStateResponse): void => {
-        const uplight = this.devices.get(DeviceAddress.generateId(state.id, DeviceType.Uplight));
+    private onUplightState = (state: LightState): void => {
+        const uplight = this.devices.get(Common.generateId(state.id, Devices.Uplight));
 
         if (uplight != null) {
             uplight.update({
@@ -260,7 +261,7 @@ export class Client extends EventEmitter<{
                 Level: state.level,
                 Zone: { href: state.id },
                 AssociatedArea: { href: state.id },
-            } as Interfaces.ZoneStatus);
+            } as ZoneStatus);
         }
     };
 
@@ -268,8 +269,8 @@ export class Client extends EventEmitter<{
      * When the connection responds with a uvc light state, this will update
      * the light device.
      */
-    private onUvcState = (state: LightStateResponse): void => {
-        const uvc = this.devices.get(DeviceAddress.generateId(state.id, DeviceType.UVC));
+    private onUvcState = (state: LightState): void => {
+        const uvc = this.devices.get(Common.generateId(state.id, Devices.UVC));
 
         if (uvc != null) {
             uvc.update({
@@ -277,7 +278,7 @@ export class Client extends EventEmitter<{
                 SwitchedLevel: state.on ? "On" : "Off",
                 Zone: { href: state.id },
                 AssociatedArea: { href: state.id },
-            } as Interfaces.ZoneStatus);
+            } as ZoneStatus);
         }
     };
 
@@ -285,29 +286,29 @@ export class Client extends EventEmitter<{
      * When the connection responds with a sensor state, this will update the
      * sensor device.
      */
-    private onSensorState = (state: SensorStateResponse): void => {
-        const temperature = this.devices.get(DeviceAddress.generateId(state.id, DeviceType.Temperature));
-        const humidity = this.devices.get(DeviceAddress.generateId(state.id, DeviceType.Humidity));
+    private onSensorState = (state: SensorState): void => {
+        const temperature = this.devices.get(Common.generateId(state.id, Devices.Temperature));
+        const humidity = this.devices.get(Common.generateId(state.id, Devices.Humidity));
 
         if (temperature != null) {
             temperature.update({
                 href: state.id,
                 Temperature: state.temperature,
-            } as Interfaces.AreaStatus);
+            } as AreaStatus);
         }
 
         if (humidity != null) {
             humidity.update({
                 href: state.id,
                 Humidity: state.humidity,
-            } as Interfaces.AreaStatus);
+            } as AreaStatus);
         }
     };
 
     /*
      * When a device updates, this will emit an update event.
      */
-    private onDeviceUpdate = (device: Interfaces.Device, state: Interfaces.DeviceState): void => {
+    private onDeviceUpdate = (device: Device, state: DeviceState): void => {
         this.emit("Update", device, state);
     };
 }

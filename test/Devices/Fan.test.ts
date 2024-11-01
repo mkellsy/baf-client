@@ -2,12 +2,12 @@ import chai, { expect } from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
 
-import { Fan } from "../../src/Devices/Fan/Fan";
+import { FanController } from "../../src/Devices/Fan/FanController";
 
 chai.use(sinonChai);
 
 describe("Fan", () => {
-    let fan: Fan;
+    let fan: FanController;
     let capabilities: any;
     let connection: any;
 
@@ -22,7 +22,7 @@ describe("Fan", () => {
             eco: true,
         };
 
-        fan = new Fan(connection, capabilities);
+        fan = new FanController(connection, capabilities);
     });
 
     it("should define common properties", () => {
@@ -79,7 +79,7 @@ describe("Fan", () => {
             fan: true,
         };
 
-        fan = new Fan(connection, capabilities);
+        fan = new FanController(connection, capabilities);
 
         expect(fan.capabilities.eco).to.be.undefined;
     });
@@ -117,7 +117,7 @@ describe("Fan", () => {
             fan: true,
         };
 
-        fan = new Fan(connection, capabilities);
+        fan = new FanController(connection, capabilities);
 
         fan.on("Update", (_device, status) => {
             expect(status.eco).to.be.undefined;
@@ -170,7 +170,7 @@ describe("Fan", () => {
     it("should call write when setting the state to off and eco is not supported", (done) => {
         connection.write.resolves();
         capabilities.eco = false;
-        fan = new Fan(connection, capabilities);
+        fan = new FanController(connection, capabilities);
 
         fan.set({ state: "Off", speed: 0, whoosh: "Off" })
             .then(() => {

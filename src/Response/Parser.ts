@@ -1,6 +1,6 @@
 /**
  * Defines helper functions used to parse data to and from the device connection.
- * @public
+ * @private
  */
 export abstract class Parser {
     private static fragment: Buffer = Buffer.alloc(0);

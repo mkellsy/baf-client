@@ -117,8 +117,8 @@ describe("Client", () => {
                     }
                 },
             },
-            "./Devices/Dimmer/Dimmer": {
-                Dimmer: class {
+            "./Devices/Dimmer/DimmerController": {
+                DimmerController: class {
                     on(event: string, callback: Function) {
                         if (dimmerStub.callbacks[event] == null) {
                             dimmerStub.callbacks[event] = [];
@@ -134,8 +134,8 @@ describe("Client", () => {
                     }
                 },
             },
-            "./Devices/Fan/Fan": {
-                Fan: class {
+            "./Devices/Fan/FanController": {
+                FanController: class {
                     on(event: string, callback: Function) {
                         if (fanStub.callbacks[event] == null) {
                             fanStub.callbacks[event] = [];
@@ -151,8 +151,8 @@ describe("Client", () => {
                     }
                 },
             },
-            "./Devices/Humidity/Humidity": {
-                Humidity: class {
+            "./Devices/Humidity/HumidityController": {
+                HumidityController: class {
                     on(event: string, callback: Function) {
                         if (humidityStub.callbacks[event] == null) {
                             humidityStub.callbacks[event] = [];
@@ -168,8 +168,8 @@ describe("Client", () => {
                     }
                 },
             },
-            "./Devices/Occupancy/Occupancy": {
-                Occupancy: class {
+            "./Devices/Occupancy/OccupancyController": {
+                OccupancyController: class {
                     on(event: string, callback: Function) {
                         if (occupancyStub.callbacks[event] == null) {
                             occupancyStub.callbacks[event] = [];
@@ -185,8 +185,8 @@ describe("Client", () => {
                     }
                 },
             },
-            "./Devices/Switch/Switch": {
-                Switch: class {
+            "./Devices/Switch/SwitchController": {
+                SwitchController: class {
                     on(event: string, callback: Function) {
                         if (switchStub.callbacks[event] == null) {
                             switchStub.callbacks[event] = [];
@@ -202,8 +202,8 @@ describe("Client", () => {
                     }
                 },
             },
-            "./Devices/Temperature/Temperature": {
-                Temperature: class {
+            "./Devices/Temperature/TemperatureController": {
+                TemperatureController: class {
                     on(event: string, callback: Function) {
                         if (temperatureStub.callbacks[event] == null) {
                             temperatureStub.callbacks[event] = [];
