@@ -6,7 +6,6 @@ import Colors from "colors";
 
 import { EventEmitter } from "@mkellsy/event-emitter";
 
-import { Address } from "./Connection/Address";
 import { Capabilities } from "./Response/Capabilities";
 import { Common } from "./Devices/Common";
 import { Connection } from "./Connection/Connection";
@@ -15,6 +14,7 @@ import { DimmerController } from "./Devices/Dimmer/DimmerController";
 import { Discovery } from "./Connection/Discovery";
 import { FanController } from "./Devices/Fan/FanController";
 import { FanState } from "./Response/FanState";
+import { Host } from "./Connection/Host";
 import { HumidityController } from "./Devices/Humidity/HumidityController";
 import { LightState } from "./Response/LightState";
 import { OccupancyController } from "./Devices/Occupancy/OccupancyController";
@@ -71,7 +71,7 @@ export class Client extends EventEmitter<{
     /*
      * Creates a connection when mDNS finds a device.
      */
-    private onDiscovered = (host: Address): void => {
+    private onDiscovered = (host: Host): void => {
         if (this.connections.has(host.id)) {
             this.connections.get(host.id)!.disconnect();
             this.connections.delete(host.id);

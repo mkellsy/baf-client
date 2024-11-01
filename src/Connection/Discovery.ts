@@ -8,19 +8,19 @@ import { EventEmitter } from "@mkellsy/event-emitter";
 import { MDNSService, MDNSServiceDiscovery, Protocol } from "tinkerhub-mdns";
 import { HostAddress, HostAddressFamily } from "@mkellsy/hap-device";
 
-import { Address } from "./Address";
 import { Connection } from "./Connection";
+import { Host } from "./Host";
 
 /**
  * Creates and searches the network for devices.
  * @private
  */
 export class Discovery extends EventEmitter<{
-    Discovered: (device: Address) => void;
+    Discovered: (device: Host) => void;
     Failed: (error: Error) => void;
 }> {
     private cache: Cache.Cache;
-    private cached: Map<string, Address> = new Map();
+    private cached: Map<string, Host> = new Map();
     private discovery?: MDNSServiceDiscovery;
 
     /**
@@ -29,7 +29,7 @@ export class Discovery extends EventEmitter<{
      * ```js
      * const discovery = new Discovery();
      *
-     * discovery.on("Discovered", (device: Address) => {  });
+     * discovery.on("Discovered", (device: Host) => {  });
      * discovery.search()
      * ```
      */
@@ -38,7 +38,7 @@ export class Discovery extends EventEmitter<{
 
         this.cache = Cache.load("discovery", path.join(os.homedir(), ".baf"));
 
-        for (const host of (this.cache.getKey("/hosts") || []) as Address[]) {
+        for (const host of (this.cache.getKey("/hosts") || []) as Host[]) {
             this.cached.set(host.id, host);
         }
     }
@@ -101,7 +101,7 @@ export class Discovery extends EventEmitter<{
             });
         }
 
-        const host: Address = { id, addresses, name, model };
+        const host: Host = { id, addresses, name, model };
 
         if (!equals(this.cached.get(id), host)) {
             this.emit("Discovered", host);
