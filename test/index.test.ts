@@ -1,4 +1,4 @@
-import { proxy } from "proxyrequire";
+import proxyquire from "proxyquire";
 
 import chai, { expect } from "chai";
 import sinonChai from "sinon-chai";
@@ -9,7 +9,7 @@ describe("index", () => {
     let Baf: any;
 
     before(() => {
-        Baf = proxy(() => require("../src"), {
+        Baf = proxyquire("../src", {
             "./Client": {
                 Client: class {},
             },

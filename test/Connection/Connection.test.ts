@@ -1,4 +1,4 @@
-import { proxy, registerNode } from "proxyrequire";
+import proxyquire from "proxyquire";
 
 import chai, { expect } from "chai";
 import sinon from "sinon";
@@ -7,7 +7,6 @@ import sinonChai from "sinon-chai";
 import { Connection } from "../../src/Connection/Connection";
 
 chai.use(sinonChai);
-registerNode();
 
 describe("Connection", () => {
     let optionsStub: any;
@@ -23,7 +22,7 @@ describe("Connection", () => {
     let connectionType: typeof Connection;
 
     before(() => {
-        connectionType = proxy(() => require("../../src/Connection/Connection").Connection, {
+        connectionType = proxyquire("../../src/Connection/Connection", {
             net: {
                 connect: (...args: any[]) => socketStub.connect(...args),
                 Socket: class {
@@ -62,7 +61,7 @@ describe("Connection", () => {
                     }
                 },
             },
-        });
+        }).Connection;
     });
 
     beforeEach(() => {

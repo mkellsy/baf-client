@@ -1,4 +1,4 @@
-import { proxy, registerNode } from "proxyrequire";
+import proxyquire from "proxyquire";
 
 import chai, { expect } from "chai";
 import sinon from "sinon";
@@ -7,7 +7,6 @@ import sinonChai from "sinon-chai";
 import { Client } from "../src/Client";
 
 chai.use(sinonChai);
-registerNode();
 
 describe("Client", () => {
     const logStub = {
@@ -40,7 +39,7 @@ describe("Client", () => {
     };
 
     before(() => {
-        clientType = proxy(() => require("../src/Client").Client, {
+        clientType = proxyquire("../src/Client", {
             "js-logger": {
                 get() {
                     return logStub;
@@ -219,7 +218,7 @@ describe("Client", () => {
                     }
                 },
             },
-        });
+        }).Client;
     });
 
     beforeEach(() => {
